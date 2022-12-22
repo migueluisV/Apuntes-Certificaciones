@@ -1,0 +1,130 @@
+\section{Evaluación de expresiones}
+
+\subsection{Sentencia if else}
+\hspace{0.55cm}Evalúa una expresión, si esta es acertada regresa true, si no lo es, regresa false. Su estructura es la siguiente:
+\begin{lstlisting}
+    if (condición) {
+        // Instrucciones si la condición es verdadera.
+    }
+    else {
+        // Instrucciones si la condición es falsa.
+    }
+\end{lstlisting}
+
+\textit{Nota}: el lenguaje soporta que, si solamente se escribe una instrucción en cualquiera de sus bloques, no sea necesario escribir las llaves y el bloque \textit{else} puede ser omitido.
+
+
+\subsection{Sentencia else if}
+\hspace{0.55cm}En ocasiones, es requerido que se evalúe una condición si una condición previa fue falsa, para eso funciona la sentencia else if:
+\begin{lstlisting}
+    if (condición 1) {
+        // Instrucciones si la condición es verdadera.
+    }
+    else if (condición 2) {
+        // Instrucciones si la condición 1 es falsa.
+    } else {
+        // Instrucciones si la condición 2 es falsa.
+    }
+\end{lstlisting}
+
+
+\subsection{Sentencia switch}
+\hspace{0.55cm}Evalúa una variable y se le asigna un valor dependiendo de otra cantidad de valores o parámetros. Su estructura es la siguiente:
+\begin{lstlisting}
+    switch (variable o expresión) {
+        case n1:
+            // Instrucciones.
+            break;
+        case n2:
+            // Instrucciones.
+            break;
+        .
+        .
+        .
+        case n:
+            // Instrucciones.
+            break;
+        default:
+            // Instrucciones.
+    }
+\end{lstlisting}
+
+\textit{Nota}: el valor \textbf{default} puede ser omitido y no es obligatoria la palabra reservada \textbf{break}.
+
+
+
+\section{Ciclos}
+
+\subsection{Ciclo For}
+\hspace{0.55cm}Ejecuta un bloque de código n cantidad de veces. Su estructura es:
+\begin{lstlisting}
+    for (inicializador o contador; condición para ejecución; incremento o decremento) {
+        // Instrucciones.
+    }
+\end{lstlisting}
+
+Donde:
+\begin{itemize}
+    \item \textbf{inicializador o contador}: es la variable que será incrementada o decrementada a lo largo de la ejecución del bloque de código. Puede ser omitido siempre y cuando haya alguna variable fuera de la declaración del ciclo que maneje la ejecución del mismo, a su vez, pueden haber múltiples contadores dentro de la declaración.
+    \item \textbf{condición para ejecución}: condición que permite que el bloque se ejecute; si la condición ya no es cierta, se sale del ciclo.
+    \item \textbf{incremento o decremento}: incrementa o decrementa la variable contador cuando una vuelta se da en el ciclo.
+\end{itemize}
+
+Vemos a continuación dos ejemplos del primer punto anterior mencionados:
+\begin{lstlisting}
+    i = 1;
+    // Ciclo for sin un contador.
+    for (; i < 5; i++) {}
+    // Ciclo for con dos contadores o inicializadores.
+    for (x = 1, text = ""; x < 5; x++) {}
+\end{lstlisting}
+
+
+\subsection{Ciclo While}
+\hspace{0.55cm}Ejecuta un bloque de código mientras una condición sea verdadera. Su estructura es:
+\begin{lstlisting}
+    while (condición) {
+        // Instrucciones.
+    }
+\end{lstlisting}
+
+Debe poseer una variable contador dentro de su bloque para manejar las vueltas dentro del ciclo y su fin es que el ciclo termine, sino, sería un ciclo infinito.
+
+
+\subsection{Ciclo Do-While}
+\hspace{0.55cm}Ejecuta un bloque de código mientras una condición sea verdadera y se ejecuta mínimo una vez. Su estructura es:
+\begin{lstlisting}
+    do {
+        // Instrucciones.
+    }
+    while (condición);
+\end{lstlisting}
+
+
+\subsection{Break y Continue}
+\hspace{0.55cm}La palabra reservada \textbf{break} es utilizada para terminar la ejecución de un ciclo, aún si su condición todavía era verdadera como para continuar con las vueltas.\\
+La palabra reservada \textbf{continue} es utilizada para saltar n cantidad de líneas de código después de la palabra reservada en cuestión, es decir, salta una vuelta del ciclo. Veremos un ejemplo de ambas a continuación:
+\begin{lstlisting}
+    for (x = 1; x <= 10; x++) {
+        if (x == 5){
+            continue;
+        }
+        console.log(x);
+        if (x == 8){
+            break;
+        }
+    }
+
+    /*
+    Imprime:
+    1
+    2
+    3
+    4
+    6
+    7
+    8
+    */
+\end{lstlisting}
+
+En el código anterior se imprimen los primeros cuatro números, se salta el número cinco por la sentencia \textit{continue} y continua imprimiendo, cuando x vale ocho, termina el ciclo.

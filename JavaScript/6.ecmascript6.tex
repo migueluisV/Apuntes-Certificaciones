@@ -1,0 +1,721 @@
+\section{ECMAScript 6}
+\hspace{0.55cm}ECMAScript 6 (ahora abreviado ES6), y posteriormente llamado ECMAScript 2015, es una de las versiones más populares de JavaScript. Esta versión buscó estandarizar el lenguaje, trayendo consigo muchas nuevas funciones y herramientas, como: nueva sintaxis, clases, módulos, iteradores para ciclos, generadores, datos binarios, arreglos \textit{tipado}s, nuevas colecciones de datos (mapas, mapas débiles y Sets), \textit{promesas}, mejoras para los tipos números y matemáticas \textit{reflection}, \textit{proxies}, etc.
+
+
+\subsection{Variables y cadenas}
+\hspace{0.55cm}Antes de mencionar los tipos de variables en esta versión de JavaScript, mencionemos el concepto \textbf{Scope:}
+
+
+\subsubsection{Scope}
+\hspace{0.55cm}El \textbf{Scope} (\textbf{Alcance, Límite, Enfoque}) en los lenguajes de programación es el área donde una variable u objeto tiene validez, puede interactuar con otras variables y es útil: una variable puede tener un Scope únicamente al bloque true o false de una condicional, al bloque en bucle de un ciclo, al bloque de instrucciones de una función o de una clase.
+
+Podemos declarar variables de tres maneras:
+\begin{itemize}
+    \item \textbf{var}: son variables globales o con un Scope un poco más general.
+    \item \textbf{const}: son variables que no pueden cambiar su valor, una vez se le asigna uno, ya no puede cambiar.
+    \item \textbf{let}: son variables con un Scope muy reducido.
+\end{itemize}
+
+\subsubsection{Template Literals}
+\hspace{0.55cm}La nueva forma de poder desplegar variables en esta versión del lenguaje es la siguiente:
+\begin{center}
+    \textit{
+            // Declara variable.
+            let nombre = "David";
+            // Forma de desplegar.
+            console.log("Bienvenido " + nombre);
+            // Nueva forma de desplegar.
+            console.log(`Bienvenido \$\{nombre\}`);
+            }
+\end{center}
+
+Fíjese que el ejemplo donde se utiliza el símbolo de dinero (\$) y un par de llaves (\{\}) se encierra el texto a mostrar dentro de comillas inversas (``), esto debido a que el formato \textbf{\$\{expresión\}} es un \textbf{marcador de posición}.
+
+
+\subsection{Ciclos y funciones}
+
+
+\subsubsection{Nueva sintaxis de funciones y parámetros predeterminados}
+\hspace{0.55cm}Podemos volver atrás en este documento para poder recordar como declarar una función, sin embargo, esta versión de JS tiene una nueva sintaxis para la declaración de métodos:
+\begin{lstlisting}
+    // Vieja sintaxis.
+    function suma(num1, num2) {
+        suma = sum1 + sum2;
+        console.log(`La suma es: ${suma}$`);
+    }
+    // Nueva sintaxis.
+    const suma = (num1, num2) => {
+        suma = sum1 + sum2;
+        console.log(`La suma es: ${suma}$`);
+    }
+\end{lstlisting}
+
+Esta nueva sintaxis puede adaptarse a funciones que no poseen parámetros no solamente tiene uno:
+\begin{lstlisting}
+    // Regresa el cuadrado de un número.
+    const cuadrado = x => x * x;
+    // Regresa un mensaje en el sitio web.
+    const mensaje = () => alert("Hola mundo");
+\end{lstlisting}
+
+Vemos que la simplificación de la nueva sintaxis es considerable para funciones con una instrucción y uno o ningún parámetro, si requieres regresar un valor de la función con la palabra reservada \textbf{return} con la nueva sintaxis, utilizar esta palabra no será necesaria.
+
+Podemos crear parámetros con valores por defecto en nuestras funciones:
+\begin{lstlisting}
+    // Regresa la suma de un parámetro con los otros dos predeterminados.
+    const suma = (a, b=3, c=4) => {
+        return a + b + c;
+    }
+    // Regresa la multiplicación de dos parámetros predeterminados con uno regular
+    const multi = (a=2, b, c=3) => {
+        return a * b * c;
+    }
+
+    // Imprime la llamada a las funciones.
+    console.log(suma(1));
+    console.log(multi(2));
+
+    /*
+    Imprime:
+    8
+    12
+    */
+\end{lstlisting}
+
+Los parámetros de las funciones suelen ser recorridos de izquierda a derecha, también, si deseamos cambiar uno de los valores de los parámetros predeterminados, el lenguaje nos lo permite.
+
+Se integra a los tipos de ciclos válidos en el lenguaje los ciclos \textbf{For...in} y \textbf{For...of}.
+
+
+\subsubsection{Ciclo For...in}
+\hspace{0.55cm}Este ciclo es utilizado para iterar sobre las llaves de objetos, no para arreglos, esto debido a que la variable contador es de tipo cadena, contrario a los índices de un arreglo, el cual es un entero. Veamos un ejemplo:
+\begin{lstlisting}
+    // Declara tupla.
+    let obj = [a:1, b:2, c:3, d:4];
+    // Imprime sus llaves por medio de ciclo For..in.
+    for (let v in obj) {
+        console.log(v);
+    }
+
+    /*
+    Imprime:
+    a
+    b
+    c
+    */
+\end{lstlisting}
+
+Lo que se desplegará son las llaves de una colección tupla.
+
+\subsubsection{Ciclo For...of}
+\hspace{0.55cm}Este ciclo es utilizado para iterar sobre objetos iterables (\textit{arreglos, Map, Set, WeakMap} y \textit{WeakSet}) por medio de una variable que adopta el tipo de dato según el tipo de dato que maneje la colección. Veamos un ejemplo:
+\begin{lstlisting}
+    // Declara un arreglo.
+    let obj = ["a", "b", "c", "d"];
+    // Imprime sus elementos por medio del ciclo For...of.
+    for (let v of obj) {
+        console.log(v);
+    }
+    // Imprime los caracteres de la cadena por medio del ciclo For...of.
+    for (let v of "Hola") {
+        console.log(v);
+    }
+
+    /*
+    Imprime:
+    a
+    b
+    c
+    H
+    o
+    l
+    a
+    */
+\end{lstlisting}
+
+
+
+\subsection{Objetos ES6}
+\hspace{0.55cm}La nueva versión del lenguaje te permite escribir menos a la hora de declarar métodos de objetos e inicializar sus propiedades:
+\begin{lstlisting}
+    // Declara objeto.
+    let arbol = {
+        // Declara atributos del objeto.
+        altura: 10,
+        color: "verde",
+        // Declara, de forma reducida, un método del objeto.
+        crecer() {
+            this.altura += 2;
+        }
+    };
+    // Declara variables para inicializar propiedades de un objeto.
+    let nombre = "mario";
+    let edad = 21;
+    // Declara objeto.
+    let atleta = {
+        // Utiliza variables para inicializar propiedades.
+        nombre,
+        edad
+    };
+    // Llamada al método para hacer crecer al árbol.
+    arbol.crecer();
+    console.log(arbol.altura);
+
+    // Imprime: 12
+\end{lstlisting}
+
+En caso de crear un objeto con múltiples propiedades con el mismo nombre y distintos valores, la última propiedad con el mismo nombre sobre escribirá el resto:
+\begin{center}
+    \textit{
+            // Imprime: 4 \\
+            var a = {x: 1, x: 2, x: 3, x: 4};
+            }
+\end{center} 
+
+
+\subsubsection{Nombres computados para propiedades}
+\hspace{0.55cm}Los \textbf{nombres computados para propiedades} son nombres construidos a partir de otras variables, con el operador corchetes cuadrados (\textbf{[]}) dentro de un objeto de clase, obtenemos este resultado:
+\begin{lstlisting}
+    // Declara variables.
+    let nombre = "nombre";
+    let id = 1234;
+    let num_tel = 5546788876;
+    var i = 0;
+    // Declara objeto.
+    let usuario = {
+        // Declara nombre de propiedad según el contenido de la variable "nombre".
+        [nombre]: "luis",
+        // Declara nombre de propiedad según el texto "usuario_" y el contenido de la variable "id".
+        [`usuario_${id}`]: `${num_tel}`
+    }
+    // Declara objeto.
+    var a = {
+        // Declara nombre de propiedad según el contenido de la variable "i".
+        ['foo' + ++i]: i,
+        ['foo' + ++i]: i,
+        ['foo' + ++i]: i
+    };
+    // Imprime valores de propiedades
+    console.log(user.name);
+    console.log(user.user_1234);
+    console.log(a.foo1);
+    console.log(a.foo2);
+    console.log(a.foo3);
+
+    /*
+    Imprime:
+    luis
+    1234
+    1
+    2
+    3
+    */
+\end{lstlisting}
+
+
+\subsubsection{Objet.assign()}
+\hspace{0.55cm}Es un nuevo método de los objetos que permite crear o asignar a un objeto las propiedades de otros objetos, con este método, podemos crear nuevos objetos o duplicar otros:
+\begin{lstlisting}
+    // Declara objeto.
+    let person = {
+        name: 'Jack',
+        age: 18,
+        sex: 'male'
+    };
+    // Declara objeto.
+    let student = {
+        name: 'Bob',
+        age: 20,
+        xp: '2'
+    };
+    // Declara objeto construido a partir de las propiedades de los objetos "person" y "student".
+    let newStudent = Object.assign({}, person, student);
+    // Imprime los valores de las propiedades.
+    console.log(newStudent.name); // Bob
+    console.log(newStudent.age); // 20
+    console.log(newStudent.sex); // male
+    console.log(newStudent.xp); // 2
+\end{lstlisting}
+
+El primer parámetro con las llaves vacías es el objeto destino, y después de este, el resto de parámetros son los objetos con los que se construirá otro, podemos utilizar tantos objetos como queramos. Debemos tomar en cuenta el orden de como vamos escribiendo los objetos a utilizar ya que, si dos o más objetos tienen propiedades con el mismo nombre, el último objeto con dichas propiedades sobre escribirá al resto, en el ejemplo anterior, vemos que el objeto "person" y "student" poseen dos propiedades con el mismo nombre (name y age), sin embargo, los valores de las propiedades con el mismo nombre del objeto "newStudent" son "Bob" y "20", en vez de ser "Jack" y "18"; pruebe cambiar el orden de los objetos en la declaración de newStudent para ver cuales serán los valores de sus propiedades.
+
+Se podría pensar que con utilizar el operador de igual (=) se puede duplicar un objeto:
+\begin{center}
+    \textit{nuevoObjecto = objecto;}
+\end{center}
+
+Esto generaría una \textbf{referencia} al objeto original, es como un acceso directo en los sistemas operativos, si se cambian los valores en la referencia, el objeto original también recibirá los cambios:
+\begin{lstlisting}
+    // Declara objeto.
+    let person = {
+        name: 'Jack',
+        age: 18
+    };
+    // Declara objeto con referencia a "person".
+    let newPerson = person;
+    // Cambia el valor de la propiedad del objeto referencia.
+    newPerson.name = 'Bob';
+    // Imprime las propiedades "name" de ambos objetos.
+    console.log(person.name);
+    console.log(newPerson.name);
+
+    /*
+    Imprime:
+    Bob
+    Bob
+    */
+\end{lstlisting}
+
+Con el método assign(), podemos crear un objeto a partir de las propiedades de otro, pudiendo cambiar el valor de una de las propiedades a recibir:
+\begin{lstlisting}
+    // Declara objeto.
+    let person = {
+        name: 'Jack',
+        age: 18
+    };
+    // Declara objeto con referencia a "person".
+    let newPerson = Objet.assign({}, person, {name:"Bob"});
+    // Imprime las propiedades "name" de ambos objetos.
+    console.log(newPerson.name);
+
+    /*
+    Imprime:
+    Bob
+    */
+\end{lstlisting}
+
+
+\subsection{Clases}
+\hspace{0.55cm}Para declarar una clase en ES6, se utiliza la palabra reservada \textbf{class}, y para crear objetos de clases es requerido utilizar la palabra reservada \textbf{new}:
+\begin{lstlisting}
+    // Declara clase.
+    class Rectangulo {
+        // Constructor que inicializa atributos de clase.
+        constructor(ancho, altura) {
+            this.ancho = ancho;
+            this.altura = altura;
+        }
+        // Regresa el cálculo del área.
+        area() {
+            return this.calcArea();
+        }
+        // Calcula el área del rectángulo.
+        calcArea() {
+            return this.ancho * this.altura;
+        }
+    }
+    // Declara objeto de clase Rectangulo.
+    const rect = new Rectangulo(5, 6);
+    // Imprime: 30.
+    console.log(rect.area());
+\end{lstlisting}
+
+Algo que no se ha mencionado a lo largo de este documento, es que \textbf{las funciones en JS pueden ser llamadas sin haber sido declaradas anteriormente}, a diferencia de otros lenguajes donde es requerido que declares una una función previo a llamarla; las clases en JS si deben ser declaradas antes de utilizarlas, no como las funciones.
+
+
+\subsubsection{Constructores}
+\hspace{0.55cm}Aquí también tenemos presente los \textbf{constructores}, el cual puede ser instanciado o no dentro de la declaración de una clase, su principal característica es que \textbf{solamente puede haber un constructor por clase}, no como en otros lenguajes, donde estos pueden ser sobrecargados.
+\begin{center}
+    \textit{constructor(parámetros) \{ //Instrucciones. \}}
+\end{center}
+
+
+\subsubsection{Tipos de clases}
+\hspace{0.55cm}Además de las clases regulares, que acabamos de ver, existen las \textbf{clases nombradas} y \textbf{sin nombrar}, estas son el producto de las \textbf{expresiones de clases}, como vemos enseguida:
+\begin{lstlisting}
+    // Declara clase nombrada.
+    var rect = class Rectangulo {
+        constructor(ancho, altura) {
+            this.ancho = ancho;
+            this.altura = altura;
+        }
+    }
+
+    // Declara clase sin nombrar.
+    var rect = class {
+        constructor(ancho, altura) {
+            this.ancho = ancho;
+            this.altura = altura;
+        }
+    }
+\end{lstlisting}
+
+Como podemos observar, una clase nombrada es una clase con nombre en la declaración que es asignada a una variable (let, const o var), mientras que una clase no nombrada es una clase sin nombre en la declaración; podemos ver a este tipo de clases como saltarnos el paso de declarar la clase y luego su objeto:
+\begin{lstlisting}
+    // Declara clase de forma regular.
+    class Rectangulo {
+        constructor(ancho, altura) {
+            this.ancho = ancho;
+            this.altura = altura;
+        }
+        area() {
+            return this.calcArea();
+        }
+        calcArea() {
+            return this.ancho * this.altura;
+        }
+    }
+    // Declara objeto de clase Rectangulo de forma regular.
+    const rect = new Rectangulo(5, 6);
+
+    // Declara clase nombrada en una variable, omitiendo la declaración
+    // de la clase y del objeto.
+    var rect = class Cuadrado {
+        constructor(lado) {
+            this.lado = lado;
+        }
+    }
+\end{lstlisting}
+
+
+\subsubsection{Tipos de métodos}
+\hspace{0.55cm}Los \textbf{métodos prototipo} son las funciones a las que los objetos de clases pueden acceder; son los métodos que utilizamos todo el tiempo en en las clases. Este tipo de métodos no requiere de alguna palabra reservada particular.
+
+Los \textbf{métodos estáticos} son las funciones que únicamente pueden acceder directamente una clase, no sus objetos, esto con el objeto de limitar el alcance y uso del método. Este tipo de métodos requiere de la palabra reservada \textbf{static}, previo al nombre del método, para ser declarado.
+\begin{lstlisting}
+    // Declara clase de forma regular.
+    class Rectangulo {
+        constructor(ancho, altura) {
+            this.ancho = ancho;
+            this.altura = altura;
+        }
+        area() {
+            return this.ancho * this.altura;
+        }
+        perimetro() {
+            return (this.ancho * this.altura) / 2;
+        }
+        // Método estático que recibe otro objeto Rectangulo como parámetro, imprime sus atributos más dos.
+        static sumar_valores(a) {
+            a.ancho += 2;
+            a.altura += 2;
+            console.log(a.ancho + ", " + a.altura);
+        }
+    }
+    // Declara objeto de clase Rectangulo de forma regular.
+    const rect = new Rectangulo(5, 6);
+    // Llamada al método estático de la clase Rectangulo.
+    Rectangulo.sumar_valores(rect);
+\end{lstlisting}
+
+
+\subsubsection{Herencia}
+\hspace{0.55cm}La palabra reservada \textbf{extends} es utilizada para heredar el contenido de una clase a otra:
+\begin{lstlisting}
+    // Declara clase base.
+    class Animal {
+        // Constructor.
+        constructor(name) {
+            this.name = name;
+        }
+        // Método que imprime un mensaje.
+        speak() {
+            console.log(this.name + ' makes a noise.');
+        }
+    }
+    // Declara clase derivada.
+    class Dog extends Animal {
+        // Método de clase basee que imprime un mensaje.
+        speak() {
+            // Llama al método de la clase base.
+            super.speak(); // Super
+            // Imprime mensaje.
+            console.log(this.name + ' barks.');
+        }
+    }
+    // Declara objeto de clase Dog.
+    let dog = new Dog('Rex');
+    // Llamada al método que imprime mensaje.
+    dog.speak();
+
+    /*
+    Imprime:
+    Rex makes a noise.
+    Rex barks.
+    */
+\end{lstlisting}
+
+Nótese que se está utilizando el método \textbf{super()}, el cual es un acceso directo a los métodos y atributos de la clase base de la clase derivada.
+
+
+\subsection{Desempacando arreglos y objetos}
+\hspace{0.55cm}Así como en Python, podemos asignarle a múltiples variables los elementos de un arreglo o las propiedades de un objeto:
+\begin{lstlisting}
+    // Declara arreglo.
+    let arreglo = [1, 2, 3];
+    // Declara objeto.
+    let objeto = {
+        prop1: 100,
+        prop2: true
+    };
+    // Asigna a múltiples variables los elementos de un arreglo.
+    let [num1, num2, num3] = arreglo;
+    // Asigna a múltiples variables las propiedades de un objeto.
+    let {prop1, prop2} = objeto;
+    // Imprime valores.
+    console.log(prop1);
+    console.log(prop2);
+    console.log(num1);
+    console.log(num2);
+    console.log(num3);
+
+    /*
+    Imprime:
+    100
+    true
+    1
+    2
+    3
+    */
+\end{lstlisting}
+
+Tome en cuenta que las variables que recibirán las variables de las propiedades de un objeto tendrán el mismo nombre que las propiedades, en el ejemplo anterior, el objeto "objeto" tiene las propiedades "prop1" y "prop2", y las variables que reciben sus valores son llamadas de la misma manera. Considere la existencia de elementos con valores predeterminados en los elementos de los arreglos:
+\begin{lstlisting}
+    // Declara variables.
+    let a, b, c = 4, d = 8;
+    // Asigna a la variable "a" el valor "2", "b" se mantiene con su valor por defecto.
+    [a, b = 6] = [2];
+    // Se intercambian los valores de las variables.
+    [c, d] = [d, c];
+
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log(d);
+
+    /*
+    Imprime:
+    2
+    6
+    8
+    4
+    */
+\end{lstlisting}
+
+En caso de que se le quieran asignar los valores de las propiedades de un objeto a múltiples variables que a fueron declaradas, la sintaxis cambia un poco:
+\begin{lstlisting}
+    // Declara variables.
+    let a, b;
+    // Asigna a variables las propiedades de un objeto.
+    ({a, b} = {a: "hola", b: "mundo"});
+    // Imprime resultados.
+    console.log(a + b);
+
+    // Imprime: hola mundo.
+\end{lstlisting}
+
+Si deseamos cambiar el nombre de las variables que recibirán los valores de las propiedades de un objeto, utilizamos la siguiente sintaxis:
+\begin{lstlisting}
+    // Declara objeto.
+    let objeto = {prop1: 100, prop2: true};
+    // Asigna a variables "p1" y "p2" las propiedades del objeto "objeto".
+    let {prop1: p1, prop2: p2} = objeto;
+    // Despliega valores.
+    console.log(prop1);
+    console.log(p1);
+
+    /*
+    Imprime:
+    Error
+    100
+    */
+\end{lstlisting}
+
+
+\subsection{Rest \& Spread}
+\hspace{0.55cm}Así como con Python, este lenguaje permite que una función pueda recibir \textit{n} cantidad de parámetros en una llamada, otra cantidad en otra llamada, así cuantas veces requerimos, podemos llamar a esto \textbf{parámetros variables}, esto lo obtenemos con la sentencia \textbf{arguments}:
+\begin{lstlisting}
+    // Declara función con un parámetro, que es una lista.
+    function ejemplo(arr) {
+        // Ciclo para recorrer los elementos del parámetro variable "arguments".
+        for (let i = 1; i < arguments.length; i++) {
+            // Declara variable que va recibindo los elementos del parámetro variable "arguments".
+            let num = arguments[i];
+            // Si la variable anterior no está presente en el arreglo, regresa falso.
+            if (arr.indexOf(num) == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    let x = [2, 4, 6, 8];
+    // Llamada a la función con distintos valores en los parámetros.
+    console.log(ejemplo(x, 2, 4 ,7));
+    console.log(ejemplo(x, 6, 4, 9));
+
+    /*
+    Imprime:
+    true
+    false
+    */
+\end{lstlisting}
+
+En cambio, SE6 introduce la nueva sentencia para utilizar los parámetros variables: los parámetros \textbf{Rest} son los famosos parámetros variables y pueden ser nombrados como queramos, además, requieren del \textbf{operador tres puntos} (\textbf{...)}; veamos un ejemplo:
+\begin{lstlisting}
+    // Declara función con un parámetro, que es una lista.
+    function ejemplo(arr, ...nums) {
+        // Ciclo For...of para recorrer el parámetro Rest.
+        for (let num of nums) {
+            // Si la variable anterior no está presente en el arreglo, regresa falso.
+            if (arr.indexOf(num) === -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+    // Declara arreglo.
+    let x = [2, 4, 6, 7];
+    // Llamada a la función con distintos valores en los parámetros.
+    console.log(ejemplo(x, 2, 4 ,7));
+    console.log(ejemplo(x, 6, 4, 9));
+
+    /*
+    Imprime:
+    true
+    false
+    */
+\end{lstlisting}
+
+En caso de que el parámetro Rest solamente reciba un elemento, en vez de un conjunto de elementos, dentro de la función, la lista de elementos solamente tendrá un valor (índice 0).
+
+Apuntes sobre Spread se realizarán más adelante.
+
+
+\subsection{Map y Set}
+\hspace{0.55cm}Un objeto \textbf{Map} puede contener pares de llaves y valores, como las duplas de Python u otros lenguajes, las llaves y valores pueden ser tipos de datos primitivos, objetoso o funciones.
+
+Un objeto Map puede ser inicializado con iterables, donde cada par de corchetes cuadrados representa un arreglo de dos posiciones u otro tipo de iterable:
+\begin{lstlisting}
+    let mapa = new Map([
+    [iterable1],
+    [iterable2],
+    .
+    .
+    .
+    [iterableN]
+    ])
+\end{lstlisting}
+
+Un objeto Map es diferente a un objeto regular debido a los siguientes puntos:
+\begin{enumerate}
+    \item Las llaves pueden ser cualquier tipo de dato (primitivo, funciones u otros objetos).
+    \item Puedes obtener el tamaño del mapa.
+    \item Puedes iterar directamente en un mapa.
+    \item El funcionamiento de los mapas es mejor cuando se tiene una situación donde se está constantemente agregando, cambiando o eliminando valores con llaves.
+\end{enumerate}
+
+Los métodos de los mapas vienen en la \textit{Tabla \ref{tab: 12}}:
+\begin{table}[H]
+    \begin{center}
+        \caption{Métodos del objeto Map}
+        \label{tab: 12}
+        \begin{tabular}{m{3cm} m{10cm}}
+            \hline
+            \textbf{Método} & \textbf{Definición} \\
+            \hline
+            set(llave, valor)   & Agrega una nueva llave y su valor al mapa. Si la llave la existe, sustituye su valor en el mapa con el que se desea agregar \\
+            get(llave)          & Regresa el valor correspondiente a la llave solicitada. Si la llave no existe, regresa \textbf{undefined} \\
+            has(llave)          & Regresa \textit{true} si la llave solicitada existe, \textit{false} en caso contrario \\
+            delete(llave)      & Elimina la llave y valor del mapa según la llave solicitada y regresa \textit{true}; regresa \textit{false} si la llave no existe \\
+            clear()             & Elimina todas las llaves y sus valores del mapa \\
+            keys()              & Regresa un iterador con todas las llaves de un mapa \\
+            values()            & Regresa un iterador con todos los valores de un mapa \\
+            entries()           & Regresa un iterador con un arreglo con todas las llaves y valores de un mapa \\
+            \hline
+        \end{tabular}
+    \end{center}    
+\end{table}
+
+Veamos un ejemplo ahora de los mapas y sus métodos:
+\begin{lstlisting}
+    // Declara un objeto Map vacío.
+    let mapa = new Map();
+    // Agrega varios pares al mapa.
+    mapa.set("1", 1);
+    mapa.set("2", 2);
+    mapa.set("3", 3).set("4", 4);
+    // Imprime los valores de las llaves "1" y "2".
+    console.log(mapa.get("1"));
+    console.log(mapa.get("2"));
+    // Elimina la llave "4" y su valor.
+    console.log(mapa.delete("4"));
+    // Verifica si existe la llave "4" en el mapa.
+    console.log(mapa.has("4"));
+    // Imprime, por medio del método "entries()", los pares del mapa.
+    for (let i of mapa.entries()) {
+        console.log(i[0] + " : " + i[1]);
+    }
+
+    /*
+    Imprime:
+    1
+    2
+    true
+    false
+    1 : 1
+    2 : 2
+    3 : 3
+    */
+\end{lstlisting}
+
+Los objetos \textbf{Set} son un tipo de arreglo donde solo se almacenan valores \textbf{únicos}, es decir, no se puede repetir un elemento dentro del conjunto; estos valores pueden ser tipos primitivos u otros objetos.
+
+Un objeto Set puede ser inicializado con iterables, donde cada par de corchetes cuadrados representa un arreglo de dos posiciones u otro tipo de iterable:
+\begin{lstlisting}
+    let conjunto = new Set([
+    [iterable1],
+    [iterable2],
+    .
+    .
+    .
+    [iterableN]
+    ])
+\end{lstlisting}
+
+Los métodos de los conjuntos vienen en la \textit{Tabla \ref{tab: 13}}:
+\begin{table}[H]
+    \begin{center}
+        \caption{Métodos del objeto Set}
+        \label{tab: 13}
+        \begin{tabular}{m{3cm} m{10cm}}
+            \hline
+            \textbf{Método} & \textbf{Definición} \\
+            \hline
+            add(valor)      & Agrega un elemento al conjunto \\
+            delete(valor)   & Elimina un elemento específico del conjunto \\
+            has(valor)      & Regresa \textit{true} si un elemento existe dentro del conjunto, regresa \textit{false} si no se encuentra \\
+            clear()         & Elimina todos los elementos del conjunto \\
+            values()        & Regresa un iterador con todos los elementos del conjunto \\
+            \hline
+        \end{tabular}
+    \end{center}    
+\end{table}
+
+Veamos un ejemplo ahora de los conjuntos y sus métodos:
+\begin{lstlisting}
+    // Declara un objeto Set vacío.
+    let con = new Set();
+    // Agrega varios valores al conjunto.
+    con.add(5);
+    con.add(9);
+    con.add(59);
+    con.add(9).add(5).add(59).add(60);
+    // Elimina el valor 60.
+    con.delete(60);
+    // Verifica si existe el valor 60 en el conjunto.
+    con.has(60)
+    // Imprime, por medio del método "values()", los valores del conjunto.
+    for (let i of con.values()) {
+        console.log(i);
+    }
+    
+    Imprime:
+    false
+    5
+    9
+    59
+    */
+\end{lstlisting}
+
+Veamos que se agregaron más de una vez el valor "5", "9" y "59", sin embargo, no fueron repetidos dentro del conjunto.

@@ -1,0 +1,330 @@
+
+Todas la información y comandos usados para crear y ejemplificar este documento fueron sacados de los enlaces puestos en la sección de referencias: (\textit{\cite{trefor2}}), (\textit{\cite{trefor1}}), (\textit{\cite{overl}}).
+
+\section{Comandos básicos y estructura del documento}
+\hspace{0.55cm}Para trabajar con \LaTeX  es necesario tener conocimiento de sus nociones básicas y cómo estructurarlo para un mejor orden.
+
+
+\subsection{Lo básico}
+\begin{itemize}
+    \item \textbf{Inicio de comando}: para iniciar un comando en \LaTeX  se utiliza una \textbf{\textbackslash}. Por ejemplo:
+    \begin{center}
+        \textit{\textbackslash{textbackslash}, \textbackslash{par}, \textbackslash{LaTeX}}.
+    \end{center}
+    \item \textbf{Salto de línea}: para hacer un salto de línea, se usan las dos \textbf{\textbackslash\textbackslash} o dándo doble ENTER con el teclado (dos salto de líneas).
+    \item \textbf{Salto de página}: para hacer un salto de página se usa el comando \textbf{\textbackslash{newpage}}.
+    \item \textbf{Sangría}: Al dejar una línea vacía antes de un párrafo, este tendrá sangría por defecto en \LaTeX. De igual manera, con el comando \textbf{\textbackslash{hspace\{\}}} podemos insertar una sangría a un párrafo, esta sangría debe ser establecida con alguna de las unidades que maneja \LaTeX, que veremos a continuación.
+\end{itemize}
+
+
+\subsection{Unidades y longitud}
+\hspace{0.55cm}Para poder establecer el alto o ancho de una imagen, columna, celda, figura, debemos establecer dicha medida de ancho o alto, para ello, requerimos de unidades que \LaTeX conoce y así, establecer el tamaño que deseamos, a continuación está la lista de unidades que se manejan:
+\begin{itemize}
+    \item \textbf{pt}: puntos, que son aproximadamente 0.3515 milímetros.
+    \item \textbf{mm}: milímetros.
+    \item \textbf{cm}: centímetros.
+    \item \textbf{in}: pulgadas, que son 2.54 centímetros.
+    \item \textbf{ex}: el alto de una "x" minúscula dependiendo de la fuente con la que se esté trabajando.
+    \item \textbf{em}: el ancho de una "m" mayúscula dependiendo de la fuente con la que se esté trabajando.
+    \item \textbf{mu}: su valor es igual a $\frac{1}{18}$em.
+    \item \textbf{sp}: punto especial, 65,536 puntos especiales son iguales a 1pt.
+\end{itemize}
+
+De igual forma, existen algunos comandos de longitud especiales para no rompernos la cabeza utilizando las unidades, los cuales son:
+\begin{itemize}
+    \item \textbf{\textbackslash{columnwidth}}: el ancho de una columna.
+    \item \textbf{\textbackslash{paperwidth}}: el ancho de toda la página.
+    \item \textbf{\textbackslash{paperheight}}: el alto de toda la página.
+    \item \textbf{\textbackslash{parskip}}: el espacio vertical entre párrafos.
+    \item \textbf{\textbackslash{textwidth}}: el ancho del texto del documento.
+    \item \textbf{\textbackslash{textheight}}: el alto del texto del documento
+    \item \textbf{\textbackslash{topmargin}}: el largo del margen superior.
+\end{itemize}
+
+Un ejemplo de la aplicación de los comandos de longitud o unidades de longitud de \LaTeX se encuentra a continuación:
+\begin{lstlisting}
+    \usepackage{graphicx}
+    
+    \begin{document}
+        \includegraphics[width=\textwidth]{abc.png}
+        \includegraphics[height=5cm]{cba.png}
+    \end{document}
+\end{lstlisting}
+
+\textit{Nota}: sea cuidadoso con asignar tamaños a objetos de \LaTeX, puede asignarle el tamaño del margen a un objeto y que sobresalga de la página.
+
+
+\subsection{Títulos, subtítulos y tablas de contenido}
+
+\textbf{Títulos y subtítulos}
+
+Los títulos y subtítulos en \LaTeX  dan un orden y estructura al documento que se está trabajando:
+\begin{itemize}
+    \item \textbf{\textbackslash{section}\{\}}: crea un título o sección.
+    \item \textbf{\textbackslash{subsection\{\}}}: crea un subtítulo o subsección.
+    \item \textbf{\textbackslash{subsubsection\{\}}}: crea un subtítulo del subtítulo.
+\end{itemize}
+\begin{lstlisting}
+    \begin{document}
+        \section{Título 1}
+        \subsection{Título 1.1}
+        \subsection{Título 1.1.1}
+    \end{document}
+    
+    
+    Despliega:
+    1 Título 1
+    1.1 Título 1.1
+    1.1.1 Título 1.1.1
+\end{lstlisting}
+
+\textbf{Tablas de contenido}
+
+Para que se cree correctamente una índice de contenido, ya sea de todo el documento, imágenes, figuras o tablas, es necesario establecer en los puntos donde, se requiere de las secciones, subsecciones y etiquetas de objetos para crear títulos, subtítulos y así sucesivamente, de los índices; por lo general, estos índices suelen colocarse enseguida del inicio del documento. Se utilizan los siguientes comandos:
+\begin{itemize}
+    \item Índice:
+    \begin{itemize}
+        \item \textbf{\textbackslash{tableofcontents}}: crea un índice del documento.
+        \item \textbf{\textbackslash{renewcommand*} y \textbackslash{contentsname}}: juntos, cambian el título del índice del documento (que originalmente es "Contents").
+        \begin{lstlisting}
+            \begin{document}
+                \renewcommand*\contentsname{Índice}
+                \tableofcontents
+            \end{document}
+        \end{lstlisting}
+    \end{itemize}
+    \item Índice de tablas:
+    \begin{itemize}
+        \item \textbf{\textbackslash{listoftables}}: crea un índice de tablas.
+        \item \textbf{\textbackslash{renewcommand\{\}\{\}}}: cambia el título del índice de tablas.
+        \begin{lstlisting}
+            \begin{document}
+                \renewcommand{listtablename}{Índice de Tablas}
+                \listoftables
+            \end{document}
+        \end{lstlisting}
+    \end{itemize}
+    \item Índice de figuras:
+    \begin{itemize}
+        \item \textbf{\textbackslash{listoffigures}}: crea un índice de figuras.
+        \item \textbf{\textbackslash{renewcommand\{\}\{\}}}: cambia el título del índice de figuras.
+        \begin{lstlisting}
+            \begin{document}
+                \renewcommand{listfigurename}{Índice de Figuras}
+                \listoffigures
+            \end{document}
+        \end{lstlisting}
+    \end{itemize}
+    \item Índice de ecuaciones: esta opción no está disponible de forma nativa.
+\end{itemize}
+
+
+\subsection{Referencias y citas}
+\hspace{0.55cm}Existen tres formas de trabajar con citas y referencias en \LaTeX, en esta ocasión y según mi entendimiento, la más sencilla es la de \textbf{biblatex}.
+
+
+\subsubsection{El archivo .bib}
+\hspace{0.55cm}Referenciar y citar por medio de \textit{biblatex} requiere que tengamos a la mano un archivo con extensión \textit{.bib} dentro del directorio donde estemos trabajando el proyecto, ahí estarán escritas todas las referencias que usaremos a lo largo del escrito.
+
+Una vez creado el archivo \textit{.bib} con las referencias escritas, necesitamos integrarlo a nuestro archivo \textbf{main}, para ello usamos el comando \textbf{addbibresource} en la parte superior del mismo (junto con los otros paquetes que estemos utilizando), y dentro de sus llaves escribimos el nombre del archivo \textit{.bib} que se creó anteriormente.
+\begin{center}
+    \textit{\textbackslash{addbibresourse\{referencias.bib\}}}
+\end{center}
+
+Para escribir las fuentes dentro de este archivo, existe una categoría para cada tipo de fuente, es decir, las fuentes están categorizadas por el tipo \textit{online}, \textit{artículo}, \textit{libro}, \textit{revista}, \textit{artículo científico}, etc. Cada categoría puede tener un tipo de entrada, dato o atributo en la cual podemos insertar la información de nuestra fuente (\textit{autor}, \textit{fecha de publicación}, \textit{link}, \textit{página}, \textit{volumen}, etc), es necesario investigar el tipo de entrada o atributo posee cada fuente que necesitemos, ya que no todas las categorías aceptan todas o ciertas entradas o atributos (no tiene sentido que la categoría \textit{online} tenga una entrada tipo \textit{volumen}). A continuación, se presentan tres ejemplos de categorías de fuentes con sus entradas correspondientes:
+\begin{lstlisting}
+    @online{trefor1,
+        title     = "Intro to LaTeX : Learn to write beautiful math equations",
+        author    = "Trefor Bazett",
+        date      = {2022-02-15},
+        url       = "https://youtu.be/Jp0lPj2-DQA",
+        publisher = "[Video de YouTube]"
+    }
+
+    @online{trefor2,
+        author    = "Trefor Bazett",
+        title     = "How to write a thesis using LaTeX **full tutorial**",
+        date      = {2022-02-15},
+        url       = "https://youtu.be/zqQM66uAig0",
+        publisher = "[Video de YouTube]"
+    }
+
+    @online{overl,
+        author    = "Overleaf",
+        title     = "Overleaf Help",
+        date      = {2022-02-15},
+        url       = "https://www.overleaf.com/learn",
+        publisher = "[Video de YouTube]"
+    }
+\end{lstlisting}
+
+\textit{Nota}: puedes acceder al sitio de Scribbr para escribir referencias y citas APA, este sitio te ofrece exportar las referencias APA a bibLaTeX: (https://www.scribbr.es/).
+
+
+\subsubsection{Citado de referencias}
+\hspace{0.55cm}Ya con el archivo de referencias creado y adjuntado a nuestro fichero \textbf{main}, es momento de citar nuestras referencias, para lograr esto usamos el comando \textbf{\textbackslash{cite\{\}}}, dentro de sus llaves escribimos la palabra clave o el nombre que le dimos previamente a cada una de nuestras fuentes (en el ejemplo anterior, los nombres de las referencias son: \textit{trefor1}, \textit{trefo2} y \textit{overl}).
+\begin{center}
+    \textit{\textbackslash{cite\{trefor1\}}}
+\end{center}
+
+
+\subsubsection{Sección de referencias en el índice y al final del documento}
+\hspace{0.55cm}Para crear la sección de referencias se usa el comando \textbf{\textbackslash{printbibliography}}, por si solo cumple con su función, pero si se busca cambiar la palabra por defecto que tiene (References), se pueden agregar unos corchetes después del comando donde se le pasa el parámetro \textit{title} para cambiar el título de la sección, el valor de este parámetro debe estar contenido dentro de llaves; para que esta sección salga en el índice general del documento sin estar enumerada, dentro de los mismos corchetes donde está el parámetro\textit{title}, le pasamos otro parámetro separado por una coma llamado \textit{heading}, su valor contenido dentro de llaves sería \textit{bibintoc}.
+\begin{lstlisting}
+    \usepackage{biblatex}	            % Paquete para usar referencias y citas.
+    \addbibresource{referencias.bib}	% Se agrega el archivo .bib al documento.
+
+    \begin{document}
+        \renewcommand*\contentsname{Índice}
+        \tableofcontents
+        \printbibliography[title={Referencias}, heading={bibintoc}]
+    \end{document}
+\end{lstlisting}
+
+El resultado del ejemplo anterior lo puede revisar en este mismo documento.
+
+
+\subsubsection{Estilo de las referencias}
+\hspace{0.55cm}Si queremos aplicar un estilo en particular a las referencias, es posible modificar el que está puesto por defecto para que nuestras citas y sección de referencias tengan otro aspecto (APA, IEEE, entre otros); para este caso en particular yo usaré el estilo APA para este documento.
+
+Cuando agregamos el paquete \textbf{biblatex}, no le pasamos ningún otro parámetro a \textit{usepackage}, ahora, entre corchetes, antes de las llaves, le pasaremos el parámetro \textbf{style}, y su valor será igual a \textbf{apa}, repito, en esta parte del comando se le puede usar otro tipo de estilo, y automáticamente, las citas y la sección de referencias se actualizará al etilo establecido.
+\begin{lstlisting}
+    \usepackage[style=apa]{biblatex}    % Paquete para usar referencias y citas.
+    \addbibresource{referencias.bib}	% Se agrega el archivo .bib al documento.
+
+    \begin{document}
+        
+    \end{document}
+\end{lstlisting}
+
+
+\subsection{Márgenes}
+\hspace{0.55cm}Debemos agregar el paquete \textbf{geometry} dentro de nuestro documento para poder modificar los márgenes del mismo.
+
+Entonces, previo a darle comienzo al documento, usamos el comando \textbf{newgeometry} y, dentro de sus llaves, agregamos los valores que queremos que tengan nuestros márgenes; los parámetros que puede recibir son: \textbf{top}, \textbf{bottom}, \textbf{outer} e \textbf{inner} (\textit{arriba}, \textit{abajo}, \textit{la parte exterior del documento} y \textit{la parte interior}; si estuviéramos viendo el documento como un libro, la parte outer de la página izquierda sería la izquierda, y la parte inner sería el lad derecho, para la página derecha, el outer es el lado derecho y el inner la izquierda de la página; para un documento digital, que se desliza hacía abajo, el outer es el lado derecho y el inner el izquierdo), el valor que se le asigne a estos parámetros tiene que ser un unidades utilizadas por \LaTeX.
+\begin{lstlisting}
+    \usepackage{geometry} % Paquete para trabajar con los márgenes del documento.
+    
+    % Márgenes del documento.
+    \newgeometry{
+        top=0.75in,     % Superior.
+        bottom=0.75in,  % Inferior.
+        outer=0.75in,   % Parte exterior.
+        inner=1.5in,    % Parte interior.
+    }
+    
+    \begin{document}
+    
+    \end{document}
+\end{lstlisting}
+
+El resultado del ejemplo anterior se puede ver a lo largo de los márgenes de este documento.
+
+
+\subsection{Encabezado y pie de página}
+\hspace{0.55cm}\LaTeX por defecto maneja el encabezado y pie de página solamente con el número de página, esto es porque el documento utiliza el comando \textbf{\textbackslash{pagestyle\{\}}} que define que es lo qué contendrá ambas partes del documento, suele estar ubicado antes del inicio del documento, su estilo por defecto es \textit{plain}, pero se le puede poner otro tipo estilo, como:
+\begin{itemize}
+    \item \textbf{plain}: estilo predeterminado de \LaTeX, simplemente agrega el número de página al documento.
+    \item \textbf{myheading}: utilizado para documentos con dos lados de página, escribe en la cabecera el título del capítulo en el que se esté posicionado.
+    \item \textbf{empty}: deja ambas partes del documento vacío.
+    \item \textbf{thispagestyle}: este comando se utiliza para para asignarle un estilo de página a una sola página, esto para diferenciarla de las otras.
+\end{itemize}
+\begin{center}
+    \textit{\textbackslash{pagestyle\{plain\}}}
+\end{center}
+
+
+\subsubsection{Personalización}
+\hspace{0.55cm}Para salirnos de lo básico mostrado en la sección anterior, podemos personalizar aún más el encabezado y pie de página, para ello requerimos el paquete \textbf{fancyhdr}, después, dentro del comando \textbackslash{pagestyle}, le pasamos como parámetro el valor\textbf{fancy}, posterior a ello utilizaremos el comando \textbf{\textbackslash{fancyhf\{\}}}, este último funciona para limpiar todo lo que esté contenido en la cabecera y pie (algo así como empty de pagestyle). La siguiente configuración va previa al comienzo del documento:
+\begin{lstlisting}
+    \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+    
+    % Personalización de la cabecera y pie de página.
+    \pagestyle{fancy}
+    \fancyhf{}
+
+    \begin{document}
+    
+    \end{document}
+\end{lstlisting}
+
+Algunos de los parámetros son utilizados en este documento, que se le pueden pasar a \textbf{fancyhdr} son:
+\begin{itemize}
+    \item \textbf{rhead}: texto del lado derecho del encabezado.
+    \item \textbf{chead}: texto en el centro del encabezado.
+    \item \textbf{lhead}: texto en el lado izquierdo del encabezado.
+    \item \textbf{rfoot}: texto en el lado derecho del pie de página.
+    \item \textbf{cfoot}: texto en el centro del pie de página.
+    \item \textbf{lfoot}: texto en el lado izquierdo del pie de página.
+    \begin{lstlisting}
+        \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+    
+        % Personalización de la cabecera y pie de página.
+        \pagestyle{fancy}
+        \fancyhf{}
+        % Texto en esquina superior derecha.
+        \rhead{Overleaf}
+        % Texto en esquina superior izquierda.
+        \lhead{Apuntes de LaTeX}
+        % Texto en la esquina inferior izquierda.
+        lfoot{Hola mundo}
+        % Texto en esquina inferior derecha (Página n).
+        \rfoot{Pagina \thepage}
+
+        \begin{document}
+    
+        \end{document}
+    \end{lstlisting}
+    \item \textbf{headrulewidth}: establece una línea vertical en la cabecera, este comando debe usarse como parámetro para el comando \textbf{\textbackslash{renewcommand}}. El grosor de esta línea es el parámetro de este comando y puede establecerse con unidades de medida.
+    \item \textbf{footrulewidth}: establece una línea vertical en el pie de página, este comando debe usarse como parámetro para el comando \textbf{\textbackslash{renewcommand}}. El grosor de esta línea es el parámetro de este comando y puede establecerse con unidades de medida.
+    \begin{lstlisting}
+        \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+    
+        % Personalización de la cabecera y pie de página.
+        \pagestyle{fancy}
+        \fancyhf{}
+        % Texto en esquina superior derecha.
+        \rhead{Overleaf}
+        % Texto en esquina superior izquierda.
+        \lhead{Apuntes de LaTeX}
+        % Texto en la esquina inferior izquierda.
+        lfoot{Hola mundo}
+        % Texto en esquina inferior derecha (Página n).
+        \rfoot{Pagina \thepage}
+        % Ancho de línea horizontal superior e inferior.
+        \renewcommand{\headrulewidth}{1pt}
+        \renewcommand{\footrulewidth}{1pt}
+
+        \begin{document}
+    
+        \end{document}
+    \end{lstlisting}
+    \item \textbf{Página x de y}: se puede personalizar el estilo en el que se presenta la numeración de páginas, para ello podemos escribir el texto "Página x de z" donde remplazamos x por el comando \textbf{thepage} y z por \textbf{pageref} donde su parámetro es \textbf{LastPage} (requiere el paquete \textbf{lastpage} para el funcionamiento correcto de esta personalización), con esto obtenemos como resultado que cada página tenga la numeración con el estilo "Página 1 de 120", el estilo de esta presentación puede ser personalizado, lo que importa son los comandos utilizados en este punto, depende de uno escoger si poner este comando en el encabezado o pie.
+    \begin{lstlisting}
+        \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+        \usepackage{lastpage}	% Paquete para reverenciar páginas del documento.
+    
+        % Personalización de la cabecera y pie de página.
+        \pagestyle{fancy}
+        \fancyhf{}
+        % Texto en esquina superior derecha.
+        \rhead{Overleaf}
+        % Texto en esquina superior izquierda.
+        \lhead{Apuntes de LaTeX}
+        % Texto en la esquina inferior izquierda.
+        lfoot{Hola mundo}
+        % Texto en esquina inferior derecha (Página n de n).
+        \rfoot{Pagina \thepage \hspace{1pt} de \pageref{LastPage}}
+        % Ancho de línea horizontal superior e inferior.
+        \renewcommand{\headrulewidth}{1pt}
+        \renewcommand{\footrulewidth}{1pt}
+
+        \begin{document}
+    
+        \end{document}
+    \end{lstlisting}
+\end{itemize}
+
+\textit{Nota}: los comandos \textbf{\textbackslash{thepage}} referencia a la página actual en el contador del documento.
+
+El desarrollo de los ejemplos anteriores se ven a lo largo de todos las cabeceras y pies de página de este documento.

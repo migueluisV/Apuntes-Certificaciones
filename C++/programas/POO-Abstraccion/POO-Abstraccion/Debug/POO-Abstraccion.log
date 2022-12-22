@@ -1,0 +1,9 @@
+﻿  Cilindro.cpp
+  Cono.cpp
+  Cubo.cpp
+  Esfera.cpp
+  Figuras.cpp
+  POO-Abstraccion.cpp
+D:\Mis Documentos\Visual Studio 2019\Projects\C++\programas\POO-Abstraccion\POO-Abstraccion\POO-Abstraccion.cpp(41,16): warning C4101: 'x': unreferenced local variable
+  Generating Code...
+  POO-Abstraccion.vcxproj -> D:\Mis Documentos\Visual Studio 2019\Projects\C++\programas\POO-Abstraccion\Debug\POO-Abstraccion.exe

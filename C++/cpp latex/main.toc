@@ -1,0 +1,72 @@
+\contentsline {section}{\numberline {1}Conceptos básicos}{5}{}%
+\contentsline {section}{\numberline {2}Cabeceras y librerías}{5}{}%
+\contentsline {section}{\numberline {3}Comentarios}{6}{}%
+\contentsline {section}{\numberline {4}Variables}{6}{}%
+\contentsline {subsection}{\numberline {4.1}Reglas para nombrar variables}{6}{}%
+\contentsline {section}{\numberline {5}Aritmética básica}{7}{}%
+\contentsline {section}{\numberline {6}Asignación e incremento en variables}{7}{}%
+\contentsline {section}{\numberline {7}Comparación de cadenas}{8}{}%
+\contentsline {section}{\numberline {8}Condicionales}{10}{}%
+\contentsline {section}{\numberline {9}Ciclos}{10}{}%
+\contentsline {subsection}{\numberline {9.1}Ciclo while}{10}{}%
+\contentsline {subsection}{\numberline {9.2}Ciclo for}{11}{}%
+\contentsline {subsection}{\numberline {9.3}Ciclo do-while}{12}{}%
+\contentsline {section}{\numberline {10}Condicional switch}{12}{}%
+\contentsline {section}{\numberline {11}Operadores lógicos}{13}{}%
+\contentsline {subsection}{\numberline {11.1}Operador ternario}{13}{}%
+\contentsline {section}{\numberline {12}Tipos de datos}{14}{}%
+\contentsline {subsubsection}{\numberline {12.0.1}Tipo numérico}{14}{}%
+\contentsline {subsection}{\numberline {12.1}Tipo cadena y caracteres}{14}{}%
+\contentsline {subsection}{\numberline {12.2}Tipo booleano}{15}{}%
+\contentsline {section}{\numberline {13}El operador sizeof()}{15}{}%
+\contentsline {section}{\numberline {14}Arreglos}{15}{}%
+\contentsline {subsection}{\numberline {14.1}Arreglos en ciclos}{16}{}%
+\contentsline {subsection}{\numberline {14.2}Arreglos multidimensionales}{16}{}%
+\contentsline {subsection}{\numberline {14.3}Arreglos con cabecera array}{17}{}%
+\contentsline {subsection}{\numberline {14.4}Arreglos dinámicos con cabecera vector}{18}{}%
+\contentsline {section}{\numberline {15}Introducción a los Punteros}{19}{}%
+\contentsline {section}{\numberline {16}Memoria dinámica}{20}{}%
+\contentsline {section}{\numberline {17}Estructuras de datos}{21}{}%
+\contentsline {subsection}{\numberline {17.1}Colas dinámicas}{21}{}%
+\contentsline {subsection}{\numberline {17.2}Pilas dinámicas}{22}{}%
+\contentsline {section}{\numberline {18}Funciones}{24}{}%
+\contentsline {subsection}{\numberline {18.1}Con parámetros}{25}{}%
+\contentsline {subsubsection}{\numberline {18.1.1}Argumentos predeterminados}{25}{}%
+\contentsline {subsection}{\numberline {18.2}Con múltiples parámetros}{26}{}%
+\contentsline {subsection}{\numberline {18.3}Arreglos como parámetros}{26}{}%
+\contentsline {subsection}{\numberline {18.4}Punteros como referencias}{27}{}%
+\contentsline {subsection}{\numberline {18.5}Sobrecarga de funciones}{28}{}%
+\contentsline {subsection}{\numberline {18.6}La función rand()}{28}{}%
+\contentsline {subsubsection}{\numberline {18.6.1}La función srand()}{29}{}%
+\contentsline {subsection}{\numberline {18.7}Funciones recursivas}{29}{}%
+\contentsline {section}{\numberline {19}Constante PI}{29}{}%
+\contentsline {section}{\numberline {20}Clases}{31}{}%
+\contentsline {subsection}{\numberline {20.1}Concepto de clases}{31}{}%
+\contentsline {subsection}{\numberline {20.2}Conceptos de POO}{32}{}%
+\contentsline {subsubsection}{\numberline {20.2.1}Objetos}{32}{}%
+\contentsline {subsubsection}{\numberline {20.2.2}Abstracción}{32}{}%
+\contentsline {subsubsection}{\numberline {20.2.3}Encapsulamiento}{32}{}%
+\contentsline {subsubsection}{\numberline {20.2.4}Herencia}{34}{}%
+\contentsline {subsubsection}{\numberline {20.2.5}Especificadores de acceso de clases derivadas (miembros protegidos)}{35}{}%
+\contentsline {subsubsection}{\numberline {20.2.6}Polimorfismo}{36}{}%
+\contentsline {subsection}{\numberline {20.3}Creando una clase en un archivo separado}{38}{}%
+\contentsline {subsection}{\numberline {20.4}Miembros especiales}{39}{}%
+\contentsline {subsubsection}{\numberline {20.4.1}Constructores}{39}{}%
+\contentsline {subsubsection}{\numberline {20.4.2}Destructores}{40}{}%
+\contentsline {subsection}{\numberline {20.5}Palabras reservadas}{42}{}%
+\contentsline {subsubsection}{\numberline {20.5.1}Friend}{42}{}%
+\contentsline {subsubsection}{\numberline {20.5.2}This}{42}{}%
+\contentsline {subsection}{\numberline {20.6}Operadores de selección}{43}{}%
+\contentsline {subsection}{\numberline {20.7}Objetos Const}{44}{}%
+\contentsline {subsection}{\numberline {20.8}Miembros inicializador}{46}{}%
+\contentsline {subsection}{\numberline {20.9}Composición}{47}{}%
+\contentsline {subsection}{\numberline {20.10}Sobrecarga de operadores}{48}{}%
+\contentsline {subsection}{\numberline {20.11}Clases abstractas}{49}{}%
+\contentsline {section}{\numberline {21}Plantillas (Templates)}{53}{}%
+\contentsline {subsection}{\numberline {21.1}Funciones plantilla}{53}{}%
+\contentsline {subsection}{\numberline {21.2}Plantillas de funciones con múltiples parámetros}{53}{}%
+\contentsline {subsection}{\numberline {21.3}Plantillas de clases}{54}{}%
+\contentsline {subsection}{\numberline {21.4}Plantillas especializadas}{55}{}%
+\contentsline {section}{\numberline {22}Excepciones}{56}{}%
+\contentsline {subsection}{\numberline {22.1}Excepción de formato}{57}{}%
+\contentsline {section}{\numberline {23}Trabajando con archivos}{58}{}%

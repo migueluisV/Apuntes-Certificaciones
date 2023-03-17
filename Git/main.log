@@ -1,0 +1,511 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (MiKTeX 22.3) (preloaded format=pdflatex 2022.6.5)  14 DEC 2022 19:22
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**./main.tex
+(main.tex
+LaTeX2e <2021-11-15> patch level 1
+L3 programming layer <2022-05-04>
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/base\article.cls
+Document Class: article 2021/10/04 v1.4n Standard LaTeX document class
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/base\size10.clo
+File: size10.clo 2021/10/04 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count185
+\c@section=\count186
+\c@subsection=\count187
+\c@subsubsection=\count188
+\c@paragraph=\count189
+\c@subparagraph=\count190
+\c@figure=\count191
+\c@table=\count192
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/base\inputenc.sty
+Package: inputenc 2021/02/14 v1.3d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/graphics\graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/graphics\keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks18
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/graphics\graphics.sty
+Package: graphics 2021/03/04 v1.4d Standard LaTeX Graphics (DPC,SPQR)
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/graphics\trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/graphics-cfg\graphics.cf
+g
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/graphics-def\pdftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen139
+\Gin@req@width=\dimen140
+) (D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/geometry\geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/generic/iftex\ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/generic/iftex\iftex.sty
+Package: iftex 2022/02/03 v1.0f TeX engine tests
+))
+\Gm@cnth=\count193
+\Gm@cntv=\count194
+\c@Gm@tempcnt=\count195
+\Gm@bindingoffset=\dimen141
+\Gm@wd@mp=\dimen142
+\Gm@odd@mp=\dimen143
+\Gm@even@mp=\dimen144
+\Gm@layoutwidth=\dimen145
+\Gm@layoutheight=\dimen146
+\Gm@layouthoffset=\dimen147
+\Gm@layoutvoffset=\dimen148
+\Gm@dimlist=\toks19
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/geometry\geometry.cfg))
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/fancyhdr\fancyhdr.sty
+Package: fancyhdr 2022/05/18 v4.0.3 Extensive control of page headers and foote
+rs
+\f@nch@headwidth=\skip49
+\f@nch@O@elh=\skip50
+\f@nch@O@erh=\skip51
+\f@nch@O@olh=\skip52
+\f@nch@O@orh=\skip53
+\f@nch@O@elf=\skip54
+\f@nch@O@erf=\skip55
+\f@nch@O@olf=\skip56
+\f@nch@O@orf=\skip57
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/lastpage\lastpage.sty
+Package: lastpage 2021/09/03 v1.2n Refers to last page's name (HMM; JPG)
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/multirow\multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip58
+\multirow@cntb=\count196
+\multirow@dima=\skip59
+\bigstrutjot=\dimen149
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/tools\array.sty
+Package: array 2021/10/04 v2.5f Tabular extension package (FMi)
+\col@sep=\dimen150
+\ar@mcellbox=\box50
+\extrarowheight=\dimen151
+\NC@list=\toks20
+\extratabsurround=\skip60
+\backup@length=\skip61
+\ar@cellbox=\box51
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/float\float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count197
+\float@exts=\toks21
+\float@box=\box52
+\@float@everytoks=\toks22
+\@floatcapt=\box53
+)
+*geometry* verbose mode - [ newgeometry ] result:
+* driver: 
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 451.6875pt, 54.2025pt)
+* v-part:(T,H,B)=(54.2025pt, 686.56499pt, 54.2025pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=451.6875pt
+* \textheight=686.56499pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-55.06749pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/l3backend\l3backend-pdft
+ex.def
+File: l3backend-pdftex.def 2022-04-20 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count198
+\l__pdf_internal_box=\box54
+) (main.aux (texto.aux))
+\openout1 = `main.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 43.
+LaTeX Font Info:    ... okay on input line 43.
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/context/base/mkii\supp-pdf.mki
+i
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count199
+\scratchdimen=\dimen152
+\scratchbox=\box55
+\nofMPsegments=\count266
+\nofMParguments=\count267
+\everyMPshowfont=\toks23
+\MPscratchCnt=\count268
+\MPscratchDim=\dimen153
+\MPnumerator=\count269
+\makeMPintoPDFobject=\count270
+\everyMPtoPDFconversion=\toks24
+)
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/epstopdf-pkg\epstopdf-ba
+se.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(D:\Mis Documentos\Programas\Archivos\MikTex\tex/latex/00miktex\epstopdf-sys.cf
+g
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: <default>
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(108.405pt, 451.6875pt, 54.2025pt)
+* v-part:(T,H,B)=(54.2025pt, 686.56499pt, 54.2025pt)
+* \paperwidth=614.295pt
+* \paperheight=794.96999pt
+* \textwidth=451.6875pt
+* \textheight=686.56499pt
+* \oddsidemargin=36.13501pt
+* \evensidemargin=36.13501pt
+* \topmargin=-55.06749pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 43.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 49.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 49.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 49.
+[1
+
+
+{C:/Users/DELL/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}] (main.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 2.
+)
+\tf@toc=\write3
+\openout3 = `main.toc'.
+
+
+[2] (main.lof)
+\tf@lof=\write4
+\openout4 = `main.lof'.
+
+ [3]
+\openout2 = `texto.aux'.
+
+ (texto.tex
+<conceptos/g1.jpg, id=16, 422.57875pt x 282.05376pt>
+File: conceptos/g1.jpg Graphic file (type jpg)
+<use conceptos/g1.jpg>
+Package pdftex.def Info: conceptos/g1.jpg  used on input line 20.
+(pdftex.def)             Requested size: 227.62204pt x 151.93231pt.
+<conceptos/g2.jpg, id=17, 744.7825pt x 443.6575pt>
+File: conceptos/g2.jpg Graphic file (type jpg)
+<use conceptos/g2.jpg>
+Package pdftex.def Info: conceptos/g2.jpg  used on input line 33.
+(pdftex.def)             Requested size: 451.6875pt x 269.07365pt.
+ [4
+
+ <./conceptos/g1.jpg>]
+<conceptos/g3.jpg, id=22, 824.07875pt x 191.71625pt>
+File: conceptos/g3.jpg Graphic file (type jpg)
+<use conceptos/g3.jpg>
+Package pdftex.def Info: conceptos/g3.jpg  used on input line 47.
+(pdftex.def)             Requested size: 451.6875pt x 105.08151pt.
+ [5 <./conceptos/g2.jpg> <./conceptos/g3.jpg>] [6] [7] [8]
+<capturas/creando_w1.png, id=39, 313.77225pt x 517.935pt>
+File: capturas/creando_w1.png Graphic file (type png)
+<use capturas/creando_w1.png>
+Package pdftex.def Info: capturas/creando_w1.png  used on input line 144.
+(pdftex.def)             Requested size: 199.16928pt x 328.76651pt.
+<capturas/creando_w2.png, id=41, 564.9105pt x 352.9185pt>
+File: capturas/creando_w2.png Graphic file (type png)
+<use capturas/creando_w2.png>
+Package pdftex.def Info: capturas/creando_w2.png  used on input line 151.
+(pdftex.def)             Requested size: 341.43306pt x 213.30363pt.
+<capturas/creando_w3.png, id=42, 406.51875pt x 253.54726pt>
+File: capturas/creando_w3.png Graphic file (type png)
+<use capturas/creando_w3.png>
+Package pdftex.def Info: capturas/creando_w3.png  used on input line 158.
+(pdftex.def)             Requested size: 341.43306pt x 212.95888pt.
+ [9 <./capturas/creando_w1.png>]
+<capturas/creando_w4.png, id=47, 304.13625pt x 521.5485pt>
+File: capturas/creando_w4.png Graphic file (type png)
+<use capturas/creando_w4.png>
+Package pdftex.def Info: capturas/creando_w4.png  used on input line 165.
+(pdftex.def)             Requested size: 199.16928pt x 341.55707pt.
+<capturas/creando_w5.png, id=48, 565.51276pt x 352.31625pt>
+File: capturas/creando_w5.png Graphic file (type png)
+<use capturas/creando_w5.png>
+Package pdftex.def Info: capturas/creando_w5.png  used on input line 172.
+(pdftex.def)             Requested size: 341.43306pt x 212.71385pt.
+ [10 <./capturas/creando_w2.png> <./capturas/creando_w3.png>] [11 <./capturas/c
+reando_w4.png> <./capturas/creando_w5.png>]
+<capturas/abriendo_w1.png, id=59, 252.945pt x 495.0495pt>
+File: capturas/abriendo_w1.png Graphic file (type png)
+<use capturas/abriendo_w1.png>
+Package pdftex.def Info: capturas/abriendo_w1.png  used on input line 183.
+(pdftex.def)             Requested size: 199.16928pt x 389.80821pt.
+<capturas/abriendo_w2.png, id=60, 564.30824pt x 351.714pt>
+File: capturas/abriendo_w2.png Graphic file (type png)
+<use capturas/abriendo_w2.png>
+Package pdftex.def Info: capturas/abriendo_w2.png  used on input line 190.
+(pdftex.def)             Requested size: 341.43306pt x 212.81178pt.
+ [12 <./capturas/abriendo_w1.png>]
+<capturas/abriendo_terminal.png, id=65, 717.882pt x 516.7305pt>
+File: capturas/abriendo_terminal.png Graphic file (type png)
+<use capturas/abriendo_terminal.png>
+Package pdftex.def Info: capturas/abriendo_terminal.png  used on input line 201
+.
+(pdftex.def)             Requested size: 341.43306pt x 245.75703pt.
+<capturas/git init.png, id=66, 707.0415pt x 442.0515pt>
+File: capturas/git init.png Graphic file (type png)
+<use capturas/git init.png>
+Package pdftex.def Info: capturas/git init.png  used on input line 210.
+(pdftex.def)             Requested size: 341.43306pt x 213.47063pt.
+ [13 <./capturas/abriendo_w2.png> <./capturas/abriendo_terminal.png>]
+<capturas/git add git commit.png, id=72, 584.1825pt x 471.56175pt>
+File: capturas/git add git commit.png Graphic file (type png)
+<use capturas/git add git commit.png>
+Package pdftex.def Info: capturas/git add git commit.png  used on input line 21
+9.
+(pdftex.def)             Requested size: 341.43306pt x 275.62146pt.
+File: capturas/git add git commit.png Graphic file (type png)
+<use capturas/git add git commit.png>
+Package pdftex.def Info: capturas/git add git commit.png  used on input line 22
+8.
+(pdftex.def)             Requested size: 341.43306pt x 275.62146pt.
+ [14 <./capturas/git init.png> <./capturas/git add git commit.png>]
+<capturas/modificaciones.png, id=77, 495.0495pt x 225.84375pt>
+File: capturas/modificaciones.png Graphic file (type png)
+<use capturas/modificaciones.png>
+Package pdftex.def Info: capturas/modificaciones.png  used on input line 237.
+(pdftex.def)             Requested size: 341.43306pt x 155.76686pt.
+<capturas/segundo commit.png, id=78, 579.3645pt x 522.15076pt>
+File: capturas/segundo commit.png Graphic file (type png)
+<use capturas/segundo commit.png>
+Package pdftex.def Info: capturas/segundo commit.png  used on input line 246.
+(pdftex.def)             Requested size: 341.43306pt x 307.72368pt.
+ [15 <./capturas/modificaciones.png>]
+<capturas/creando_b1.png, id=83, 810.6285pt x 649.82774pt>
+File: capturas/creando_b1.png Graphic file (type png)
+<use capturas/creando_b1.png>
+Package pdftex.def Info: capturas/creando_b1.png  used on input line 272.
+(pdftex.def)             Requested size: 398.33858pt x 319.3207pt.
+
+[16 <./capturas/segundo commit.png>]
+<capturas/abriendo_b1.png, id=88, 813.0375pt x 649.82774pt>
+File: capturas/abriendo_b1.png Graphic file (type png)
+<use capturas/abriendo_b1.png>
+Package pdftex.def Info: capturas/abriendo_b1.png  used on input line 281.
+(pdftex.def)             Requested size: 398.33858pt x 318.3688pt.
+ [17 <./capturas/creando_b1.png>]
+<capturas/creando_b2.png, id=93, 442.65375pt x 422.7795pt>
+File: capturas/creando_b2.png Graphic file (type png)
+<use capturas/creando_b2.png>
+Package pdftex.def Info: capturas/creando_b2.png  used on input line 292.
+(pdftex.def)             Requested size: 398.33858pt x 380.47221pt.
+ [18 <./capturas/abriendo_b1.png>]
+<capturas/seguimiento_archivos.png, id=98, 240.9pt x 208.3785pt>
+File: capturas/seguimiento_archivos.png Graphic file (type png)
+<use capturas/seguimiento_archivos.png>
+Package pdftex.def Info: capturas/seguimiento_archivos.png  used on input line 
+303.
+(pdftex.def)             Requested size: 256.0748pt x 221.52559pt.
+ [19 <./capturas/creando_b2.png>]
+<capturas/commits1.png, id=104, 235.47975pt x 264.99pt>
+File: capturas/commits1.png Graphic file (type png)
+<use capturas/commits1.png>
+Package pdftex.def Info: capturas/commits1.png  used on input line 316.
+(pdftex.def)             Requested size: 256.0748pt x 288.17833pt.
+ [20 <./capturas/seguimiento_archivos.png>]
+<capturas/commits2.png, id=109, 541.42274pt x 340.8735pt>
+File: capturas/commits2.png Graphic file (type png)
+<use capturas/commits2.png>
+Package pdftex.def Info: capturas/commits2.png  used on input line 325.
+(pdftex.def)             Requested size: 284.52756pt x 179.13809pt.
+<capturas/merge1.png, id=110, 445.06274pt x 425.79076pt>
+File: capturas/merge1.png Graphic file (type png)
+<use capturas/merge1.png>
+Package pdftex.def Info: capturas/merge1.png  used on input line 338.
+(pdftex.def)             Requested size: 284.52756pt x 272.21928pt.
+ [21 <./capturas/commits1.png> <./capturas/commits2.png>]
+<capturas/merge2.png, id=115, 466.74374pt x 98.769pt>
+File: capturas/merge2.png Graphic file (type png)
+<use capturas/merge2.png>
+Package pdftex.def Info: capturas/merge2.png  used on input line 345.
+(pdftex.def)             Requested size: 398.33858pt x 84.29764pt.
+<capturas/merge3.png, id=116, 499.26524pt x 233.673pt>
+File: capturas/merge3.png Graphic file (type png)
+<use capturas/merge3.png>
+Package pdftex.def Info: capturas/merge3.png  used on input line 354.
+(pdftex.def)             Requested size: 341.43306pt x 159.80475pt.
+
+[22 <./capturas/merge1.png> <./capturas/merge2.png>]
+<capturas/merge4.png, id=121, 627.5445pt x 232.4685pt>
+File: capturas/merge4.png Graphic file (type png)
+<use capturas/merge4.png>
+Package pdftex.def Info: capturas/merge4.png  used on input line 365.
+(pdftex.def)             Requested size: 341.43306pt x 126.48175pt.
+<capturas/subir_proyecto1.png, id=122, 488.42474pt x 649.82774pt>
+File: capturas/subir_proyecto1.png Graphic file (type png)
+<use capturas/subir_proyecto1.png>
+Package pdftex.def Info: capturas/subir_proyecto1.png  used on input line 377.
+(pdftex.def)             Requested size: 284.52756pt x 378.55626pt.
+ [23 <./capturas/merge3.png> <./capturas/merge4.png>]
+<capturas/subir_proyecto2.png, id=128, 315.579pt x 649.82774pt>
+File: capturas/subir_proyecto2.png Graphic file (type png)
+<use capturas/subir_proyecto2.png>
+Package pdftex.def Info: capturas/subir_proyecto2.png  used on input line 390.
+(pdftex.def)             Requested size: 199.16928pt x 410.11748pt.
+ [24 <./capturas/subir_proyecto1.png>]
+<capturas/subir_proyecto3.png, id=133, 812.43526pt x 289.68225pt>
+File: capturas/subir_proyecto3.png Graphic file (type png)
+<use capturas/subir_proyecto3.png>
+Package pdftex.def Info: capturas/subir_proyecto3.png  used on input line 399.
+(pdftex.def)             Requested size: 398.33858pt x 142.03394pt.
+<capturas/subir_proyecto4.png, id=134, 475.17525pt x 75.8835pt>
+File: capturas/subir_proyecto4.png Graphic file (type png)
+<use capturas/subir_proyecto4.png>
+Package pdftex.def Info: capturas/subir_proyecto4.png  used on input line 406.
+(pdftex.def)             Requested size: 398.33858pt x 63.61432pt.
+ [25 <./capturas/subir_proyecto2.png>]
+<capturas/subir_proyecto5.png, id=140, 463.13025pt x 89.133pt>
+File: capturas/subir_proyecto5.png Graphic file (type png)
+<use capturas/subir_proyecto5.png>
+Package pdftex.def Info: capturas/subir_proyecto5.png  used on input line 415.
+(pdftex.def)             Requested size: 398.33858pt x 76.66374pt.
+<capturas/sincronizacion.png, id=141, 236.082pt x 107.2005pt>
+File: capturas/sincronizacion.png Graphic file (type png)
+<use capturas/sincronizacion.png>
+Package pdftex.def Info: capturas/sincronizacion.png  used on input line 426.
+(pdftex.def)             Requested size: 284.52756pt x 129.20753pt.
+ [26 <./capturas/subir_proyecto3.png> <./capturas/subir_proyecto4.png> <./captu
+ras/subir_proyecto5.png>]
+<capturas/clone.png, id=148, 814.242pt x 395.076pt>
+File: capturas/clone.png Graphic file (type png)
+<use capturas/clone.png>
+Package pdftex.def Info: capturas/clone.png  used on input line 439.
+(pdftex.def)             Requested size: 398.33858pt x 193.28148pt.
+<capturas/github.png, id=149, 1153.911pt x 572.1375pt>
+File: capturas/github.png Graphic file (type png)
+<use capturas/github.png>
+Package pdftex.def Info: capturas/github.png  used on input line 453.
+(pdftex.def)             Requested size: 398.33858pt x 197.50113pt.
+ [27 <./capturas/sincronizacion.png> <./capturas/clone.png>]
+<conceptos/fork1.jpg, id=155, 865.2325pt x 211.79124pt>
+File: conceptos/fork1.jpg Graphic file (type jpg)
+<use conceptos/fork1.jpg>
+Package pdftex.def Info: conceptos/fork1.jpg  used on input line 477.
+(pdftex.def)             Requested size: 398.33858pt x 97.50594pt.
+<capturas/fork2.png, id=156, 1141.866pt x 369.17924pt>
+File: capturas/fork2.png Graphic file (type png)
+<use capturas/fork2.png>
+Package pdftex.def Info: capturas/fork2.png  used on input line 486.
+(pdftex.def)             Requested size: 398.33858pt x 128.78654pt.
+ [28 <./capturas/github.png> <./conceptos/fork1.jpg>]
+<capturas/fork3.png, id=161, 1155.71774pt x 315.579pt>
+File: capturas/fork3.png Graphic file (type png)
+<use capturas/fork3.png>
+Package pdftex.def Info: capturas/fork3.png  used on input line 493.
+(pdftex.def)             Requested size: 398.33858pt x 108.76892pt.
+<capturas/credencial.png, id=162, 635.37375pt x 649.82774pt>
+File: capturas/credencial.png Graphic file (type png)
+<use capturas/credencial.png>
+Package pdftex.def Info: capturas/credencial.png  used on input line 508.
+(pdftex.def)             Requested size: 284.52756pt x 291.01176pt.
+ [29 <./capturas/fork2.png> <./capturas/fork3.png>]) [30 <./capturas/credencial
+.png>] 
+AED: lastpage setting LastPage
+(main.aux (texto.aux)) ) 
+Here is how much of TeX's memory you used:
+ 2706 strings out of 478614
+ 47877 string characters out of 2843561
+ 351327 words of memory out of 3000000
+ 20804 multiletter control sequences out of 15000+600000
+ 474722 words of font info for 46 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 55i,12n,62p,1565b,342s stack positions out of 10000i,1000n,20000p,200000b,80000s
+ <C:\Users\DELL\AppData\Local\MiKTeX\fonts/pk/ljfour/jk
+nappen/ec/dpi600\tcrm1000.pk><D:/Mis Documentos/Programas/Archivos/MikTex/fonts
+/type1/public/amsfonts/cm/cmbx10.pfb><D:/Mis Documentos/Programas/Archivos/MikT
+ex/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/Mis Documentos/Programas/Archi
+vos/MikTex/fonts/type1/public/amsfonts/cm/cmbxti10.pfb><D:/Mis Documentos/Progr
+amas/Archivos/MikTex/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/Mis Documento
+s/Programas/Archivos/MikTex/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/Mis Do
+cumentos/Programas/Archivos/MikTex/fonts/type1/public/amsfonts/cm/cmr17.pfb><D:
+/Mis Documentos/Programas/Archivos/MikTex/fonts/type1/public/amsfonts/cm/cmti10
+.pfb><D:/Mis Documentos/Programas/Archivos/MikTex/fonts/type1/public/amsfonts/c
+m/cmtt10.pfb>
+Output written on main.pdf (30 pages, 1385193 bytes).
+PDF statistics:
+ 211 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 186 words of extra memory for PDF output out of 10000 (max. 10000000)
+

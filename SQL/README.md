@@ -1,4 +1,4 @@
 ## Certificado SQL
 
 
-Mi estudio en SQL lo conseguí en el bachillerato, pero lo repasé y reforcé en el sitio web [Sololearn](https://www.sololearn.com/), mi usuario donde puede consultar otra información referente a cursos que he hecho se encuentra en [este enlace](https://www.sololearn.com/profile/25112731). Finalmente, dejo el enlace de mi certificado en este lenguaje a través de este [link](https://www.sololearn.com/certificates/CC-UKRQY2IG).
+Mi estudio en SQL lo conseguí en el bachillerato, pero lo repasé y reforcé en el sitio web [Sololearn](https://www.sololearn.com/), dejo el enlace de mi certificado en este lenguaje a través de este [enlace](https://www.sololearn.com/certificates/CC-UKRQY2IG).

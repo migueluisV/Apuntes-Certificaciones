@@ -1,0 +1,253 @@
+\section{Matemáticas}
+
+Las matemáticas, fórmulas y ecuaciones son el área fuerte de \LaTeX.
+
+
+\subsection{Fórmulas y área de trabajo de fórmulas}
+\begin{itemize}
+    \item \textbf{Sin espacio dedicado}: una ecuación o fórmula, puesta en el documento de forma sencilla y sin dedicarle un espacio dedicado, requiere de dos símbolos de dolar (\textbf{\$}): \$ecuación\$. Las siguientes dos ecuaciones solamente están puestas con un \$ al inicio y al final, una tras otra, sin comando de salto de línea:
+    \begin{center}
+        \textit{
+            \$e\textasciicircum{2}\$, \$e\textasciicircum{\{1/2\}}\$ \\
+            $e^2$, $e^{1/2}$
+        }
+    \end{center}
+    \item \textbf{Con espacio dedicado}: dos símbolos de dolar (\textbf{\$\$}) al inicio y final indica el comienzo de un área de trabajo para ecuaciones, la siguiente ecuación están dentro de dicho área y por ello están centradas en el documento:
+    \begin{center}
+        \$\$e\textasciicircum\{1/3\textbackslash{pi}\}\$\$
+    \end{center}
+    $$e^{1/3\pi}$$
+    \item \textbf{El entorno Equation}: los comandos \textbf{\textbackslash{begin\{\}}} y \textbf{\textbackslash{end\{\}}}, donde entre sus llaves se escribe \textbf{equation}, funcionan para así tener ecuaciones centradas y enumeradas.
+    \begin{center}
+        \textit{
+            \textbackslash{begin\{equation\}} \\
+            \textbackslash{Pi}=3.1416 \\
+            \textbackslash{end\{equation\}}}
+    \end{center}
+    \begin{equation}
+        \label{ec: 3}
+        \Pi=3.1416
+    \end{equation}
+    \item El comando \textbf{cdot} pone un punto, en este caso multiplicación, dentro de un texto, fórmula o ecuación.
+    \begin{center}
+        \$\$\textbackslash{cdot}\$\$\\
+        4\textbackslash{cdot}5
+    \end{center}
+    $$4\cdot5$$
+    \item Al principio del documento, podemos usar paquetes dentro del documento para hacerlo más rico y completo, uno de ellos es \textbf{amsmath}, te proporciona más comandos matemáticos\begin{center}\textit{\textbackslash{usepackage\{amsmath\}}}\end{center}
+\end{itemize}
+
+
+\subsection{Alineación de ecuaciones: Align, Slip y Multiline}
+
+
+\subsubsection{Align}
+
+Si buscamos que nuestras ecuaciones se mantengan alineadas correctamente, centradas y enumeradas, podemos utilizar los comandos \textbf{\textbackslash{begin\{\}}} y \textbf{\textbackslash{end\{\}}}, donde entre sus llaves se escribe \textbf{align}. Esto puede ser usado como cuando se muestra el desarrollo de una ecuación, integral, derivada u otro problema matemático, por ejemplo, el desarrollo de un límite:
+\begin{lstlisting}
+    \begin{align}
+        \label{ec: ecuacion3}
+        e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n \\
+        \label{ec: ecuacion4}
+        =\lim_{n\to 0}(1+t)^\frac{1}{t}
+    \end{align}
+\end{lstlisting}
+\begin{align}
+    \label{ec: 4}
+    e=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n\\
+    \label{ec: 5}
+    =\lim_{n\to 0}(1+t)^\frac{1}{t}
+\end{align}
+
+La \textit{Ecuación \ref{ec: 4}} y \textit{\ref{ec: 5}} muestran un ejemplo de como podríamos tener presente un ejemplo de un desarrollo de ecuaciones sin alinear (símbolos de igualdad disparejos) y que, además, al ser un desarrollo de un solo problema, se muestran como ecuaciones independientes. Podemos lograr que este desarrollo se muestre como una sola ecuación.
+
+
+\subsubsection{Slipt}
+
+Para hacer que las ecuaciones dentro del desarrollo de una misma estén correctamente alineadas con respecto al símbolo de igualdad, se pone el símbolo \& antes de todos los símbolos de igualdad de todo el desarrollo para que así, las siguientes ecuaciones se alineen correctamente y, en vez de usar \textit{align} dentro de \textit{begin} y \textit{end}, volvemos a usar \textit{equation}, además de que toda la ecuación estará dentro de otro comando begin y end donde su contenido ahora será \textbf{slipt}.
+\begin{lstlisting}
+    \begin{equation}
+        \label{ec: 6}
+        \begin{split}
+            e&=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n \\
+            &=\lim_{n\to 0}(1+t)^\frac{1}{t}
+        \end{split}
+    \end{equation}
+\end{lstlisting}
+\begin{equation}
+    \label{ec: 6}
+    \begin{split}
+        e&=\lim_{n\to\infty}\left(1+\frac{1}{n}\right)^n \\
+        &=\lim_{n\to 0}(1+t)^\frac{1}{t}
+    \end{split}
+\end{equation}
+
+La \textit{Ecuación \ref{ec: 6}} ahora si está bien centrada y enumerada a un solo desarrollo de problema matemático.
+
+
+\subsubsection{Multiline}
+
+En caso de tener una ecuación muy larga, se puede usar los comandos \textbf{\textbackslash{begin\{\}}} y \textbf{\textbackslash{end\{\}}}, donde entre sus llaves se escribe \textbf{multiline} para hacer saltos de línea a lo largo de toda la ecuación, para lograr esto, supongamos que tenemos una ecuación matemática larga y la queremos dividir en cuatro partes y ponerlas una debajo de otra, para separar estas partes las encerramos entre \textbackslash\textbackslash (al inicio y final) y con eso basta, todas las partes deben ser encerradas entre estas barras, tanto la primera (inicial) como la última (final).
+
+La estructura es exactamente la misma al ejemplo anterior, lo único que cambia es precisamente el tipo de \textit{begin} y \textit{end} (con la palabra que ya mencionamos anteriormente) y se usan dos diagonales invertidas en los puntos de la ecuación donde se quiera hacer una separación.
+\begin{lstlisting}
+    \begin{multline}
+        \label{ec: ecuacion6}
+        \frac{1}{2}+\frac{2}{2}+\frac{2}{2}+\frac{3}{2}+\frac{4}{2}+\frac{5}{2}+\frac{6}{2}+\frac{7}{2}+\frac{8}{2}+\frac{9}{2}+\frac{10}{2}+\frac{1}{3}+\frac{2}{3}+\frac{3}{3}+\frac{4}{3}+\frac{5}{3}+\frac{6}{3}+\frac{7}{3}+\frac{9}{3}+\frac{10}{3}=0
+    \end{multline}
+\end{lstlisting}
+\begin{multline}
+        \label{ec: 7}
+        \frac{1}{2}+\frac{2}{2}+\frac{2}{2}+\frac{3}{2}+\frac{4}{2}+\frac{5}{2}+\frac{6}{2}+\frac{7}{2}+\frac{8}{2}+\frac{9}{2}+\frac{10}{2}+\frac{1}{3}+\frac{2}{3}+\frac{3}{3}+\frac{4}{3}+\frac{5}{3}+\frac{6}{3}+\frac{7}{3}+\frac{9}{3}+\frac{10}{3}=0
+\end{multline}
+
+La \textit{Ecuación \ref{ec: 7}} es muy larga y no tiene espaciado dentro de \textbf{multiline}.
+\begin{lstlisting}
+    \begin{multline}
+        \label{ec: ecuacion7}
+        \\\frac{1}{2}+\frac{2}{2}+\frac{2}{2}+\frac{3}{2}+\frac{4}{2}\\+\frac{5}{2}+\frac{6}{2}+\frac{7}{2}+\frac{8}{2}+\frac{9}{2}\\+\frac{10}{2}+\frac{1}{3}+\frac{2}{3}+\frac{3}{3}+\frac{4}{3}\\+\frac{5}{3}+\frac{6}{3}+\frac{7}{3}+\frac{9}{3}+\frac{10}{3}=0\\
+    \end{multline}
+\end{lstlisting}
+\begin{multline}
+    \label{ec: 8}
+    \\
+    \frac{1}{2}+\frac{2}{2}+\frac{2}{2}+\frac{3}{2}+\frac{4}{2} \\
+    +\frac{5}{2}+\frac{6}{2}+\frac{7}{2}+\frac{8}{2}+\frac{9}{2} \\
+    +\frac{10}{2}+\frac{1}{3}+\frac{2}{3}+\frac{3}{3}+\frac{4}{3} \\
+    +\frac{5}{3}+\frac{6}{3}+\frac{7}{3}+\frac{9}{3}+\frac{10}{3}=0 \\
+\end{multline}
+
+La \textit{Ecuación \ref{ec: 8}} está dividida en cuatro partes, centrada y con numeración de ecuación, todo gracias a \textbf{multiline}.
+
+
+\subsection{Fracciones}
+
+
+\subsubsection{Sencillas}
+\begin{itemize}
+    \item Se utiliza el comando de \textbf{\textbackslash{frac\{\}\{\}}} para una fracción, es otra forma de escribirlas: el primer par de llaves es el numerador, el segundo par el denominador.
+    \begin{center}
+        \textit{\$\$(\textbackslash{frac\{1+\}\{\textbackslash{frac\{3\}\{n\}}\}})\$\$}
+    \end{center}
+    $$\frac{2}{5}$$
+    $$(1+\frac{3}{n})$$
+    \item La ecuación anterior presenta los paréntesis muy pequeños, se aumentan con el comando \textbf{\textbackslash{left}} y \textbf{\textbackslash{right}}, ambos al principio y final de su respectivo paréntesis. En otras palabras, paréntesis que se ajustan automáticamente.
+    \begin{center}
+        \textit{\$\$\textbackslash{left}(\textbackslash{frac\{1+\}\{\textbackslash{frac\{3\}\{n\}}\}}\textbackslash{right})\$\$}
+    \end{center}
+    $$\left(1+\frac{1}{3}\right)^n$$
+\end{itemize}
+
+
+\subsubsection{Fracciones en fracciones}
+\begin{itemize}
+    \item No es algo más que poner dentro de las llaves de \textit{frac} otro comando \textbf{frac}, así como se desee para poner fracciones dentro de fracciones.
+    \begin{center}
+        \textit{\$\$\textbackslash{frac\{1\}\{\textbackslash{frac\{1+\}\{\textbackslash{frac\{2\}\{2n+1\}}\}}\}}\$\$}
+    \end{center}
+    $$\frac{\frac{1}{3}}{\frac{2}{5}}$$
+    $$\frac{1}{1+\frac{2}{2n+1}}$$
+    \item Si se pone el comando \textbf{ddots} crea tres puntos diagonales que significan que una ecuación continua un camino con patrón visible:
+    $$\ddots$$
+\end{itemize}
+
+
+\subsection{Límites}
+
+Los límites se escriben utilizando el comando \textbf{\textbackslash{lim}}. Para agregar valores debajo de la palabra \textit{lim}, escribimos el comando \textit{\textbackslash{lim}}, seguido usamos el guión bajo (\_), entre llaves, escribimos la expresión del límite (separados por el comando \textbf{\textbackslash{to}}). El primero ejemplo a continuación es  un límite simple sin valores, el segundo ya tiene un valor escrito debajo de la palabra lim (n a infinito y n a 8):
+\begin{center}
+    \textit{
+        \$\$\textbackslash{lim}\textbackslash{left}(1+\textbackslash{frac\{1\}\{3\}}\textbackslash{right})\textasciicircum n\$\$ \\
+        \$\$\textbackslash{lim}\_\{n\textbackslash{to}\textbackslash{infty}\}\textbackslash{left}(1+\textbackslash{frac\{1\}\{3\}}\textbackslash{right})\textasciicircum n\$\$ \\
+        \$\$\textbackslash{lim}\_\{n\textbackslash{to}8\}\textbackslash{left}(1+\textbackslash{frac\{1\}\{3\}}\textbackslash{right})\textasciicircum n\$\$
+    }
+\end{center}
+$$\lim \left(1+\frac{1}{3}\right)^n$$
+$$\lim_{n\to\infty} \left(1+\frac{1}{3}\right)^n$$
+$$\lim_{n\to8} \left(1+\frac{1}{3}\right)^n$$
+
+\textit{Nota}: el comando \textbf{\textbackslash{infty}} es un símbolo de infinito en el ambiente de matemáticas.
+
+
+\subsection{Raíces}
+
+Para poner una raíz se usa el comando \textbf{\textbackslash{sqrt[]\{\}}}. Este comando tiene dos parámetros, uno dentro de corchetes y otro dentro de llaves, el primero es para indicar el nivel de raíz (raíz cuadrada/cúbica/cuarta...\\), y el otro para el contenido (raíz de 4, 16, 25, x...), pero si se quiere una raíz simple podemos usar solo los parámetros entre llaves. El símbolo de factorial no tiene un comando como tal, solo es el símbolo !.
+\begin{center}
+    \textit{
+        \$\$\textbackslash{sqrt\{25\}}\$\$ \\
+        \$\$\textbackslash{sqrt[3]\{4!\}}\$\$
+    }
+\end{center}
+$$\sqrt{25}$$
+$$\sqrt[3]{4}$$
+$$\sqrt[3]{4!}$$
+
+
+\subsection{Sumatorias}
+
+Las sumatorias requieren el comando \textbf{\textbackslash{sum}}, para poner valores debajo de la sumatoria se aplica lo mismo que con los límites, que es poner guión bajo seguido de llaves(\_\{\}), para poner valores encima de la sumatoria, debemos poner el símbolo de elevar a tal potencia y, entre llaves, el valor correspondiente (\textasciicircum{\textbackslash{infty}}, 10, 100,...).
+\begin{center}
+    \textit{\$\$\textbackslash{sum\_\{n=0\}}\textasciicircum{\{\textbackslash{infty}\}} \textbackslash{frac\{1\}\{n!\}}\$\$}
+\end{center}
+$$\sum_{n=0}^{\infty} \frac{1}{n!}$$
+
+
+\subsection{Integrales}
+
+Se usa el comando \textbf{\textbackslash{int}} para integrales, si es definida, se usa el guión bajo y potencia para indicar los valores definidos de la integral, si se quiere más de una integral en la misma, se ponen todas las i's que se quieran al inicio del comando (\textit{iiint}).
+\begin{itemize}
+    \item Definidas
+    \begin{center}
+        \textit{\$\$\textbackslash{int\_1\textasciicircum{1}}f(x)dx\$\$}
+    \end{center}
+    $$\int_1^2f(x)dx$$
+    \item Indefinidas
+    \begin{center}
+        \textit{\$\$\textbackslash{int f(x)dx}\$\$}
+    \end{center}
+    $$\int f(x)dx$$
+    \item Múltiples integrales
+    \begin{center}
+        \textit{\$\$\textbackslash{iiint\_0\textasciicircum{2}}f(x,y,z)dxdydz\$\$}
+    \end{center}
+    $$\iiint_0^2f(x,y,z)dxdydz$$
+\end{itemize}
+
+
+\subsection{Vectores}
+
+Se usa el comando \textbf{\textbackslash{vec\{\}}}, dentro de sus llaves ponemos el nombre del vector, o la letra que lo caracterizará, si el vector tiene valores, estos valores se indican usando el nombre del vector, seguido de un guión bajo y el número del valor.
+\begin{itemize}
+    \item Símbolo
+    \begin{center}
+        \textit{\$\$\textbackslash{vec\{a\}}\$\$}
+    \end{center}
+    $$\vec{a}$$
+    \item Con valores
+    \begin{center}
+        \textit{\$\$\textbackslash{vec\{a\}}=\textless v\_1, v\_2, v\_3\textgreater\$\$}
+    \end{center}
+    $$\vec{v}=<v_1, v_2, v_3>$$
+    \item Con operaciones
+    \begin{center}
+        \textit{\$\$\textbackslash{vec\{a\}}\textbackslash{cdot}\textbackslash{vec\{b\}}\$\$}
+    \end{center}
+    $$\vec{a}\cdot\vec{b}$$
+\end{itemize}
+
+
+\subsection{Matrices}
+
+Se usa el comando \textbf{\textbackslash{begin\{\}}} y \textbf{\textbackslash{end\{\}}}, y dentro de sus llaves se usa el comando \textbf{bmatrix} para crearla, cada item dentro de una fila se separa con el símbolo \textbf{\&}, si la matriz tiene tres elementos en la primera fila, se separan con dicho carácter, y para finalizar dicha fila, se ponen las dos diagonales invertidas \textbackslash\textbackslash (salto de línea), así sucesivamente hasta armar la matriz deseada.
+\begin{lstlisting}
+    $$\begin{bmatrix}
+        1 & 2  & 3  & 4 \\
+        5 & 6  & 7  & 8 \\
+        9 & 10 & 11 & 0 \\
+    \end{bmatrix}$$
+\end{lstlisting}
+$$\begin{bmatrix}
+    1&2&3&4\\
+    5&6&7&8\\
+    9&10&11&0\\
+\end{bmatrix}$$

@@ -1,0 +1,257 @@
+\section{Manejo de tablas}
+
+
+\subsection{Creación de una tabla}
+
+Hasta ahora, siempre manejábamos una sola tabla propuesta por nosotros, sin embargo, el mundo real requiere que el desarrollador cree y manipule sus propias tablas, recodemos nuevamente que las tablas están constituidas por columnas (atributos) y filas (registros). Las columnas de la tabla "Personas" contiene solamente dos tipos de datos, cadena y número entero, la \textit{Tabla \ref{tab: 20}} contiene el resto de tipos de datos disponibles para la creación de columnas en tablas:
+\begin{table}[H]
+    \centering
+    \caption{Tipos de datos disponibles en SQL}
+    \label{tab: 20}
+    \begin{tabular}{m{4cm} m{9cm}}
+        \hline
+        \textbf{Nombre} & \textbf{Descripción} \\
+        \hline
+        INT             & Número entero positivo o negativo \\
+        FLOAT           & Número decimal positivo o negativo \\
+        DOUBLE          & Como \textit{FLOAT}, pero con mayor rango de valores decimales disponibles \\
+        DATE            & Una fecha en formato YYYY-MM-DD \\
+        DATETIME        & Una fecha y hora que está en formato YYYY-MM-DD HH:MM:SS \\
+        TIMESTAMP       & Una marca de tiempo, calculada desde la medianoche del primero de enero de 1970 \\
+        TIME            & Una hora en formato en HH:MM:SS \\
+        VARCHAR(largo)  & Una cadena variable con largo definido dentro de los paréntesis \\
+        TEXT            & Una cadena muy larga \\
+        \hline
+    \end{tabular}
+\end{table}
+
+A la hora de crear la tabla, debes especificar el tipo de dato que almacenará cada columna, por lo que debes pensar qué tipo de datos almacenarás para que corresponda con el tipo de dato asignado. Veamos la sintaxis para crear una tabla:
+\begin{lstlisting}
+    CREATE TABLE Clientes (
+        id INT,
+        firstname VARCHAR(128),
+        lastname VARCHAR(128),
+        salary INT,
+        city VARCHAR(128)
+    );
+\end{lstlisting}
+
+Como se puede ver, las columnas que conformarán la tabla van encerradas entre paréntesis, separados por una coma y el tipo de dato se separa del nombre de la columna por un espacio, además, el tipo \textit{VARCHAR} recibe el largo del dato a almacenar dentro de paréntesis también.
+
+Si requerimos que, al momento de crear una tabla, se le asigne un valor predeterminado a una de las tablas, se puede utilizar el comando \textbf{DEFAULT}:
+\begin{lstlisting}
+    CREATE TABLE Clientes (
+        id INT,
+        firstname VARCHAR(128),
+        lastname VARCHAR(128),
+        salary INT DEFAULT 0,
+        city VARCHAR(128)
+    );
+\end{lstlisting}
+
+Este comando va enseguida del tipo de dato y el valor va enseguida del comando, al ejecutar esta sentencia, se creará la tabla y todo registro nuevo en la misma tendrá el valor predeterminado de 0 (en caso de que no se le agregue un valor a la columna "salary"). Puede crear una tabla con múltiples valores predeterminados.
+
+Si requerimos que todo registro, al momento de hacer un registro en una tabla, se llenen todos los campos de la misma, podemos utilizar el comando \textbf{NULL} y \textbf{NOT NULL}:
+\begin{lstlisting}
+    CREATE TABLE Clientes (
+        id INT NOT NULL,
+        firstname VARCHAR(128) NOT NULL,
+        lastname VARCHAR(128),
+        salary INT NOT NULL,
+        city VARCHAR(128)
+    );
+\end{lstlisting}
+
+Ahora la tabla "Clientes" requiere obligatoriamente que los campos "id", "firstname" y "salary" sean llenados para el correcto registro.
+
+
+\subsection{Actualización de una tabla}
+
+El comando \textbf{ALTER TABLE} sirve para agregar, eliminar y modificar una columna en una tabla existe. Añadiremos las columnas "ex1" y "ex2" a la tabla "Clientes" con el comando \textbf{ADD}:
+\begin{lstlisting}
+    ALTER TABLE Clientes
+    ADD ex1 TEXT,
+    ADD ex2 TEXT;
+\end{lstlisting}
+
+Todos los registros existentes recibirán un valor predeterminado en estas nuevas columnas, el cual es \textbf{NULL}. Note que enseguida del comando \textit{ADD} va el nombre de la columna y su tipo de dato, separados por un espacio. Agregar múltiples columnas en una sentencia indica que cada columna debe separarse por comas. Ahora eliminaremos la columna "ex2" con los comandos \textbf{DROP COLUMN}:
+\begin{lstlisting}
+    ALTER TABLE Clientes
+    DROP COLUMN ex2
+\end{lstlisting}
+
+Se borrará la columna y todos los datos almacenados en ella. También podemos cambiar el nombre de una columna existente o el nombre de la tabla con los comandos \textbf{RENAME} y \textbf{TO}:
+\begin{lstlisting}
+    ALTER TABLE Clientes
+    RENAME ex1 TO example1;
+
+    ALTER TABLE Clientes
+    RENAME TO Clients;
+\end{lstlisting}
+
+El aspecto final de la tabla "Clientes" es el siguiente (\textit{Tabla \ref{tab: 21}}) después de las actualizaciones:
+\begin{table}[H]
+    \centering
+    \caption{Aspecto de la tabla "Clientes" después de varios cambios}
+    \label{tab: 21}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{firstname} & \textbf{lastname} & \textbf{salary} & \textbf{city} \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Eliminación de una tabla}
+
+El comando \textbf{DROP TABLE} permite borrar toda una tabla y su contenido, eliminaremos una tabla imaginaria "People" simplemente para mostrar la sintaxis de la sentencia:
+\begin{lstlisting}
+    DROP TABLE People
+\end{lstlisting}
+
+
+
+\section{Manejo de datos}
+
+
+\subsection{Inserción de registros}
+
+El comando \textbf{INSERT} crea un registro dentro de una tabla, vacía o con registros previos:
+\begin{lstlisting}
+    INSERT INTO Personas
+    VALUES (9,'Mike','Towers','Houston',39)
+\end{lstlisting}
+
+Este comando va acompañado del comando \textbf{INTO}, los valores que se vayan a registrar dentro de la tabla van encerrados dentro de paréntesis y son separados por comas, los valores que sean tipo cadena son contenidos dentro de comillas simples (''), los valores numéricos no requieren estas comillas. Asegúrese de que los valores a ingresar estén en el mismo orden de las columnas de la tabla.
+
+El ejemplo anterior es la versión corta de la sentencia de inserción, pero podemos especificar a que columna va a insertarse un registro:
+\begin{lstlisting}
+    INSERT INTO Personas (id,nombre,apellidos,ciudad,edad)
+    VALUES (10,'Steve','Jobs','Philadelphia',41)
+\end{lstlisting}
+
+De esta forma, podemos escribir el código evitando escribir los valores a registrar en una columna que no le corresponde. Con esta sintaxis, podemos insertar valores a ciertas columnas únicamente, para que los valores predeterminados se inserten en el registro:
+\begin{lstlisting}
+    INSERT INTO Clientes (id,firstname,lastname,city)
+    VALUES (1,'Mario','España','CDMX')
+\end{lstlisting}
+
+Para este ejemplo, retomamos el último aspecto de la tabla "Clientes" que estuvimos creando y modificando en la sección anterior, aquella que tiene el valor 0 como predeterminado para la columna "salary", es por ello que la omitimos en este ejemplo de inserción, quedando el resultado en la \textit{Tabla \ref{tab: 22}}:
+\begin{table}[H]
+    \centering
+    \caption{Inserción de registros en una tabla}
+    \label{tab: 22}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{firstname} & \textbf{lastname} & \textbf{salary} & \textbf{city} \\
+        \hline
+        1 & Mario & España & 0 & CDMX \\ 
+        \hline
+    \end{tabular}
+\end{table}
+
+\textit{Nota}: si no escribe un valor para una tabla que es de rellenado obligatorio y no tiene un valor predeterminado, la sentencia \textit{INSERT INTO} lanzará un error.
+
+Si deseamos insertar varios registros en una misma sentencia, simplemente separe cada registro por comas y vea el resultado en la \textit{Tabla \ref{tab: 23}}:
+\begin{lstlisting}
+    INSERT INTO Clientes (id,firstname,lastname,city)
+    VALUES
+    (2,'Arnulfo','Rodriguez',500.99,'BCS'),
+    (3,'Christopher','Robin',1999.87,'EDOMEX');
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Múltiple inserción de registros en una tabla}
+    \label{tab: 23}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{firstname} & \textbf{lastname} & \textbf{salary} & \textbf{city} \\
+        \hline
+        1 & Mario       & España    & 0         & CDMX \\ 
+        \hline
+        2 & Arnulfo     & Rodriguez & 500.99    & BCS \\
+        \hline
+        3 & Christopher & Robin     & 1999.87   & EDOMEX \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Actualización de registros}
+
+El comando \textbf{UPDATE} actualiza los datos de un registro dentro de una tabla:
+\begin{lstlisting}
+    UPDATE Clientes
+    SET salary = 2010.56
+    WHERE id = 2
+\end{lstlisting}
+
+La actualización de registros dependen de una condición a la cual aplicarle las modificaciones, en el caso anterior se le aplica al registro que tiene un "id" de 2, pero se puede aplicar una condición que afecte a más de un registro (\textbf{si omite la condicional, todos los registros sufrirán la modificación}).
+
+Como con la inserción, podemos actualizar múltiples datos separándolos por coma:
+\begin{lstlisting}
+    UPDATE Clientes
+    SET
+    salary = 2210.56,
+    city = 'BC'
+    WHERE id = 2
+\end{lstlisting}
+
+Quedando la tabla "Clientes" de la siguiente manera (\textit{Tabla \ref{tab: 24}}) después de las inserciones y actualizaciones:
+\begin{table}[H]
+    \centering
+    \caption{Actualización de un registro en una tabla}
+    \label{tab: 24}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{firstname} & \textbf{lastname} & \textbf{salary} & \textbf{city} \\
+        \hline
+        1 & Mario       & España    & 0         & CDMX \\ 
+        \hline
+        2 & Arnulfo     & Rodriguez & 2210.56    & BC \\
+        \hline
+        3 & Christopher & Robin     & 1999.87   & EDOMEX \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{Eliminación de registros}
+
+El comando \textbf{DELETE} elimina los registros dentro de una tabla:
+\begin{lstlisting}
+    DELETE FROM Personas
+    WHERE id = 10
+\end{lstlisting}
+
+Tenga cuidado con la condicional, el caso anterior borra el registro que tiene el atributo "id" igual a 10, si pone una condicional que afecte a más de un registro, todos ellos serán eliminados. La tabla "Personas" queda de la siguiente manera (\ref{tab: 25}) después de las inserciones y eliminación:
+\begin{table}[H]
+    \centering
+    \caption{Aspecto de la tabla "Personas" después de varios cambios}
+    \label{tab: 25}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} & \textbf{apellidos} & \textbf{ciudad} & \textbf{edad} \\
+        \hline
+        1 & John        & Smith     & New York      & 24 \\
+        \hline
+        2 & David       & Williams  & Los Angeles   & 42 \\
+        \hline
+        3 & Chloe       & Anderson  & Chicago       & 65 \\
+        \hline
+        4 & Emily       & Adams     & Houston       & 29 \\
+        \hline
+        5 & James       & Roberts   & Philadelphia  & 31 \\
+        \hline
+        6 & Andrew      & Thomas    & New York      & 21 \\
+        \hline
+        7 & Daniel      & Harris    & Los Angeles   & 67 \\
+        \hline
+        8 & Charlotte   & Walker    & Chicago       & 45 \\
+        \hline
+        9 & Mike        & Towers    & Houston       & 39 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+A este conjunto de operaciones de creación, lectura, actualización y eliminación de registros se le conoce como \textbf{CRUD} (Create, Read, Update \& Delete).

@@ -1,0 +1,267 @@
+\section{Las bases de datos}
+
+SQL es la abreviación de \textbf{Structured Query Language}, suele utilizarse para el manejo, manipulación y administración de bases de datos. Una \textbf{base de datos} es una colección de datos ordenada de tal manera que permite acceder a los datos de manera fácil y eficiente para la administración y actualización.
+
+
+\subsection{Composición}
+
+Una base de datos está compuesta de \textit{tablas}, las cuales tienen \textit{columnas} y \textit{filas}, las \textit{celdas} es un dato seleccionado en \textit{n} posición de columna y tabla. Las tablas suelen tener una columna o \textit{atributo} propio e irrepetible que las diferencia de otras, este suele ser llamado \textit{Id}, la \textit{Tabla \ref{tab: 1}} es un simple ejemplo de la apariencia de una tabla SQL:
+\begin{table}[H]
+    \centering
+    \caption{Ejemplo de una tabla sencilla en SQL: Tabla "Personas"}
+    \label{tab: 1}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} & \textbf{apellidos} & \textbf{ciudad} & \textbf{edad} \\
+        \hline
+        1 & John    & Smith     & New York      & 24 \\
+        \hline
+        2 & David   & Williams  & Los Angeles   & 42 \\
+        \hline
+        3 & Chloe   & Anderson  & Chicago       & 65 \\
+        \hline
+        4 & Emily   & Adams     & Houston       & 29 \\
+        \hline
+        5 & James   & Roberts   & Philadelphia  & 31 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Como vemos, cada columna representa un atributo o característica de un objeto, evento o cosa del mundo real, ese es el objetivo de las tablas en las bases de datos, almacenar datos del mundo real.
+
+Se dice que los datos almacenados dentro de una base de datos son \textit{registros}, podemos insertar, actualizar, modificar, ordenar, consultar, filtrar registros y otras más operaciones.
+
+El lenguaje SQL para manipulación de base de datos es una cosa, si instalamos este lenguaje en nuestra máquina no podremos interactuar con él, porque no viene con una interfaz gráfica o sistema, es aquí donde entran los \textbf{Sistemas Gestores de Bases de Datos} (abreviado \textit{SGBD}), que son los programas o interfaces donde podemos trabajar con SQL. Uno de los SGBD más populares es MySQL, además, algunas SGBD suelen incorporar extensiones o plugins del lenguaje propios, puede que un código de Oracle no funcione con MySQL, pero casi todos las sentencias de SQL se pueden utilizar en todos los gestores.
+
+
+
+\section{Seleccionando datos}
+
+El comando \textbf{SELECT} es utilizada para recoger datos de una tabla, el símbolo \textbf{asterisco} (*) es utilizado globalmente para recoger todo el contenido de una tabla, mientras que el comando \textbf{FROM} le dice a SQL de qué tabla se tiene que recoger la información, por lo que la sentencia queda de la siguiente manera:
+\begin{lstlisting}
+    SELECT * FROM [tabla];
+\end{lstlisting}
+
+Donde [tabla] es el nombre de la tabla que queremos consultar, para los siguientes ejemplos, estaremos trabajando con la tabla "Personas" presentada en la sección anterior. En caso de querer recoger los datos de una sola columna, sustituimos el asterisco por el nombre de la columna o atributo a consultar:
+\begin{lstlisting}
+    SELECT ciudad
+    FROM Personas;
+\end{lstlisting}
+
+El resultado aparece en la \textit{Tabla \ref{tab: 2}}:
+\begin{table}[H]
+    \centering
+    \caption{Consulta de una columna en tabla "Personas"}
+    \label{tab: 2}
+    \begin{tabular}{|l|}
+        \hline
+        \textbf{ciudad} \\
+        \hline
+        New York \\
+        \hline
+        Los Angeles \\
+        \hline
+        Chicago \\
+        \hline
+        Houston \\
+        \hline
+        Philadelphia \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Si queremos recoger los datos de más de una columna o atributo, simplemente los vamos añadiendo a la sentencia y separamos nombres de columnas por una \textit{coma} (,), el resultado lo encontramos en la \textit{Tabla \ref{tab: 3}}:
+\begin{lstlisting}
+    SELECT id, nombre
+    FROM Personas;
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Consulta de varias columnas en tabla "Personas"}
+    \label{tab: 3}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} \\
+        \hline
+        1 & John \\
+        \hline
+        2 & David \\
+        \hline
+        3 & Chloe \\
+        \hline
+        4 & Emily \\
+        \hline
+        5 & James \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Vimos en los ejemplos anteriores que las sentencias las terminamos con un \textit{punto y coma} (;), hacer esto no es necesario, sin embargo, si queremos ejecutar varias sentencias al mismo tiempo, si debemos agregar este punto y coma a cada sentencia:
+\begin{lstlisting}
+    SELECT id, nombre FROM Personas;
+    SELECT nombre, apellidos FROM Personas;
+\end{lstlisting}
+
+\textit{Nota}: podemos hacer saltos de línea o espacios dentro de las sentencias para mayor legibilidad, esto debido a que SQL ignora estos saltos y espacios.
+
+SQL no distingue entre mayúsculas y minúsculas, por lo que el siguiente ejemplo regresará el mismo resultado:
+\begin{lstlisting}
+    select id from Personas;
+    SELECT ID FROM Personas;
+    SElEct iD frOM Personas;
+\end{lstlisting}
+
+Se suelen escribir las sentencias en mayúsculas, a excepción de los nombres de tablas y columnas claro.
+
+
+
+\section{Ordenando datos y cantidad de elementos recogidos}
+
+
+\subsection{El comando ORDER BY}
+
+El comando \textbf{ORDER BY} es utilizado para ordenar los datos recogidos del comando \textit{SELECT}. Por defecto, el comando \textit{ORDER BY} ordena los datos ascendentemente, y este comando va al final de la sentencia \textit{SELECT}, como se ve en la \textit{Tabla \ref{tab: 4}}:
+\begin{lstlisting}
+    SELECT * FROM Personas
+    ORDER BY nombre
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Ordenamiento de los elementos de una sentencia}
+    \label{tab: 4}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} & \textbf{apellidos} & \textbf{ciudad} & \textbf{edad} \\
+        \hline
+        3 & Chloe   & Anderson  & Chicago       & 65 \\
+        \hline
+        2 & David   & Williams  & Los Angeles   & 42 \\
+        \hline
+        4 & Emily   & Adams     & Houston       & 29 \\
+        \hline
+        5 & James   & Roberts   & Philadelphia  & 31 \\
+        \hline
+        1 & John    & Smith     & New York      & 24 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Por otra parte, si buscamos que se ordenen de forma descendente los datos recogidos, utilizamos el comando \textit{DESC}, si queremos que se ordenen de forma ascendente, utilizamos \textit{ASC}:
+\begin{lstlisting}
+    SELECT * FROM Personas
+    ORDER BY nombre DESC
+\end{lstlisting}
+
+El ordenamiento de datos se puede extender a más de una columna, simplemente separamos la forma en la que queremos ordenar por medio de una coma:
+\begin{lstlisting}
+    SELECT * FROM Personas
+    ORDER BY ciudad ASC, apellidos DESC
+\end{lstlisting}
+
+
+\subsection{El comando LIMIT}
+
+A este comando simplemente le pasamos el número entero de elementos que queremos que recoja una consulta SELECT. El comando \textit{LIMIT} va al final de la sentencia SELECT, podemos ver el resultado en la \textit{Tabla \ref{tab: 5}}:
+\begin{lstlisting}
+    SELECT id, nombre
+    FROM Personas
+    LIMIT 2
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Mostrar un límite de elementos recogidos de SELECT}
+    \label{tab: 5}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} \\
+        \hline
+        1 & John \\
+        \hline
+        2 & David \\
+        \hline
+    \end{tabular}
+\end{table}
+
+\textit{Nota}: se pueden combinar los comandos LIMIT, ORDER BY, ASC y DESC, solamente tome en cuenta que LIMIT va después de ORDER BY.
+
+El comando \textit{OFFSET} saltará \textit{n} registros desde el primero, el resultado lo vemos en la \textit{Tabla \ref{tab: 6}}:
+\begin{lstlisting}
+    SELECT * FROM Personas
+    OFFSET 2
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Saltado de los elementos de una sentencia}
+    \label{tab: 6}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} & \textbf{apellidos} & \textbf{ciudad} & \textbf{edad} \\
+        \hline
+        3 & Chloe   & Anderson  & Chicago       & 65 \\
+        \hline
+        4 & Emily   & Adams     & Houston       & 29 \\
+        \hline
+        5 & James   & Roberts   & Philadelphia  & 31 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+\section{DISTINCT}
+
+En ocasiones, una columna o atributo puede contener valores iguales o duplicados, agregaremos tres registros más a nuestra tabla de ejemplo (\textit{Tabla \ref{tab: 7}}):
+\begin{table}[H]
+    \centering
+    \caption{Tabla "Personas" extendida}
+    \label{tab: 7}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} & \textbf{apellidos} & \textbf{ciudad} & \textbf{edad} \\
+        \hline
+        1 & John        & Smith     & New York      & 24 \\
+        \hline
+        2 & David       & Williams  & Los Angeles   & 42 \\
+        \hline
+        3 & Chloe       & Anderson  & Chicago       & 65 \\
+        \hline
+        4 & Emily       & Adams     & Houston       & 29 \\
+        \hline
+        5 & James       & Roberts   & Philadelphia  & 31 \\
+        \hline
+        6 & Andrew      & Thomas    & New York      & 21 \\
+        \hline
+        7 & Daniel      & Harris    & Los Angeles   & 67 \\
+        \hline
+        8 & Charlotte   & Walker    & Chicago       & 45 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Vemos que los nuevos registros tienen los valores "New York", "Los Angeles" y "Chicago" repetidos, el comando \textit{DISTINCT} ayuda a remover los resultados duplicados de atributos en una sentencia, este comando va después del comando \textit{SELECT} y antes del atributo al cual aplicar DISTINCT, como se ve en la \textit{Tabla \ref{tab: 8}}:
+\begin{lstlisting}
+    SELECT DISTINCT ciudad
+    FROM Personas
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Eliminado de duplicados en una sentencia}
+    \label{tab: 8}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{ciudad} \\
+        \hline
+        New York \\
+        \hline
+        Los Angeles \\
+        \hline
+        Chicago \\
+        \hline
+        Houston \\
+        \hline
+        Philadelphia \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Esta sentencia se puede combinar con las últimas tres mencionadas.

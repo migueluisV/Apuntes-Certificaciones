@@ -1,0 +1,221 @@
+\section{Funciones}
+
+SQL posee algunas funciones integradas que nos permite conocer algunos detalles o características de las tablas.
+
+
+\subsection{COUNT}
+
+La función \textbf{COUNT()} regresa un número entero que representa el total de registros de una tabla, se le puede pasar el carácter asterisco o el nombre de alguna columna para que cuenten los registros:
+\begin{lstlisting}
+    SELECT COUNT(*) FROM Personas;
+    SELECT COUNT(apellidos) FROM PERSONAS;
+
+    // Ambas sentencias regresan 8.
+\end{lstlisting}
+
+\textit{Nota}: los valores NULL son ignorados.
+
+
+\subsection{SUM}
+
+La función \textbf{SUM()} suma todos los valores numéricos (entero o decimal) de una columna, es necesario especificar el nombre de la columna a sumar dentro de los paréntesis de la función:
+\begin{lstlisting}
+    SELECT SUM(edad) FROM Personas
+
+    // Regresa 324.
+\end{lstlisting}
+
+Si se intenta utilizar esta función con textos, el valor de retorno es 0. La suma de valores NULL es NULL. Los valores NULL son ignorados.
+
+Las funciones pueden ser combinadas con condicionales, como por ejemplo:
+\begin{lstlisting}
+    SELECT SUM(ciudad)
+    FROM Personas
+    WHERE ciudad = 'New York'
+
+    // Regresa 45.
+\end{lstlisting}
+
+La sentencia anterior selecciona los dos registros con el valor "New York" y suma los valores de sus atributos "edad".
+
+
+\subsection{AVG}
+
+Similar a la función anterior, \textbf{AVG()} regresa el promedio de una columna numérica:
+\begin{lstlisting}
+    SELECT AVG(edad) FROM Personas
+
+    // Regresa 40.5.
+\end{lstlisting}
+
+\textit{Nota}: los valores NULL son ignorados. Si tiene 10 registros de los cuales 5 son NULL, solamente se saca el promedio de los 5 valores que no son NULL.
+
+
+\subsection{MIN \& MAX}
+
+Las funciones \textbf{MIN()} y \textbf{MAX()} regresan el valor numérico mínimo y máximo de una columna respectivamente. Esta función puede ser utilizada para realizar operaciones aritméticas:
+\begin{lstlisting}
+    SELECT MIN(edad) FROM Personas;
+    SELECT MAX(edad) FROM Personas;
+
+    // Regresan 21 y 67 respectivamente.
+\end{lstlisting}
+
+
+\subsection{UPPER}
+
+Vimos que las funciones anteriores simplemente regresan un valor, sin embargo, otras funciones pueden regresar una columna nueva de una tabla origen, un ejemplo de estas funciones es \textbf{UPER()}, la cual genera una columna con el nombre de la función como nombre y los caracteres de una columna original en mayúsculas, como se ve en la \textit{Tabla \ref{tab: 15}}:
+\begin{lstlisting}
+    SELECT UPPER(nombre) FROM Personas
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Creando una columna personalizada con UPPER}
+    \label{tab: 15}
+    \begin{tabular}{|l|}
+        \hline
+        \textbf{upper} \\
+        \hline
+        JOHN \\
+        DAVID \\
+        CHLOE \\
+        EMILY \\
+        JAMES \\
+        ANDREW \\
+        DANIEL \\
+        CHARLOTTE \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Si buscamos generar esta columna con otro nombre que no sea el nombre de la función, podemos utilizar el comando AS, seguido del nuevo nombre, como se ve en la \textit{Tabla \ref{tab: 16}}:
+\begin{lstlisting}
+    SELECT UPPER(nombre) AS nombre_mayus
+    FROM Personas
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Creando una columna personalizada con nuevo nombre con UPPER}
+    \label{tab: 16}
+    \begin{tabular}{|l|}
+        \hline
+        \textbf{nombre\_mayus} \\
+        \hline
+        JOHN \\
+        DAVID \\
+        CHLOE \\
+        EMILY \\
+        JAMES \\
+        ANDREW \\
+        DANIEL \\
+        CHARLOTTE \\
+        \hline
+    \end{tabular}
+\end{table}
+
+En el caso anterior, el nombre no tiene espacios en blanco, en caso de querer utilizarlos, el nombre de la columna debe estar encerrado en comillas simples. Si desea crear más de una columna personalizada en una sola sentencia, sepárelas con comas:
+\begin{lstlisting}
+    SELECT UPPER(nombre) AS 'Nombre mayus', edad + 1 AS Edad_Mas_Uno
+    FROM Personas
+\end{lstlisting}
+
+La sentencia anterior crea dos columnas personalizadas, utilizando una operación aritmética en la segunda para crear una columna con la edad de las personas más 1.
+
+
+
+\section{Sub-secuencias}
+
+Podemos utilizar sub-secuencias dentro de otra para obtener registros, estas sub-secuencias deben estar siempre encerradas entre paréntesis, como vemos en la \textit{Tabla \ref{tab: 17}}:
+\begin{lstlisting}
+    SELECT * FROM Personas
+    WHERE edad >
+        (SELECT AVG(edad) FROM Personas)
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Seleccionando edades mayor al promedio con una sub-secuencia}
+    \label{tab: 17}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} & \textbf{apellidos} & \textbf{ciudad} & \textbf{edad} \\
+        \hline
+        2 & David       & Williams  & Los Angeles   & 42 \\
+        \hline
+        3 & Chloe       & Anderson  & Chicago       & 65 \\
+        \hline
+        7 & Daniel      & Harris    & Los Angeles   & 67 \\
+        \hline
+        8 & Charlotte   & Walker    & Chicago       & 45 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+\section{Agrupaciones}
+
+El comando \textbf{GROUP BY} permite agrupar valores de columnas o atributos duplicados en distintos registros en uno solo, de tal forma que el resultado final de la sentencia muestra solo una vez el valor del atributo duplicado. Veamos el siguiente ejemplo en la \textit{Tabla \ref{tab: 18}} para que podamos visualizarlo de mejor manera:
+\begin{lstlisting}
+    SELECT ciudad, COUNT(*) AS c
+    FROM Personas
+    GROUP BY ciudad
+    ORDER BY c ASC
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Agrupando valores de atributos con GROUP BY}
+    \label{tab: 18}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{ciudad} & \textbf{c} \\
+        \hline
+        Houston         & 1 \\
+        \hline
+        Philadelphia    & 1 \\
+        \hline
+        Los Angeles     & 2 \\
+        \hline
+        Chicago         & 2 \\
+        \hline
+        New York        & 2 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Sabemos que tenemos tres usuarios que tienen el valor "New York", "Los Angeles" y "Chicago" respectivamente, por lo que estos valores están duplicados, en el ejemplo anterior seleccionamos la columna "ciudad" y, en vez de desplegar todos los valores de esta columna (incluso los duplicados), utilizamos el comando \textbf{GROUP BY} para agrupar los valores duplicados en uno, y añadimos el conteo de valores duplicados en una nueva columna personalizada nombrada "c".
+
+Cuando se utiliza este comando, se seleccionan únicamente las columnas a agrupar, cada función que utilicemos en nuestra sentencia será aplicada al grupo, es decir:
+\begin{lstlisting}
+    SELECT [columna a agrupar 1], ..., [columna a agrupar n] [FUNCIÓN]
+    ...
+    GROUP BY [columna a agrupar 1], ..., [columna a agrupar n]
+\end{lstlisting}
+
+Si queremos agregar otra columna a trabajar en el comando \textbf{GROUP BY} tendremos un error, solamente se utilizan las columnas seleccionadas tanto en el \textit{SELECT} com en \textit{GROUP BY}.
+
+El comando \textbf{HAVING} es como el comando \textit{WHERE}, pero aplicado a los grupos, retomemos el último ejemplo y veamos el nuevo resultado en la \textit{Tabla \ref{tab: 19}}:
+\begin{lstlisting}
+    SELECT ciudad, COUNT(*) AS c
+    FROM Personas
+    GROUP BY ciudad
+    HAVING COUNT(*) > 1
+    ORDER BY c ASC
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Agrupando valores de atributos con GROUP BY y HAVING}
+    \label{tab: 19}
+    \begin{tabular}{|l|l|}
+        \hline
+        \textbf{ciudad} & \textbf{c} \\
+        \hline
+        Los Angeles     & 2 \\
+        \hline
+        Chicago         & 2 \\
+        \hline
+        New York        & 2 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Agrega la condición de que se desplieguen solamente los grupos con más de una persona habitando en las respectivas ciudades. Aclarando: \textit{WHERE filtra los registros de una sentencia previo a agruparlos, HAVING filtra los grupos}.

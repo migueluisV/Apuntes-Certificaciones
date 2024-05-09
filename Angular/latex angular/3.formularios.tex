@@ -1,0 +1,225 @@
+\section{Formularios}
+
+
+\subsection{Template-driven}
+
+Una de las formas de crear formularios en Angular es mediante los tipos de formularios \textbf{template-driven}, los cuales son creados y mantenidos en la estructura HTML (plantilla). Para crear uno, primero se debe importar la dependencia FormsModule al componente donde tendremos nuestro formulario:
+\begin{lstlisting}[style=htmlcssjs]
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  imports: [FormsModule],
+})
+\end{lstlisting}
+
+Un código sencillo es el siguiente:
+\begin{lstlisting}[style=htmlcssjs]
+<label>Name: 
+  <input type="text" [(ngModel)]="name" />
+</label>
+\end{lstlisting}
+
+Vemos que se utiliza un atributo o directiva \textbf{[(ngModel)]}, lo que hace esta directiva es que vincula (bind) el valor recibido en el control del formulario a una propiedad de la lógica o clase del componente (el app.component.ts por ejemplo).
+
+Otra característica de esta directiva es que es bidireccional, es decir que el valor que se ingrese en el control del formulario afecta a la propiedad en la parte lógica del componente, del mismo modo que cambiar el valor de la propiedad en la lógica se ve reflejado en el control del formulario con la que está vinculada.
+
+En caso de tener que manejar el evento \textbf{submit} de un formulario, se puede utilizar la directiva [(ngSubmit)] para ejecutar un método al enviar la información de un formulario. Si se utiliza el contenedor $<$form$>$, cada input o control de este debe tener obligatoriamente un atributo \textit{name}.
+\begin{lstlisting}[style=htmlcssjs]
+<form (ngSubmit)="showName()">
+  <input type="text" [(ngModel)]="name" name="name" />
+  <input type="submit" value="Submit" />
+</form>
+\end{lstlisting}
+
+
+\subsubsection{Validación}
+
+Se pueden utilizar algunos atributos de etiquetas HTML para validar información sin ningún tipo de sintaxis especial, como \textit{required}. Otra forma de validar la información de un formulario tipo \textbf{template-driven} es mediante la directiva \textbf{ngForm}, lo que hace esta directiva es que te da acceso al estado completo del formulario, la forma de utilizarla es la siguiente:
+\begin{lstlisting}[style=htmlcssjs]
+<form (ngSubmit)="showName()" #myForm="ngForm">
+\end{lstlisting}
+
+Primero le damos un nombre al formulario con el prefijo \# y a esto le asignamos la directiva. De esta manera, podemos acceder al estado del formulario y realizar algunas validaciones antes de enviar información, por ejemplo:
+\begin{lstlisting}[style=htmlcssjs]
+<form (ngSubmit)="showName()" #myForm="ngForm">
+  <input type="text" [(ngModel)]="name" name="name" required />
+  <input type="submit" value="Submit" [disabled]="!myForm.form.valid" />
+</form>
+\end{lstlisting}
+
+Vemos que se le da el nombre "myForm" a un formulario y se le asigna la directiva ngForm, su primer control o input es una caja de texto cualquiera, pero tiene la particularidad de que es requerido que sea llenada para enviar la información del formulario, entonces, el estado del formulario no es "completado" o "válido" hasta que se llene ese único control (en caso de que haya más controles con el atributo required, se deben llenar todo estos para que el estado sea "válido"), es por ello que el botón (el cual se encarga de hacer la operación de \textit{submit}) tiene el atributo [disabled] que depende de que el estado del form (myForm.form) sea válido (myForm.form.valid).
+
+Angular proporciona estilos especiales para los estados de los formularios para poder personalizarlos en caso de ser requerido:
+\begin{lstlisting}[style=htmlcssjs]
+input.ng-valid {
+  background-color: #79ba6a;
+}
+input.ng-invalid {
+  background-color: #f58c84;
+}
+\end{lstlisting}
+
+
+\subsection{Reactive Forms}
+
+La otra forma de crear formularios es mediante los tipos de formularios \textbf{Reactive forms}. Para crear uno, primero se debe importar la dependencia ReactiveFormsModule al componente donde tendremos nuestro formulario:
+\begin{lstlisting}[style=htmlcssjs]
+import { ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  imports: [ReactiveFormsModule],
+})
+\end{lstlisting}
+
+Las dos diferencias principales entre este tipo y el primero es que este se crea y mantiene desde la lógica del componente y el primero desde su estructura, además que el primero está más enfocado en formularios pequeños y sencillos. La forma de instanciar este tipo desde la lógica es la siguiente:
+\begin{lstlisting}[style=htmlcssjs]
+import { FormControl } from '@angular/forms';
+...
+export class AppComponent {
+  // Sin valor predeterminado.
+  name = new FormControl(''); 
+
+  // Con valor predeterminado
+  name = new FormControl('Juan');
+}
+\end{lstlisting}
+
+Puedes asignar un valor predeterminado al control.Después, tienes que asociar este control de formulario a un control en la estructura HTML:
+\begin{lstlisting}[style=htmlcssjs]
+<input type="text" [formControl]="name" name="name" />
+\end{lstlisting}
+
+La directiva \textbf{[formControl]} se usa para vincular la propiedad de la parte lógica con el control de la estructura. Se utiliza el siguiente código para acceder a la información ingresada del control:
+\begin{lstlisting}[style=htmlcssjs]
+<p>{{ name.value }}</p>
+\end{lstlisting}
+
+A diferencia del tipo anterior en cuanto al evento submit, cambia un poco la sintaxis de la directiva, en lugar de utilizar [(ngSubmit)] se utiliza simplemente (submit).
+
+\textbf{Este es el código completo:}
+
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  imports: [ReactiveFormsModule],
+})
+
+export class AppComponent {
+  name = new FormControl('');
+
+  login() {
+    alert(this.name.value);
+  }
+}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<form (ngSubmit)="login()">
+  <p><input type="text" [formControl]="name" /></p>
+  <p><input type="submit" value="Submit" /></p>
+</form>
+\end{lstlisting}
+
+
+\subsection{Agrupación de controles}
+
+Para tener mayor orden en el número de controles de un formulario, se puede importar la dependencia FormGroup para agrupar controles:
+\begin{lstlisting}[style=htmlcssjs]
+import { FormGroup, FormControl } from '@angular/forms';
+\end{lstlisting}
+
+Se crea el grupo nuevo en la parte lógica del componente:
+\begin{lstlisting}[style=htmlcssjs]
+loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+});
+\end{lstlisting}
+
+El nuevo grupo es llamado \textbf{loginForm} y sus controles son \textbf{username} y \textbf{password}. Esta declaración nos da como resultado una colección de datos dupla. Ahora debemos vincular este grupo con la estructura del componente:
+\begin{lstlisting}[style=htmlcssjs]
+<form [formGroup]="loginForm">
+  <p><input type="text" formControlName="username" /></p>
+  <p><input type="text" formControlName="password" /></p>
+</form>
+\end{lstlisting}
+
+Así es como se accede a la información registrada de los controles de un grupo:
+\begin{lstlisting}[style=htmlcssjs]
+{{ loginForm.value.username }}
+\end{lstlisting}
+
+No cambia mucho la situación al momento de enviar la información del formulario:
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  imports: [ReactiveFormsModule],
+})
+export class AppComponent {
+  loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl(''),
+  });
+
+  login() {
+    alert(
+      this.loginForm.value.username + ' | ' + this.loginForm.value.password
+    );
+  }
+}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <p><input type="text" formControlName="username" /></p>
+  <p><input type="text" formControlName="password" /></p>
+  <p><input type="submit" value="Submit" /></p>
+</form>
+\end{lstlisting}
+
+
+\subsection{Validación mediante Validators}
+
+Otra forma de validar la información de los controles de un Reactive Form es mediante la dependencia Validators, la cual agrega características especiales y ahorra algo de código en la estructura del componente. Se importa de la siguiente manera:
+\begin{lstlisting}[style=htmlcssjs]
+import { Validators } from '@angular/forms';
+\end{lstlisting}
+
+Similar al estado del formulario, se puede revisar el estado de un grupo con una sintaxis similar:
+\begin{lstlisting}[style=htmlcssjs]
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <p><input type="text" formControlName="username" /></p>
+  <p><input type="text" formControlName="password" /></p>
+  <p><input type="submit" value="Submit" [disabled]="!loginForm.valid" /></p>
+</form>
+\end{lstlisting}
+
+Note que la sintaxis ya no incluye la palabra \textit{form} en medio del nombre del grupo y el atributo \textit{valid}. En styles.css también puede incorporar los estilos \textbf{ng-valid} y \textbf{ng-invalid} a un grupo de controles.
+
+Un botón también puede resetear los valores de un grupo con el método \textbf{reset()}:
+\begin{lstlisting}[style=htmlcssjs]
+<form [formGroup]="myForm">
+   ...
+   <input type="button" value="Reset" (click)="myForm.reset()" />
+</form>
+\end{lstlisting}

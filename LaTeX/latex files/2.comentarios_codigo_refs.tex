@@ -1,0 +1,179 @@
+\section{Comentarios}
+
+Para poner un comentario se usa el símbolo \%:
+\begin{center}
+    \textit{\% Esto es un comentario.}
+\end{center}
+%Esto es un comentario.
+
+Si lo que se busca es comentar varias líneas de código al mismo tiempo sin ir una a una, podemos utilizar el paquete \textbf{comment} y utilizar su comando \textbf{comment}:
+\begin{lstlisting}
+    \usepackage{verbatim}   % Paquete para comentar varias líneas a la vez.
+    
+    \begin{document}
+        \begin{comment}
+        esto
+        es
+        un
+        bloque
+        de
+        texto
+        comentado
+        \end{comment}
+        
+        hola mundo
+    \end{document}
+\end{lstlisting}
+\begin{comment}
+    Hola mamá esto no se verá.
+\end{comment}
+
+Si buscamos el camino más rápido, Overleaf (la plataforma online donde actualmente estamos escribiendo este documento) proporciona el \textit{shorcut} \textbf{Ctrl + /} para comentar varias líneas de texto ya seleccionadas con el cursor. Este \textit{shorcut} puede variar dependiendo el IDE o editor de texto donde se esté desarrollando el proyecto \LaTeX.
+
+
+
+\section{Escritura de código en \LaTeX}
+
+Algo muy interesante a la hora de trabajar en este ambiente, es el lograr escribir código de programación que se vea elegante y tabulado para su mejor comprensión, esto lo logramos con el paquete \textbf{listing}.
+\begin{center}
+    \textit{\textbackslash{usepackage\{listings\}}}
+\end{center}
+    
+Lo más difícil (o sencillo), es personalizar o configurar este paquete para que se mire como nosotros deseemos, para ello utilizamos el comando \textbf{lstset\{\}}, este debe ser posicionado antes del comienzo del documento, y dentro de sus llaves podemos insertar muchas entradas o atributos que configurarán el resultado final del paquete. Algo que quiero mencionar es que este paquete soporta automáticamente la escritura y estilo de varios lenguajes de programación (Python, Java, C, C++ o HTML, lamentablemente CSS y JavaScript no están disponibles), esto es un tipo de entrada o atributo que podemos configurar en \textit{lstset}, dejo a continuación la configuración usada en este documento junto con algunos otros atributos que podrían serle útiles para el Caso 1, y otra que podría utilizarse para escribir código de CSharp en el Caso 2:
+
+\textbf{Caso 1, configuración completa de este archivo}:
+\begin{lstlisting}
+    \usepackage{xcolor}                 % Paquete básico para agregar color al texto.
+
+    % Define colores nuevos.
+    \definecolor{color}{HTML}{E4E4EE}
+    \definecolor{verde}{HTML}{3C8031}
+
+    % Personalización de la fuente para el código.
+    \lstset{
+        language = TeX,                     % Lenguaje con palabras reservadas de este resaltadas.
+        basicstyle = \ttfamily\footnotesize,% Utiliza la fuente tttfamily, en especial el paquete inconsolata.
+        frame = single,                     % Quita el marco al cuadro flotante que contiene el código o texto.
+        backgroundcolor = \color{color},    % Cambia el color del fondo del marco del código. Utiliza el paquete "xcolor" y define un nuevo color.
+        columns = fullflexible,             % Ajusta el cuadro flotante al tamaño del texto del documento.
+        breaklines = true,                  % Ajusta el texto dentro del contenedor.
+        inputencoding = utf8,               % Admite caracteres del código UTF8.
+        extendedchars = true,               % Soporte para caracteres especiales.
+        %numbers = left,                    % Agrega número de línea al código (izquierda, sin número y derecha).
+        showstringspaces = false,           % Quita los guiones bajos predeterminados de los espacios en cadenas de texto.
+        escapebegin = \obeyspaces,          % Complemento de la entrada anterior.
+        % rulecolor = \color{red},          % Color del borde del marco del código.
+        % numberstyle = \color{red},        % Color de los números en el texto o código.
+        % stringstyle = \color{red},        % Color de las cadenas de texto en el texto o código.
+        % keywordstyle = \color{red},       % Color de las palabras reservadas en el texto o código.
+        % identifierstyle = \color{red},    % Color del texto o código.
+        commentstyle = \color{verde},       % Color de los comentarios en el texto o código.
+        literate =                          % Acepta los siguientes caracteres especiales fuera de UTF8.
+            {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+            {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+            {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+    }
+\end{lstlisting}
+
+Puedes agregar el comando \textit{\textbackslash{footnotesize}} para hacer un poco más pequeña la letra del código, esto va justo enseguida de \textit{\textbackslash{ttfamily}} en la entrada \textit{basicstyle}.
+
+\textbf{Caso 2, configuración rápida con lenguaje}:
+\begin{lstlisting}
+    \lstdefinestyle{sharpc}{language=[Sharp]C, frame=lr, rulecolor=\color{blue!80!black}}
+    
+    \lstset{style=sharpc}
+\end{lstlisting}
+
+Para comenzar a trabajarlo utilizamos los comandos \textbf{\textbackslash{begin\{\}}} y \textbf{\textbackslash{end\{\}}}, dentro de sus llaves escribimos la palabra \textbf{lstlisting}: \\
+\textit{
+    \textbackslash{begin}\{lstlisting\} \\
+    Esto es código!!! \\
+    \textbackslash{end}\{lstlisting\}
+}
+
+En el Caso 1, todos los bloques \textit{lstlisting} tendrán el mismo aspecto (en especial cuando se establece un tipo de lenguaje para el estilo de los bloques), mientras que el Caso 2 permite crear varios estilos para distintos lenguajes de programación, o simplemente permite establecer varios estilos o temas para los bloques \textit{lstlisting}.
+
+
+
+\section{Referencias y citas}
+
+Existen tres formas de trabajar con citas y referencias en \LaTeX, en esta ocasión y según mi entendimiento, la más sencilla es la de \textbf{biblatex}.
+
+
+\subsection{El archivo .bib}
+
+Referenciar y citar por medio de \textit{biblatex} requiere que tengamos a la mano un archivo con extensión \textit{.bib} dentro del directorio donde estemos trabajando el proyecto, ahí estarán escritas todas las referencias que usaremos a lo largo del escrito.
+
+Una vez creado el archivo \textit{.bib} con las referencias escritas, necesitamos integrarlo a nuestro archivo \textbf{main}, para ello usamos el comando \textbf{addbibresource} en la parte superior del mismo (junto con los otros paquetes que estemos utilizando), y dentro de sus llaves escribimos el nombre del archivo \textit{.bib} que se creó anteriormente.
+\begin{center}
+    \textit{\textbackslash{addbibresourse\{referencias.bib\}}}
+\end{center}
+
+Para escribir las fuentes dentro de este archivo, existe una categoría para cada tipo de fuente, es decir, las fuentes están categorizadas por el tipo \textit{online}, \textit{artículo}, \textit{libro}, \textit{revista}, \textit{artículo científico}, etc. Cada categoría puede tener un tipo de entrada, dato o atributo en la cual podemos insertar la información de nuestra fuente (\textit{autor}, \textit{fecha de publicación}, \textit{link}, \textit{página}, \textit{volumen}, etc), es necesario investigar el tipo de entrada o atributo posee cada fuente que necesitemos, ya que no todas las categorías aceptan todas o ciertas entradas o atributos (no tiene sentido que la categoría \textit{online} tenga una entrada tipo \textit{volumen}). A continuación, se presentan tres ejemplos de categorías de fuentes con sus entradas correspondientes:
+\begin{lstlisting}
+    @online{trefor1,
+        title     = "Intro to LaTeX : Learn to write beautiful math equations",
+        author    = "Trefor Bazett",
+        date      = {2022-02-15},
+        url       = "https://youtu.be/Jp0lPj2-DQA",
+        publisher = "[Video de YouTube]"
+    }
+
+    @online{trefor2,
+        author    = "Trefor Bazett",
+        title     = "How to write a thesis using LaTeX **full tutorial**",
+        date      = {2022-02-15},
+        url       = "https://youtu.be/zqQM66uAig0",
+        publisher = "[Video de YouTube]"
+    }
+
+    @online{overl,
+        author    = "Overleaf",
+        title     = "Overleaf Help",
+        date      = {2022-02-15},
+        url       = "https://www.overleaf.com/learn",
+        publisher = "[Video de YouTube]"
+    }
+\end{lstlisting}
+
+\textit{Nota}: puedes acceder al \href{https://www.scribbr.es/}{sitio} de Scribbr para escribir referencias y citas APA, este sitio te ofrece exportar las referencias APA a bibLaTeX.
+
+
+\subsection{Citado de referencias}
+
+Ya con el archivo de referencias creado y adjuntado a nuestro fichero \textbf{main}, es momento de citar nuestras referencias, para lograr esto usamos el comando \textbf{\textbackslash{cite\{\}}}, dentro de sus llaves escribimos la palabra clave o el nombre que le dimos previamente a cada una de nuestras fuentes (en el ejemplo anterior, los nombres de las referencias son: \textit{trefor1}, \textit{trefo2} y \textit{overl}).
+\begin{center}
+    \textit{\textbackslash{cite\{trefor1\}}}
+\end{center}
+
+
+\subsection{Sección de referencias en el índice y al final del documento}
+
+Para crear la sección de referencias se usa el comando \textbf{\textbackslash{printbibliography}}, por si solo cumple con su función, pero si se busca cambiar la palabra por defecto que tiene (References), se pueden agregar unos corchetes después del comando donde se le pasa el parámetro \textit{title} para cambiar el título de la sección, el valor de este parámetro debe estar contenido dentro de llaves; para que esta sección salga en el índice general del documento sin estar enumerada, dentro de los mismos corchetes donde está el parámetro\textit{title}, le pasamos otro parámetro separado por una coma llamado \textit{heading}, su valor contenido dentro de llaves sería \textit{bibintoc}.
+\begin{lstlisting}
+    \usepackage{biblatex}	            % Paquete para usar referencias y citas.
+    \addbibresource{referencias.bib}	% Se agrega el archivo .bib al documento.
+
+    \begin{document}
+        \renewcommand*\contentsname{Índice}
+        \tableofcontents
+        \printbibliography[title={Referencias}, heading={bibintoc}]
+    \end{document}
+\end{lstlisting}
+
+El resultado del ejemplo anterior lo puede revisar en este mismo documento.
+
+
+\subsection{Estilo de las referencias}
+
+Si queremos aplicar un estilo en particular a las referencias, es posible modificar el que está puesto por defecto para que nuestras citas y sección de referencias tengan otro aspecto (APA, IEEE, entre otros); para este caso en particular yo usaré el estilo APA para este documento.
+
+Cuando agregamos el paquete \textbf{biblatex}, no le pasamos ningún otro parámetro a \textit{usepackage}, ahora, entre corchetes, antes de las llaves, le pasaremos el parámetro \textbf{style}, y su valor será igual a \textbf{apa}, repito, en esta parte del comando se le puede usar otro tipo de estilo, y automáticamente, las citas y la sección de referencias se actualizará al etilo establecido.
+\begin{lstlisting}
+    \usepackage[style=apa]{biblatex}    % Paquete para usar referencias y citas.
+    \addbibresource{referencias.bib}	% Se agrega el archivo .bib al documento.
+
+    \begin{document}
+        
+    \end{document}
+\end{lstlisting}

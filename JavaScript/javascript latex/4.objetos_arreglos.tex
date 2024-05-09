@@ -1,0 +1,405 @@
+\section{Objetos}
+\hspace{0.55cm}Un objeto de JavaScript (JS para abreviar) es similar a un objeto de clase en otro lenguaje, es decir, un objeto JS puede ser un auto, con las propiedades de marca, modelo, kilometraje, número de llantas, el método de andar, reversa, acelerar, frenar, etc. Tienen el siguiente aspecto:
+\begin{lstlisting}
+    var objeto = {
+        propiedad1: valor1,
+        propiedad2: valor2.
+        .
+        .
+        .
+        propiedadN: valorN
+    };
+\end{lstlisting}
+
+La creación de métodos de objetos se verá más adelante. Podemos ver las propiedades y sus valores como el contenido \textbf{pares llave-valor} de un contenedor.\\
+Para acceder a las propiedades de un objeto JS utilizamos el operador punto (.) o las llaves cuadradas ([]):
+\begin{lstlisting}
+    // Declara objeto JS.
+    var persona = {
+        // Propiedades.
+        nombre: "Luis",
+        edad: 21,
+        color_fav: "rojo",
+        altura: 162
+    };
+
+    // Asigna propiedad del objeto JS a variable.
+    var nom = persona.nombre;
+    var nombre = persona["nombre"];
+
+    document.write(nom);
+    document.write(nombre);
+
+    //Imprime: LuisLuis.
+\end{lstlisting}
+
+Con la función \textbf{length} podemos acceder a la cantidad de caracteres de una propiedad de un objeto JS.
+\begin{lstlisting}
+    // Asigna cantidad de caracteres de una propiedad del objeto JS a variable.
+    var nom = persona.nombre.length;
+
+    document.write(nom);
+
+    //Imprime: 4.
+\end{lstlisting}
+
+
+\subsection{Creando objetos}
+\hspace{0.55cm}La forma de crear objetos vista anteriormente funciona únicamente para crear un solo objeto, se declara y se le asignan valores, pero no puedes tener más de un mismo tipo de objeto con la declaración previa.\\
+Para tener una \textbf{plantilla de objetos} o un \textbf{tipo de objeto} (una clase de donde sacar los objetos en otros lenguajes vaya) utilizamos una \textbf{función constructor}:
+\begin{lstlisting}
+    // Declara objeto JS sin función constructor.
+    var persona = {
+        // Propiedades.
+        nombre: "Luis",
+        edad: 21,
+        color_fav: "rojo",
+        altura: 162
+    };
+
+    // Declara objeto JS con función constructor.
+    function person(nombre, edad, peso) {
+        // Asignación de valores a propiedades de objeto por medio de parámetros
+        // y la palabra reservada "this".
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+    }
+\end{lstlisting}
+
+Así como con constructores en otros lenguajes, aquí creamos uno por medio de una función y se le asignan los valores a las propiedades por medio de parámetros, nótese que utilizamos la palabra reservada \textbf{this}, la cual asigna un valor al contexto en la que está contenida (la función person) y solo le pertenecerá a ese contexto ese valor. Ahora veamos como declarar varios objetos de la función constructor:
+\begin{lstlisting}
+    // Asigna declaración de objetos a variables.
+    var p1 = new person("Daniela", 22, 50);
+    var p2 = new person("Kevin", 26, 55);
+\end{lstlisting}
+
+Fíjese que se utiliza la palabra reservada \textbf{new} para declarar un objeto JS, esto diferencia a la declaración de objetos que ya habíamos previamente, porque esta palabra reservada hace que sea distinto un objeto declarado previamente a este nuevo que estamos creando. Con estos dos objetos declarados, podemos acceder a sus propiedades por el operador punto o llaves cuadradas.
+
+
+\subsection{Métodos objetos}
+\hspace{0.55cm}Al igual que con las propiedades, para declarar un método de objeto se utiliza la palabra reservada \textbf{this} y para acceder al mismo se utiliza el operador punto o las llaves cuadradas; utilizamos una sintaxis particular:
+\begin{lstlisting}
+    // Declara objeto JS con función constructor.
+    function person(nombre, edad, peso) {
+        // Asignación de valores a propiedades de objeto por medio de parámetros
+        // y la palabra reservada "this".
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+        // Declara método de objeto que cambia el peso y nombre del objeto.
+        this.cambioNombrePeso = function(nombre, peso) {
+            this.nombre = nombre;
+            this.peso = peso;
+        }
+    }
+
+    // Asigna declaración de objetos a variable.
+    var p1 = new person("Daniela", 22, 50);
+    // Llamada a método de objeto.
+    p1.cambioNombrePeso("Gabriela", 49)
+\end{lstlisting}
+
+La estructura que se siguió es la siguiente:
+\begin{center}
+    \textit{nombreObjeto = function(parámetros) \{ // Instrucciones. \}}
+\end{center}
+
+Se pueden declarar métodos fuera de la declaración de un objeto JS y asignarle el método exterior a un método interno del objeto, como vemos a continuación:
+\begin{lstlisting}
+    // Declara objeto JS con función constructor.
+    function person(nombre, edad, peso) {
+        // Asignación de valores a propiedades de objeto por medio de parámetros
+        // y la palabra reservada "this".
+        this.nombre = nombre;
+        this.edad = edad;
+        this.peso = peso;
+        // Declara método de objeto que cambia el peso y nombre del objeto
+        // y se le asigna un método exterior.
+        this.cambioNombrePeso = cambiarNombrePeso;
+        }
+    }
+    // Función exterior asignada a método de objeto.
+    function cambioNombrePeso(nombre, peso) {
+        this.nombre = nombre;
+        this.peso = peso;
+    }
+\end{lstlisting}
+
+\textit{Nota}: nótese que, al asignar un método exterior a un método de objeto, el método exterior no requiere de paréntesis.
+
+
+\subsection{Objeto Math}
+\hspace{0.55cm}Este \textbf{objeto} posee propiedades y métodos de objeto para realizar algunas operaciones matemáticas. La \textit{Tabla \ref{tab: 6}} almacena las propiedades del objeto:
+\begin{table}[H]
+    \begin{center}
+        \caption{Propiedades del objeto Math}
+        \label{tab: 6}
+        \begin{tabular}{c l}
+            \hline
+            \textbf{Método}&\textbf{Definición} \\
+            \hline
+            E & Constante Euler \\
+            LN2 & Logaritmo natural de 2 \\
+            LN10 & Logaritmo natural de 10 \\
+            LOG2E & Logaritmo base 2 de la constante Euler \\
+            LOG10E & Logaritmo base 10 de la constante Euler \\
+            PI & Constante PI \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+La \textit{Tabla \ref{tab: 7}} almacena los métodos más utilizados del objeto:
+
+\begin{table}[H]
+    \begin{center}
+        \caption{Métodos del objeto Math}
+        \label{tab: 7}
+        \begin{tabular}{m{4cm} m{9cm}}
+            \hline
+            \textbf{Método}&\textbf{Definición} \\
+            \hline
+            sqrt(x) & Regresa la raíz cuadrada de un valor \\
+            round(x) & Regresa un valor decimal redondeado a su entero más cercano \\
+            random() & Regresa un valor aleatorio entre 0 y 1 \\
+            pow(x, y) & Regresa un número elevado a \textit{n} potencia \\
+            min(x, y, z, ..., n) & Regresa el valor más pequeño de entre un conjunto \\
+            max(x, y, z, ..., n) & Regresa el valor más grande de entre un conjunto \\
+            abs(x) & Regresa el valor absoluto de un número \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+Este objeto se utiliza de la siguiente manera:
+\begin{lstlisting}
+    var res = Math.sqrt(4);
+    document.write(Math.PI + " " + res);
+
+    // Imprime: 3.141592653589793 2
+\end{lstlisting}
+
+
+\subsubsection{Números aleatorios entre un rango de números}
+\hspace{0.55cm}En caso de que necesitemos un número aleatorio entre 5 y 10, utilizamos el siguiente código:
+\begin{lstlisting}
+    function aleatorioEntero(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+}
+\end{lstlisting}
+
+La función regresa un número entero dentro de un rango de valores, la función está hecha de tal forma que, si el número máximo o mínimo es un decimal, este lo convierte a un número entero, y si ya es entero lo mantiene (\textit{líneas 2 y 3 del código}), posterior a ello, realiza el cálculo del número aleatorio (\textit{l código}). Esta función \textbf{incluye el número mínimo y excluye el mayor}; si deseamos que incluya tanto el número mínimo como máximo, cambiemos ligeramente la función a:
+\begin{lstlisting}
+    function aleatorioEntero(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1) + min);
+}
+\end{lstlisting}
+
+Las dos funciones aplican a números enteros, si queremos un número aleatorio decimal entre un rango de valores, quitamos las líneas de código 2 y 3 para ambos casos:
+
+\begin{lstlisting}
+    function aleatorioEntero(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+}
+\end{lstlisting}
+
+El número retornado tendrá una gran cantidad de decimales.
+
+
+\subsection{Objeto Date}
+\hspace{0.55cm}Este objeto permite crear variables con una determinada fecha, la cual está compuesta por:
+\begin{itemize}
+    \item año,
+    \item mes,
+    \item día,
+    \item hora,
+    \item minutos,
+    \item segundos,
+    \item milisegundos (un número entero: 3 seg = 3000),
+\end{itemize}
+
+Tenemos nueve formas para declarar una fecha:
+\begin{itemize}
+    \item new Date(): almacena la fecha actual del navegador o sistema.
+    \item new Date(cadena con la fecha): almacena la fecha escrita en una cadena, la cual sigue el formato \textit{"mes día, año hora:minuto:segundo:milisegundo"}.
+    \item new Date(year, month): almacena una fecha con el año y mes.
+    \item new Date(year, month, day): almacena una fecha con el año, mes y día.
+    \item new Date(year, month, day, hours): almacena una fecha con el año, mes, día y hora.
+    \item new Date(year, month, day, hours, minutes): almacena una fecha con el año, mes, día, hora y minuto.
+    \item new Date(year, month, day, hours, minutes, seconds): almacena una fecha con el año, mes, día, hora, minuto y segundos.
+    \item new Date(year, month, day, hours, minutes, seconds, miliseconds): almacena una fecha con el año, mes, día, hora, minuto, segundos y milisegundos.
+    \item new Date(miliseconds): almacena una fecha calculada a partir de los milisegundos.
+\end{itemize}
+
+El lenguaje tiene una fecha inicial, la cual es el \textbf{01 de enero de 1970, con hora 00:00:00}, en zona horaria \textbf{Tiempo Universal (UTC: Universal Time en inglés)}, con esta información se calcula una fecha cuando le pasas una cantidad de milisegundos; \textbf{los meses se cuentan a partir del cero} (0-11) y \textbf{los días a partir del uno} (1-31, 1-30); para terminar, \textbf{los objetos Date son estáticos}, quiere decir que una vez declarados, el tiempo en la máquina en el navegador sigue corriendo, pero el tiempo almacenado en el objeto ya no cambia.
+
+
+\subsubsection{Métodos}
+\hspace{0.55cm}La \textit{Tabla \ref{tab: 8}} contiene los métodos disponibles de los objetos Date:
+\begin{table}[H]
+    \begin{center}
+        \caption{Métodos del objeto Date}
+        \label{tab: 8}
+        \begin{tabular}{c l}
+            \hline
+            \textbf{Método}&\textbf{Definición} \\
+            \hline
+            getFullYear() & Regresa el año de una fecha \\
+            getMonth() & Regresa el mes de una fecha \\
+            getDate() & Regresa el día del mes de una fecha \\
+            getDay() & Regresa el día de la semana de una fecha \\
+            getHours() & Regresa la hora de una fecha \\
+            getMinutes() & Regresa el minuto de una fecha \\
+            getSeconds() & Regresa el segundo de una fecha \\
+            getMiliseconds() & Regresa el milisegundo de una fecha \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+
+\section{Objetos JSON}
+\hspace{0.55cm}JavaScript Object Notation (JSON) es un formato basado en texto estándar para representar datos estructurados en la sintaxis de objetos de JavaScript. Es comúnmente utilizado para transmitir datos en aplicaciones web (por ejemplo: enviar algunos datos desde el servidor al cliente, así estos datos pueden ser mostrados en páginas web, o vice versa). Aunque es muy parecido a la sintaxis de objeto literal de JavaScript, puede ser utilizado independientemente de JS, muchos entornos de programación poseen la capacidad de leer y generar JSON, tome en cuenta las siguientes consideraciones:
+\begin{itemize}
+    \item \textbf{Convertir} un objeto JSON a JS es llamado \textit{parsing}.
+    \item \textbf{Convertir} un objeto JS  a JSON es llamado \textit{stringfy} o \textit{stringfication}.
+    \item JSON solamente contiene propiedades, \textbf{no métodos}.
+    \item JSON no acepta comillas simples ('') para la declaración de cadenas, solamente comillas dobles ("").
+    \item JSON requiere que sus propiedades estén encerradas entre comillas.
+\end{itemize}
+
+Los JSON son cadenas - útiles cuando se quiere transmitir datos a través de una red. Debe ser convertido a un objeto nativo de JavaScript cuando se requiera acceder a sus datos. Ésto no es un problema, dado que JavaScript posee un objeto global JSON que tiene los métodos disponibles para convertir entre ellos. un objeto JSON puede ser almacenado en su propio archivo con extensión \textit{.json}, y en el archivo principal se importa con una \textbf{MIME type} de \textit{directorio/archivo .json}.
+
+
+\subsection{Estructura}
+\hspace{0.55cm}Los objetos JSON es una cadena que sigue la estructura o lógica de los objetos JS, sin embargo, estos también pueden contener tipos de datos de JavaScript (enteros, punto flotante, booleanos, arreglos y otros objetos). Veamos el aspecto que tiene un objeto JSON:
+\begin{lstlisting}
+    {
+        "squadName": "Super hero squad",
+        "homeTown": "Metro City",
+        "formed": 2016,
+        "secretBase": "Super tower",
+        "active": true,
+        "members": [
+            {
+                "name": "Molecule Man",
+                "age": 29,
+                "secretIdentity": "Dan Jukes",
+                "powers": [
+                    "Radiation resistance",
+                    "Turning tiny",
+                    "Radiation blast"
+                ]
+            },
+            {
+                "name": "Madame Uppercut",
+                "age": 39,
+                "secretIdentity": "Jane Wilson",
+                "powers": [
+                    "Million tonne punch",
+                    "Damage resistance",
+                    "Superhuman reflexes"
+                ]
+            },
+            {
+                "name": "Eternal Flame",
+                "age": 1000000,
+                "secretIdentity": "Unknown",
+                "powers": [
+                    "Immortality",
+                    "Heat Immunity",
+                    "Inferno",
+                    "Teleportation",
+                    "Interdimensional travel"
+                ]
+            }
+        ]
+    };
+\end{lstlisting}
+
+Si deseamos acceder al contenido del objeto JSON en JavaScript, debemos \textit{parsearlo} y asignarlo a una variable del mismo nombre (para evitar confusión):
+\begin{lstlisting}
+    superHeroes.homeTown;
+    superHeroes['active'];
+\end{lstlisting}
+
+Vemos que el ejemplo posee una propiedad que contiene varios elementos (arreglo), y dentro de estos elementos hay más propiedades que poseen aún más elementos (arreglos dentro de arreglos), podemos acceder a ellos de la siguiente manera:
+\begin{lstlisting}
+    superHeroes['members'][1]['powers'][2];
+\end{lstlisting}
+
+
+
+\section{Arreglos}
+\hspace{0.55cm}Para crear un arreglo en este lenguaje, se sigue la siguiente sintaxis:
+\begin{center}
+    \textit{var nombreArreglo = new Array(elementos);}
+\end{center}
+
+Para acceder a los elementos o modificar el valor de alguno de un arreglo, utilizamos los paréntesis cuadrados ([]) y el índice del elemento que deseemos (empezando de 0):
+\begin{lstlisting}
+    // Declara arreglo.
+    var cursos = new Array("HTML", "CSS", "JS");
+    // Imprime elemento en el índice 0 del arreglo.
+    console.log(cursos[0]);
+    // Cambiar el valor del elemento en el índice 0.
+    cursos[0] = "C++";
+    // Imprime elemento en el índice 0 del arreglo.
+    console.log(cursos[0]);
+\end{lstlisting}
+
+En caso de que se desee acceder a un elemento en un índice inexistente de un arreglo, lo que regresará o mostrará el lenguaje es \textbf{undefined}.\\
+Otra forma de declarar un arreglo (que es la forma en la cual suele hacerse) es de la siguiente manera:
+\begin{center}
+    \textit{var nombreArreglo = [elementos]}
+\end{center}
+
+Para accesar a sus elementos se hace de la misma manera que ya hemos visto.
+
+
+\subsection{Inicialización de arreglos y arreglos dinámicos}
+\hspace{0.55cm}Por defecto, los arreglos del lenguaje son \textbf{dinámicos}, quiere decir que no requieren de una cantidad de elementos tope en su declaración y se pueden agregar cuantos elementos necesitemos, sin embargo, en la declaración de arreglos podemos asignarle un número tope si lo requerimos y asignarle elementos por separado o inicializado, como vemos enseguida:
+\begin{lstlisting}
+    // Declara arreglo inicializado.
+    var numeros = [1, 2, 3, 4, 5];
+    //Declara arreglo sin inicializar con tres elementos.
+    var nombres = new Array(3);
+    // Asigna elementos al arreglo.
+    nombres[0] = "Luis";
+    nombres[1] = "Daniela";
+    nombres[2] = "Kevin";
+    // Declara arreglos sin inicializar.
+    var arboles = new Array();
+    var autos = [];
+\end{lstlisting}
+
+
+\subsection{Métodos y propiedades}
+\hspace{0.55cm}Algunas funciones básicas de arreglos son:
+\begin{itemize}
+    \item \textbf{length}: regresa la cantidad de elementos que tiene un arreglo (\textit{arr.length}).
+    \item \textbf{concat(arreglo)}: crea un nuevo arreglo a partir de otros dos (\textit{var arr3 = arr1.concat(arr2)}).
+\end{itemize}
+
+
+\subsection{Arreglos asociativos}
+\hspace{0.55cm}Otros lenguajes de programación poseen \textbf{arreglos asociativos}, los cuales utilizan palabras o nombres como índices, en vez de números, JavaScript no soporta este tipo de arreglos, pero pueden ser simulados utilizando los objetos que ya hemos visto:
+\begin{lstlisting}
+    // Declara arreglo sin inicializar.
+    var persona = [];
+    // El arreglo en el índice "nombre" se le asigna el valor "Luis".
+    persona["nombre"] = "Luis";
+    // El arreglo en el índice "edad" se le asigna el valor 21.
+    persona["edad"] = 21;
+    document.write(persona["edad"]);
+
+    //Imprime: 21.
+\end{lstlisting}
+
+El arreglo es declarado como tal y vacío, pero los índices utilizados (nombre y edad) son de un objeto, es aspi que el arreglo es utilizado como un objeto, por lo cual, no se pueden utilizar los métodos de arreglos en objetos.

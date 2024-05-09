@@ -1,0 +1,355 @@
+\section{Conceptos básicos}
+
+
+\subsection{Componentes}
+
+Los componentes son bloques que representan un objeto de interfaz en un proyecto Angular (así como los componentes de React), estos componentes son piezas reutilizables de código.
+
+Un componente está compuesto de tres partes: \textbf{HTML} (estructura), \textbf{Typescript} (lógica) y \textbf{CSS} (estilos).
+
+El componente lógico raíz de todo proyecto es el nombrado app.component.ts en la carpeta src/app, este componente tiene un decorador el cual especifica cual es su estructura HTML y su hoja de estilos:
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  templateUrl: './app.component.html', // estructura html
+  styleUrl: './app.component.css' // hoja de estilos
+})
+export class AppComponent {
+  title = 'prueba1';
+}
+\end{lstlisting}
+
+Habíamos dicho anteriormente que \textbf{index.html} es la estructura principal del proyecto, veamos su contenido:
+\begin{lstlisting}[style=htmlcssjs]
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Prueba1</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root></app-root>
+</body>
+</html>
+\end{lstlisting}
+
+Vemos que lo único que está en el body es una etiqueta llamada $<$app-root$>$, la cual no es original de HTML. Este tipo de etiquetas representan a los componentes de Angular, un componente tiene su nombre el cual es traducido a una etiqueta HTML y se puede insertar dentro del body de index.html e incluso insertar componentes dentro de otros componentes. ¿Cómo funciona esto?
+
+Fijémonos en el único componente existente en un proyecto recién creado: app.component. Este componente es la raíz del proyecto, es lo que se muestra cuando se despliega el proyecto en un servidor, este componente en sí está constituido por tres partes:
+\begin{itemize}
+    \item su estructura: la estructura HTML, la cual la encontramos en app.component.html.
+    \item su lógica: la lógica y propiedades del componente, lo encontramos en app.component.ts.
+    \item su estilo: la hoja de estilos, la cual la encontramos en app.component.css.
+\end{itemize}
+
+Esto quiere decir que un componente tiene diversas partes, en app.component.ts, en su decorador @Component encontramos la propiedad \textbf{selector}, la cual proporciona al componente (y a sus partes en conjunto) de un nombre para utilizarlo como una etiqueta HTML para ser insertada en alguna otra parte del proyecto, es así que podemos crear diversos componentes con su estructura, lógica y estilos para luego nombrarlos en @Component y utilizarlos en nuestro proyecto.
+
+\textit{Nota}: información adicional para este documento extraída de este \href{https://www.acontracorrientech.com/entendiendo-los-componentes-en-angular/}{link}.
+
+
+\subsubsection{Creación de un componente}
+
+Se utiliza el siguiente comando, sin embargo, podemos añadir una instrucción al final que permitirá que el componente trabaje de distinta manera:
+
+\textit{ng generate component nombreComponente}
+
+\textit{ng generate component nombreComponente --inline-template}
+
+Donde nombreComponente es el nombre que le daremos al componente, \textit{--inline-template} te permite insertar etiquetas HTML cortas directamente al componente, sin esta indicación, al momento de la creación del componente, se crearían cuatro archivos alojados en una carpeta dentro de app con el nombre que se le fue dado al componente:
+\begin{itemize}
+    \item \textit{nombreComponente.component.ts},
+    \item \textit{nombreComponente.component.html},
+    \item \textit{nombreComponente.component.css} y
+    \item \textit{nombreComponente.component.spec.ts}
+\end{itemize}
+
+Los mismo que existen para el componente raíz (app.component). En nombreComponente.component.ts, en el decorador @Component, el valor de la propiedad \textit{selector} es "app-nombreComponente", Angular agrega el prefijo "app-" a los componentes creados.
+
+Para fines del siguiente código, sustituiremos nombreComponente por "footer". Este es el aspecto que tiene el nuevo componente en nuestro directorio y su código generado:
+
+\textbf{Archivos del proyecto}
+\begin{itemize}
+    \item src
+    \begin{itemize}
+        \item app
+        \begin{itemize}
+            \item footer
+            \begin{itemize}
+                \item footer.component.css
+                \item footer.component.html
+                \item footer.component.ts
+                \item footer.component.spec.ts
+            \end{itemize}
+            \item app.component.css
+            \item app.component.html
+            \item app.component.spec.ts
+            \item app.component.ts
+            \item app.config.server.ts
+            \item app.config.ts
+            \item app.routes.ts
+        \end{itemize}
+    \end{itemize}
+    \item ...
+\end{itemize}
+
+\textbf{nombreComponente.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-footer',
+  standalone: true,
+  imports: [],
+  templateUrl: './footer.component.html',
+  styleUrl: './footer.component.css'
+})
+export class FooterComponent {}
+\end{lstlisting}
+
+\textbf{nombreComponente.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<p>footer works!</p>
+\end{lstlisting}
+
+\textbf{nombreComponente.component.css}
+\begin{lstlisting}
+(vacio)
+\end{lstlisting}
+
+\textbf{nombreComponente.component.spec.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { FooterComponent } from './footer.component';
+
+describe('FooterComponent', () => {
+  let component: FooterComponent;
+  let fixture: ComponentFixture<FooterComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [FooterComponent]
+    })
+    .compileComponents();
+    
+    fixture = TestBed.createComponent(FooterComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
+\end{lstlisting}
+
+
+\subsubsection{Uso de componentes en otros componentes}
+
+Ya que tenemos creado nuestro componente nuevo, debemos importarlo a \textit{app.component.ts} para que lo tenga disponible para su uso y así poder utilizarlo en \textit{app.component.html} para su visualización; recuerde que el selector del componente Footer es "app-footer". Las modificaciones que haremos son las siguientes:
+
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { FooterComponent } from './footer/footer.component'; // se importa el componente.
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  //imports: [RouterOutlet],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+  imports: [FooterComponent] // el componente se pasa a un arreglo de importaciones para app.component.
+})
+export class AppComponent {
+  title = 'prueba1';
+}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h4>hola</h4>
+  <app-footer /> <!-- se utiliza app-footer -->
+</body>
+</html>
+\end{lstlisting}
+
+\textit{Nota}: información adicional para este documento extraída de este \href{https://youtu.be/g8geh3lFpBg?si=hH4lsMKYcjtP0dFD}{link}.
+
+
+\subsection{Plantillas}
+
+La plantilla de un componente también se le conoce como su estructura HTML (vista anteriorment). Se pueden utilizar variables que aparecen en la parte lógica de un componente en su estructura HTML para mostrar información o cambiar la misma desde la estructura.
+
+Supongamos que tenemos una variable en el componente raíz de un proyecto llamada \textit{name}:
+\begin{lstlisting}[style=htmlcssjs]
+user = 'James'
+\end{lstlisting}
+
+Si queremos mostrar este valor en la estructura del componente, utilizamos la sintaxis llamada \textbf{interpolación}:
+\begin{lstlisting}[style=htmlcssjs]
+<h1>Welcome, {{ name }}!</h1>
+\end{lstlisting}
+
+De esta manera, cuando el valor de \textit{name} cambie, su cambio se verá reflejado en la interfaz. Como en React, también podemos usar la interpolación para asignar valores a los atributos de una etiqueta HTML:
+\begin{lstlisting}[style=htmlcssjs]
+<img src="{{imageURL}}" alt="{{altText}}" />
+\end{lstlisting}
+
+Del mismo modo, se pueden implementar llamadas a funciones o expresiones simples:
+\begin{lstlisting}[style=htmlcssjs]
+<h1>Welcome, {{ firstname + ' ' + lastname }}!</h1>
+\end{lstlisting}
+
+
+\subsection{Vinculación}
+
+Vimos anteriormente que podemos mostrar valores de la lógica del componente a su estructura, esto corresponde con el concepto \textbf{Binding} (vinculación o encuadernación), el cual se refiere a la conexión en tiempo real entre una clase y su interfaz.
+
+Angular permite vincular un atributo de una etiqueta HTML a una propiedad de su componente, logrando así que cuando el valor de la propiedad cambie, se refleje en la estructura, esto es útil en cuanto a las imágenes, se utilizan los corchetes ([]) para lograr esta vinculación:
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+imageURL = 'tree.jpg'
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<img [src] = 'imageURL'>
+\end{lstlisting}
+
+Se debe tener precaución cuando se utilicen los corchetes para encerrar un atributo de una etiqueta, el nombre a encerrar debe ser el mismo que el del atributo, o agregarle mayúsculas en ciertas ubicaciones, no se debe poner el nombre de la propiedad del componente. Se muestra un ejemplo donde si está bien y otro donde no:
+
+\textbf{Bien}
+\begin{lstlisting}[style=htmlcssjs]
+<tr><td [colSpan]="columnsCount">Some text</td></tr>
+<tr><td [colspan]="columnsCount">Some text</td></tr>
+\end{lstlisting}
+
+\textbf{Mal}
+\begin{lstlisting}[style=htmlcssjs]
+<tr><td [columnsCount]="columnsCount">Some text</td></tr>
+\end{lstlisting}
+
+También podemos lograr una vinculación usando clases y estilos de CSS, esto mediante la palabra reservada \textit{class.} y \textit{style.}:
+
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  isHighlighted = true;
+  styleBackgroundColor = "#ff0000"
+}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<p [class.highlight]="isHighlighted">some text</p>
+<p [style.background-color]="styleBackgroundColor">siiiiii</p>
+\end{lstlisting}
+
+Se pueden utilizar múltiples clases en una vinculación usando solo la palabra reservada \textit{class}, siempre y cuando:
+\begin{itemize}
+    \item se pase como valor un arreglo con nombres de clases tipo string.
+    \item una dupla donde una parte sea el nombre de la clase y la otra su valor (true o false).
+\end{itemize}
+
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  myClasses = ['highlight', 'uppercase']
+}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<p [class]="myClasses">some text</p>
+\end{lstlisting}
+
+\textit{Nota}: información adicional para este documento extraída de este \href{https://angular.io/guide/class-binding}{link}.
+
+
+\subsection{Eventos}
+
+Continuando con el tema de la vinculación, Angular te permite vincular eventos con métodos de un componente, volviendolo responsivo a clics y otras cosas que puedan ocurrir. Un ejemplo muy básico es el siguiente:
+\begin{lstlisting}[style=htmlcssjs]
+<button (click)="login()">Click me</button>
+\end{lstlisting}
+
+Se encierra entre paréntesis el nombre del evento y se le asigna el nombre de la función entre dobles comillas.
+
+
+\subsection{Flujos de control}
+
+\subsubsection{for}
+
+Por lo general, se suele repetir código el cual varia solamente por su contenido, por ejemplo: publicaciones en un blog, productos en una tienda en línea, imágenes en una galería. Para esto, Angular tiene una sintaxis especial para lidiar con el problema, el cual es @for:
+\begin{lstlisting}[style=htmlcssjs]
+@for (item of items; track item.id) {
+   {{ item.name }}
+}
+\end{lstlisting}
+
+La palabra reservada track se utiliza en esta sintaxis porque representa el id o índice del arreglo o colección de datos que navega, por lo que es único y es obligatorio ponerlo. En caso de que no importe mucho si los valores son únicos en el arreglo o colección que recorrerá, se puede poner la palabra \textit{track} y el nombre de variable \$index. Veamos un ejemplo para que se entienda mejor:
+
+\textbf{app.component.ts}[style=htmlcssjs]
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+})
+export class AppComponent {
+  products = ['apple', 'orange', 'banana'];
+}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+@for (item of products; track $index) {
+   <div>{{ item }}</div>
+}
+\end{lstlisting}
+
+Repetirá el bloque \textit{div} el número de ítems que tenga el arreglo \textit{products}.
+
+
+\subsubsection{if}
+
+También se pueden poner ciertos valores siempre y cuando se cumpla alguna condición:
+\begin{lstlisting}[style=htmlcssjs]
+@if (loggedIn) {
+   <div>Welcome!</div>
+}
+\end{lstlisting}

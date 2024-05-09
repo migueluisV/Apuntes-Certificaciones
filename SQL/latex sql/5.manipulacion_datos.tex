@@ -1,0 +1,179 @@
+\section{Más funciones}
+
+Para continuar con los siguientes temas, el nuevo aspecto de la tabla "Personas" aparece en la \textit{Tabla \ref{tab: 26}}:
+\begin{table}[H]
+    \centering
+    \caption{Tabla "Personas" re acondicionada}
+    \label{tab: 26}
+    \begin{tabular}{|l|l|l|l|l|}
+        \hline
+        \textbf{id} & \textbf{nombre} & \textbf{apellidos} & \textbf{ciudad} & \textbf{edad} \\
+        \hline
+        1 & John        & Smith     & New York      & 24 \\
+        \hline
+        2 & David       & Williams  & Los Angeles   & 42 \\
+        \hline
+        3 & Chloe       & Anderson  & Chicago       & 65 \\
+        \hline
+        4 & Emily       & Adams     & Houston       & \textit{NULL} \\
+        \hline
+        5 & James       & Roberts   & Philadelphia  & 31 \\
+        \hline
+        6 & Andrew      & Thomas    & New York      & 21 \\
+        \hline
+        7 & Daniel      & Harris    & New York      & 67 \\
+        \hline
+        8 & Charlotte   & Walker    & Chicago       & \textit{NULL} \\
+        \hline
+        9 & Samuel      & Clark     & San Diego     & \textit{NULL} \\
+        \hline
+        10 & Anthony    & Young     & Los Angeles   & 52 \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+\subsection{De cadenas}
+
+Vimos que SQL posee algunas funciones especiales que permiten realizar conteos u operaciones a las columnas y su contenido, la \textit{Tabla \ref{tab: 27}} contiene más funciones, enfocadas a las cadenas de texto, puede consultar el resto de funciones en este \href{https://www.tutorialspoint.com/sql/sql-string-functions.htm}{enlace}:
+\begin{table}[H]
+    \centering
+    \caption{Funciones para cadenas}
+    \label{tab: 27}
+    \begin{tabular}{m{6cm} m{8cm}}
+        \hline
+        \textbf{Función} & \textbf{Descripción} \\
+        \hline
+        CONCAT(c1, c2, ..., c\textit{n})        & Une dos o más cadenas o datos de distintas columnas \\
+        LOWER(columna)                          & Convierte todas las cadenas de una columna a minúsculas \\
+        \parbox{5cm}{SUBSTRING(columna,\\comienzo, fin)}       & Extrae una subcadena de una cadena, es decir, de todos los datos de una columna \\
+        \parbox{5cm}{REPLACE(columna,\\a-remplazar, remplazo)} & Remplaza una cadena por otra en todos los datos de una columna \\
+        LENGTH(cadena)                          & Regresa el total de caracteres de una cadena \\
+        FORMAT(numero, decimales)               & Regresa un número decimal con cierta cantidad de decimales \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Puede estas funciones con las tablas mostradas en este documento para ver los resultados. Además, podemos utilizar funciones en conjunto:
+\begin{lstlisting}
+    SELECT CONCAT(
+        SUBSTRING(nombre, 1, 1),
+        '. ',
+        UPPER(apellidos)) AS name
+    FROM Personas
+\end{lstlisting}
+
+La sentencia anterior toma la primer letra de cada registro de la columna "nombre" y las combina con cada registro de la columna "apellidos", todo en mayúsculas, quedando el resultado de la siguiente manera (\textit{Tabla \ref{tab: 28}}):
+\begin{table}[H]
+    \centering
+    \caption{Uso de varias funciones en una sola sentencia}
+    \label{tab: 28}
+    \begin{tabular}{|l|}
+        \hline
+        \textbf{name} \\
+        \hline
+        J. SMITH \\
+        \hline
+        D. WILLIAMS \\
+        \hline
+        C. ANDERSON \\
+        \hline
+        E. ADAMS \\
+        \hline
+        J. ROBERTS \\
+        \hline
+        A. THOMAS \\
+        \hline
+        D. HARRIS \\
+        \hline
+        C. WALKER \\
+        \hline
+        S. CLARK \\
+        \hline
+        A. YOUNG \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+
+\subsection{Agregación y matemáticas}
+
+Ya hay punto en ese documento referente a las funciones matemáticas, la \textit{Tabla \ref{tab: 29}} contiene los operadores aritméticos permitidos en SQL, puede consultar más en este \href{https://www.w3schools.com/sql/sql_operators.asp}{enlace}:
+\begin{table}[H]
+    \centering
+    \caption{Operadores aritméticos en SQL}
+    \label{tab: 29}
+    \begin{tabular}{l l}
+        \hline
+        \textbf{Función} & \textbf{Descripción} \\
+        \hline
+        +   & Suma \\
+        -   & Resta \\
+        $*$   & Multiplicación \\
+        /   & División \\
+        \%  & Módulo \\
+        \hline
+    \end{tabular}
+\end{table}
+
+Estos operadores pueden ser aplicados en sentencias para renombrar una columna de una cierta manera:
+\begin{lstlisting}
+    SELECT nombre, apellidos, edad / 2 AS menos
+    FROM Personas
+\end{lstlisting}
+
+Esta sentencia creará una columna con el nombre, apellidos y la mitad de edad de cada persona registrada. Otro ejemplo sería el siguiente:
+\begin{lstlisting}
+    SELECT nombre, apellidos, peso / (altura * altura) AS imc
+    FROM Personas
+\end{lstlisting}
+
+Suponiendo que en nuestra tabla "Personas" existen columnas llamadas "peso" y "altura" creamos una columna llamada "imc" con la división del peso entre el cuadrado de la altura, es decir, varias operaciones aritméticas en una sola sentencia.
+
+
+
+\section{CASE}
+
+Si recordamos de los lenguajes de programación, existen las estructuras condicional, como el \textit{if} y \textit{case}, SQL puede utilizar la estructura \textit{case} mediante el comando \textbf{CASE} para asignar valores a registros según un criterio o condición. Veamos el siguiente ejemplo y el resultado en la \textit{Tabla \ref{tab: 30}}:
+\begin{lstlisting}
+    SELECT nombre, apellidos,
+    CASE
+        WHEN edad >= 65 THEN 'Senior'
+        WHEN edad >= 25 AND edad < 65 THEN 'Adulto'
+        ELSE 'Joven'
+    END AS categoria
+    FROM Personas
+\end{lstlisting}
+\begin{table}[H]
+    \centering
+    \caption{Uso de CASE para asignación de valores}
+    \label{tab: 30}
+    \begin{tabular}{|l|l|l|}
+        \hline
+        \textbf{nombre} & \textbf{apellidos} & \textbf{categoria} \\
+        \hline
+        John        & Smith     & Joven \\
+        \hline
+        David       & Williams  & Adulto \\
+        \hline
+        Chloe       & Anderson  & Senior \\
+        \hline
+        Emily       & Adams     & Joven \\
+        \hline
+        James       & Roberts   & Adulto \\
+        \hline
+        Andrew      & Thomas    & Joven \\
+        \hline
+        Daniel      & Harris    & Senior \\
+        \hline
+        Charlotte   & Walker    & Joven \\
+        \hline
+        Samuel      & Clark     & Joven \\
+        \hline
+        Anthony     & Young     & Adulto \\
+        \hline
+    \end{tabular}
+\end{table}
+
+El ejemplo anterior crear una columna personalizada llamada "categoria" con ayuda del comando \textit{CASE}: el comando \textbf{WHEN} ayuda a poner la condición a seguir para asignar un valor, esta primera sub-sentencia asigna el valor "Senior" con el comando \textbf{THEN} a la columna si la edad es mayor igual a 65; la segunda sub-sentencia asigna el valor "Adulto" a la columna si la edad está entre 25 y 64, el comando \textbf{ELSE} asigna el valor "Joven" en caso de que las dos sub-sentencias anteriores no se cumplan (algo como el \textit{if-else}); no olvide agregar el comando \textbf{END} al final de su CASE para indicarle a SQL que ese es el final de la condicional. Podemos utilizar cuantos comando \textit{WHEN} deseemos y omitir el uso del comando \textit{ELSE}.

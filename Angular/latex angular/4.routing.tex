@@ -1,0 +1,368 @@
+\section{Routing}
+
+
+Para pasar de una pantalla a otra (o de un componente a otro), hay varios pasos a seguir: primero se importa la dependencia \textbf{RouterModule} de \textit{@angular/router}.
+\begin{lstlisting}[style=htmlcssjs]
+import { RouterModule } from "@angular/router";
+\end{lstlisting}
+
+Luego, se agrega como una dependencia del componente que manejará el ruteo:
+\begin{lstlisting}[style=htmlcssjs]
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  standalone: true,
+  imports: [RouterModule],
+})
+\end{lstlisting}
+
+Para comprender como funcionará el ruteo que haremos, plantearemos el siguiente caso: tenemos una app que tiene dos pantallas o componentes, el home y una página de contactos, ambos tienen el mismo header, el cual tiene los dos link que navegan a las dos páginas descritas anteriormente. Este es el aspecto que tendría nuestro \textbf{app.component.ts}, quien es quien se encargará del ruteo:
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+import { HeaderComponent } from '../header/header.component';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  templateUrl: './app.component.html',
+  imports: [HeaderComponent, RouterModule],
+})
+export class AppComponent {}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<app-header>
+<router-outlet>
+\end{lstlisting}
+
+\textbf{app.header.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-header',
+  standalone: true,
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css',
+  imports: [RouterModule],
+})
+export class HeaderComponent {}
+\end{lstlisting}
+
+\textbf{app.header.html}
+\begin{lstlisting}[style=htmlcssjs]
+<h1>My Header</h1>
+<nav>
+  <a routerLink="/home">Home</a>
+  <a routerLink="/contacts">Contacts</a>
+</nav>
+
+\end{lstlisting}
+
+De primeras, si hacemos estos cambios en un proyecto, lanzará un error ya que todavía no existe 'router-outlet'. Nos dirigiremos al archivo \textbf{main.ts} para crear el arreglo de rutas que utilizará el proyecto:
+\textbf{main.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import 'zone.js';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { AppComponent } from './app/app.component';
+import { provideRouter, Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { ContactsComponent } from './contacts/contacts.component';
+
+const routes: Routes = [
+  { path: 'home', component: HomeComponent },
+  { path: 'contacts', component: ContactsComponent },
+];
+
+bootstrapApplication(AppComponent, {
+  providers: [provideRouter(routes)],
+});
+\end{lstlisting}
+
+Se importan los componentes \textbf{Home} y \textbf{Contacts} para utilizarlos más adelante, se importa también la librería \textbf{Routes} y \textbf{provideRouter}, el primero sirve para crear el arreglo de rutas y el segundo es para vincular un componente a una ruta creada, en \textit{bootstrapApplication} es donde se pasan las rutas y vinculaciones al componente raíz. Home y Contacts tienen el aspecto normal de un componente recién creado sin importaciones referentes al ruteo.
+
+
+\subsection{Ruta predeterminada}
+
+Podemos definir un componente por defecto el cual será cargado cuando se acceda al proyecto, simplemente creamos una ruta con unas comillas simples vacías y el componente a donde queremos que vaya:
+\begin{lstlisting}[style=htmlcssjs]
+const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'contacts', component: ContactsComponent },
+];
+\end{lstlisting}
+
+
+\subsection{Rutas para errores}
+
+En caso de que se acceda a una Url que ya no existe, Angular puede redireccionar al usuario a una página de error, esto mediante las rutas comodín (widlcard routes) utilizando dos asteriscos en una de las rutas de nuestro proyecto:
+\begin{lstlisting}[style=htmlcssjs]
+const routes: Routes = [
+  { path: '', title: 'Home', component: HomeComponent },
+  { path: 'home', title: 'Home', component: HomeComponent },
+  { path: 'contacts', title: 'Contacts', component: ContactsComponent },
+  { path: '**', title: 'Error', component: UnknownComponent },
+];
+\end{lstlisting}
+
+Es importante que esta ruta esté al final de todas, ya que lo que hace Angular es recorrer el arreglo de rutas desde el principio al final cuando un usuario hace una solicitud de acceso a nuestra app mediante una Url, si se recorrieron todas las rutas y no encontró la que el usuario solicitó, mostrará la que tenemos programada como la última que redirecciona a la página de error
+
+
+\subsection{Título de página}
+
+Cuando estamos en alguna página, la pestaña del buscador nos muestra un título, podemos modificarlo en Angular agregando el atributo \textbf{title} a las rutas que creemos para nuestro proyecto:
+\begin{lstlisting}[style=htmlcssjs]
+const routes: Routes = [
+  { path: '', title: 'Home', component: HomeComponent },
+  { path: 'home', title: 'Home', component: HomeComponent },
+  { path: 'contacts', title: 'Contacts', component: ContactsComponent },
+];
+\end{lstlisting}
+
+
+\subsection{Uso de métodos para navegación}
+
+Podemos crear enlaces o botones que redirijan al usuario cuando este les de clic. Pondremos de ejemplo que Home dirija a Contacts y viceversa:
+\textbf{contacts.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component, inject } from "@angular/core";
+import { Inject } from "@angular/core";
+import { Router } from "@angular/router";
+
+@Component({
+    selector: 'app-contacts',
+    templateUrl: './contacts.component.html',
+    standalone: true,
+    imports: [],
+})
+
+export class ContactsComponent {
+    router = inject(Router);
+
+    navigate() {
+        this.router.navigateByUrl('/home');
+    }
+}
+\end{lstlisting}
+
+\textbf{contacts.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+<h1>Contacts</h1>
+
+<button (click)="navigate()">Home</button>
+\end{lstlisting}
+
+Simplemente sustituya la palabra "contacts" por home en el selector, templateUrl y el nombre de la clase pra tener el código del componente Home. Tome en cuenta que, para que este ejemplo funcione, debe complementarlo con la creación de las rutas y configuración de las mismas.
+
+\textit{Nota}: este ejemplo es de una versión de Angular anterior a la que está vigente al momento de la redacción de este documento. La forma de hacer routing básico con la versión que tengo descargada en este momento (17.3.3) es:
+
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  standalone: true,
+  imports: [RouterModule],
+})
+
+export class AppComponent {}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<router-outlet />
+\end{lstlisting}
+
+\textbf{app.config.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { ApplicationConfig } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideRouter(routes)]
+};
+\end{lstlisting}
+
+\textbf{app.routes.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { ContactsComponent } from './contacts/contacts.component';
+
+export const routes: Routes = [
+    { path: '', title: 'Home', component: HomeComponent },
+    { path: 'home', title: 'Home', component: HomeComponent },
+    { path: 'contacts', title: 'Contacts', component: ContactsComponent }
+];
+\end{lstlisting}
+
+\textbf{main.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { bootstrapApplication } from '@angular/platform-browser';
+import { appConfig } from './app/app.config';
+import { AppComponent } from './app/app.component';
+
+bootstrapApplication(AppComponent, appConfig)
+  .catch((err) => console.error(err));
+\end{lstlisting}
+
+Donde:
+\begin{itemize}
+    \item \textbf{app.component.ts} y \textbf{app.component.html} si reciben modificaciones.
+    \item \textbf{app.config.ts} no recibe modificaciones, se encarga de hacer el routing por nosotros.
+    \item \textbf{app.routes.ts} recibe modificaciones, aquí se agregan las rutas que usará \textit{app.config.ts} y \textit{main.ts}.
+    \item \textbf{main.ts} no recibe modificaciones.
+    \item fuera de estos componentes, se deben agregar otros para crear las rutas y, al final de cuentas, el ruteo de la app.
+\end{itemize}
+
+
+\subsection{Pasar parámetros entre Urls}
+
+Una función muy útil al momento de trabajar con el routing es poder pasar parámetros entre páginas para visualizar la información a detalle de un elemento, esta tarea es algo compleja de llevar a cabo pero la explicaremos paso a paso. Este ejemplo utiliza un componente Home y Notes, el primero muestra una lista de notas (que obtenemos de un archivo \textit{.ts} en nuestro proyecto) y si le damos clic a alguna de ellas, se nos redirecciona a otro componente donde vemos más información de esa nota seleccionada.
+
+Vamos a utilizar la última arquitectura del proyecto mencionada en este documento, estos son los componentes:
+
+\textbf{app.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  standalone: true,
+  imports: [RouterModule],
+})
+export class AppComponent {}
+\end{lstlisting}
+
+\textbf{app.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<router-outlet></router-outlet>
+\end{lstlisting}
+
+No hay nada nuevo con estos dos archivos.
+
+\textbf{notes.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component, inject } from "@angular/core";
+import { ActivatedRoute, RouterModule, Router } from "@angular/router";
+import { NOTES } from "../notes";
+
+@Component({
+    selector: 'app-notes',
+    templateUrl: './notes.component.html',
+    standalone: true,
+    imports: [RouterModule],
+})
+
+export class NotesComponent {
+    router = inject(Router);
+    activatedRouter = inject(ActivatedRoute)
+    id = Number(this.activatedRouter.snapshot.paramMap.get('id'));
+    note = NOTES.find((x) => x.id === this.id)
+    
+    navigate() {
+        this.router.navigateByUrl('/home');
+    }
+}
+\end{lstlisting}
+
+Vemos que el componente sigue importanto RouterModule, se sigue usando una variable que recibe la inyección de un objeto Router (para navegar mediante Urls), pero aquí comienza el primer cambio. Se importa la dependencia ActivatedRouter, la cual nos permite obtener valores de parámetros de una Url, se inyecta a una variable un objeto de esta dependencia y con el podemos acceder a los valores de los parámetros, en este caso, se le asigna a la variable \textbf{id} este valor de tipo numérico, con él, se busca en el arreglo NOTES (que se verá más adelante).
+
+\textbf{notes.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<h1>Note details</h1>
+
+@if (note) {
+    <span>{{ note.title }}</span><br>
+    <span>{{ note.id }}</span><br>
+    <span>{{ note.text }}</span><br>
+}
+
+<button (click)="navigate()">Go back</button>
+\end{lstlisting}
+
+La plantilla del componennte simplemente verifica si \textbf{note} tiene algún valor, en caso de que si, muestra la información del mismo.
+
+\textbf{home.component.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Component, inject } from "@angular/core";
+import { Inject } from "@angular/core";
+import { RouterModule } from "@angular/router";
+import { NOTES } from "../notes";
+
+@Component({
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    standalone: true,
+    imports: [RouterModule],
+})
+
+export class HomeComponent {
+    notes = NOTES;
+}
+\end{lstlisting}
+
+\textbf{home.component.html}
+\begin{lstlisting}[style=htmlcssjs]
+<h1>Home</h1>
+
+@for (note of notes; track $index) {
+    <div>
+        <button [routerLink]="['/notes', note.id]">
+            <span>{{ note.id }}</span>
+            <span>{{ note.text }}</span>
+        </button>
+    </div>
+}
+\end{lstlisting}
+
+No hay mucha novedad en estos archivos, simplemente se importa el archivo de notas que estamos utilizando y se muestra en la plantilla del componente.
+
+\textbf{notes.ts}
+\begin{lstlisting}[style=htmlcssjs]
+export interface Note {
+    id: number;
+    title: string;
+    text: string;
+  }
+  export const NOTES: Note[] = [
+    {
+      id: 1,
+      title: 'Lorem ipsum',
+      text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    },
+    {
+      id: 2,
+      title: 'Shakespeare',
+      text: 'To be, or not to be: that is the question.',
+    },
+  ];
+\end{lstlisting}
+
+Este es el archivo de notas, es una interfaz con sus atributos y un arreglo de dos elementos, el cual se utiliza por los archivos anteriores.
+
+\textbf{app.routes.ts}
+\begin{lstlisting}[style=htmlcssjs]
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { NotesComponent } from './notes/notes.component';
+
+export const routes: Routes = [
+    {path: '', title: 'Home', component: HomeComponent},
+    {path: 'home', title: 'Home', component: HomeComponent},
+    {path: 'notes/:id', title: 'Contacts', component: NotesComponent}
+];
+
+\end{lstlisting}
+
+La gran diferencia en este archivo es que en la ruta del componente Notes es que se le agrega una diagonal, dos puntos y el nombre del parámetro (notes/:id), de esta manera, \textbf{Routes} y \textbf{RouterModule} saben que la ruta tiene parámetros y la permite manejar en con los componentes.

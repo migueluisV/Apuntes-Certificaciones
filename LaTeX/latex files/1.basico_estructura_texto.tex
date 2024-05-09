@@ -1,0 +1,506 @@
+Todas la información y comandos usados para crear y ejemplificar este documento fueron sacados de los enlaces puestos en la sección de referencias: (\textit{\cite{trefor2}}), (\textit{\cite{trefor1}}), (\textit{\cite{overl}}).
+
+
+
+\section{Comandos básicos y estructura del documento}
+
+Para trabajar con \LaTeX es necesario tener conocimiento de sus nociones básicas y cómo estructurarlo para un mejor orden.
+
+
+\subsection{Lo básico}
+\begin{itemize}
+    \item \textbf{Inicio de comando}: para iniciar un comando en \LaTeX  se utiliza una diagonal (\textbf{\textbackslash}). Por ejemplo:
+    \begin{center}
+        \textit{\textbackslash{textbackslash}, \textbackslash{par}, \textbackslash{LaTeX}}
+    \end{center}
+    \item \textbf{Salto de línea}: para hacer un salto de línea, se usan las dos \textbf{\textbackslash\textbackslash} o dándo doble ENTER con el teclado (dos salto de líneas).
+    \item \textbf{Salto de página}: para hacer un salto de página se usa el comando \textbf{\textbackslash{newpage}}.
+    \item \textbf{Sangría}: Al dejar una línea vacía antes de un párrafo, este tendrá sangría por defecto en \LaTeX. De igual manera, con el comando \textbf{\textbackslash{hspace\{\}}} podemos insertar una sangría a un párrafo, esta sangría debe ser establecida con alguna de las unidades que maneja \LaTeX, que veremos a continuación.
+    \item Un párrafo puede ser creado simplemente escribiendo en el archivo \textit{.tex} después del comienzo del documento, sin embargo, un comando para crear párrafos de una forma más ordenada y con un ancho de párrafo es \textbf{\textbackslash{parbox\{\}\{\}}}, donde el primer par de llaves contiene el ancho del párrafo, y el segundo par contiene el texto de párrafo:
+    \begin{lstlisting}
+        \begin{document}
+            Esto es un párrafo normal y corriente.
+
+            \parbox{10cm}{Esto es un párrafo con 10cm de ancho}
+        \end{document}
+    \end{lstlisting}
+\end{itemize}
+
+
+\subsection{Unidades y longitud}
+
+Para poder establecer el alto o ancho de una imagen, columna, celda, figura, debemos establecer dicha medida de ancho o alto, para ello, requerimos de unidades que \LaTeX conoce y así, establecer el tamaño que deseamos, a continuación está la lista de unidades que se manejan:
+\begin{itemize}
+    \item \textbf{pt}: puntos, que son aproximadamente 0.3515 milímetros.
+    \item \textbf{mm}: milímetros.
+    \item \textbf{cm}: centímetros.
+    \item \textbf{in}: pulgadas, que son 2.54 centímetros.
+    \item \textbf{ex}: el alto de una "x" minúscula dependiendo de la fuente con la que se esté trabajando.
+    \item \textbf{em}: el ancho de una "m" mayúscula dependiendo de la fuente con la que se esté trabajando.
+    \item \textbf{mu}: su valor es igual a $\frac{1}{18}$em.
+    \item \textbf{sp}: punto especial, 65,536 puntos especiales son iguales a 1pt.
+\end{itemize}
+
+De igual forma, existen algunos comandos de longitud especiales para no rompernos la cabeza utilizando las unidades, los cuales son:
+\begin{itemize}
+    \item \textbf{\textbackslash{columnwidth}}: el ancho de una columna.
+    \item \textbf{\textbackslash{paperwidth}}: el ancho de toda la página.
+    \item \textbf{\textbackslash{paperheight}}: el alto de toda la página.
+    \item \textbf{\textbackslash{parskip}}: el espacio vertical entre párrafos.
+    \item \textbf{\textbackslash{textwidth}}: el ancho del texto del documento.
+    \item \textbf{\textbackslash{textheight}}: el alto del texto del documento
+    \item \textbf{\textbackslash{topmargin}}: el largo del margen superior.
+\end{itemize}
+
+Un ejemplo de la aplicación de los comandos de longitud o unidades de longitud de \LaTeX se encuentra a continuación:
+\begin{lstlisting}
+    \usepackage{graphicx}
+    
+    \begin{document}
+        \includegraphics[width=\textwidth]{abc.png}
+        \includegraphics[height=5cm]{cba.png}
+    \end{document}
+\end{lstlisting}
+
+\textit{Nota}: sea cuidadoso con asignar tamaños a objetos de \LaTeX, puede asignarle el tamaño del margen a un objeto y que sobresalga de la página.
+
+
+\subsection{Títulos, subtítulos y tablas de contenido}
+
+\textbf{Títulos y subtítulos}
+
+Los títulos y subtítulos en \LaTeX  dan un orden y estructura al documento que se está trabajando:
+\begin{itemize}
+    \item \textbf{\textbackslash{section}\{\}}: crea un título o sección.
+    \item \textbf{\textbackslash{subsection\{\}}}: crea un subtítulo o subsección.
+    \item \textbf{\textbackslash{subsubsection\{\}}}: crea un subtítulo del subtítulo.
+\end{itemize}
+\begin{lstlisting}
+    \begin{document}
+        \section{Título 1}
+        \subsection{Título 1.1}
+        \subsection{Título 1.1.1}
+    \end{document}
+    
+    
+    Despliega:
+    1 Título 1
+    1.1 Título 1.1
+    1.1.1 Título 1.1.1
+\end{lstlisting}
+
+\textbf{Tablas de contenido}
+
+Para que se cree correctamente una índice de contenido, ya sea de todo el documento, imágenes, figuras o tablas, es necesario establecer en los puntos donde, se requiere de las secciones, subsecciones y etiquetas de objetos para crear títulos, subtítulos y así sucesivamente, de los índices; por lo general, estos índices suelen colocarse enseguida del inicio del documento. Se utilizan los siguientes comandos:
+\begin{itemize}
+    \item Índice:
+    \begin{itemize}
+        \item \textbf{\textbackslash{tableofcontents}}: crea un índice del documento.
+        \item \textbf{\textbackslash{renewcommand*} y \textbackslash{contentsname}}: juntos, cambian el título del índice del documento (que originalmente es "Contents").
+        \begin{lstlisting}
+            \begin{document}
+                \renewcommand*\contentsname{Índice}
+                \tableofcontents
+            \end{document}
+        \end{lstlisting}
+    \end{itemize}
+    \item Índice de tablas:
+    \begin{itemize}
+        \item \textbf{\textbackslash{listoftables}}: crea un índice de tablas.
+        \item \textbf{\textbackslash{renewcommand\{\}\{\}}}: cambia el título del índice de tablas.
+        \begin{lstlisting}
+            \begin{document}
+                \renewcommand{listtablename}{Índice de Tablas}
+                \listoftables
+            \end{document}
+        \end{lstlisting}
+    \end{itemize}
+    \item Índice de figuras:
+    \begin{itemize}
+        \item \textbf{\textbackslash{listoffigures}}: crea un índice de figuras.
+        \item \textbf{\textbackslash{renewcommand\{\}\{\}}}: cambia el título del índice de figuras.
+        \begin{lstlisting}
+            \begin{document}
+                \renewcommand{listfigurename}{Índice de Figuras}
+                \listoffigures
+            \end{document}
+        \end{lstlisting}
+    \end{itemize}
+    \item Índice de ecuaciones: esta opción no está disponible de forma nativa.
+\end{itemize}
+
+
+\subsection{Márgenes}
+
+Debemos agregar el paquete \textbf{geometry} dentro de nuestro documento para poder modificar los márgenes del mismo.
+
+Entonces, previo a darle comienzo al documento, usamos el comando \textbf{newgeometry} y, dentro de sus llaves, agregamos los valores que queremos que tengan nuestros márgenes; los parámetros que puede recibir son: \textbf{top}, \textbf{bottom}, \textbf{outer} e \textbf{inner} (\textit{arriba}, \textit{abajo}, \textit{la parte exterior del documento} y \textit{la parte interior}; si estuviéramos viendo el documento como un libro, la parte outer de la página izquierda sería la izquierda, y la parte inner sería el lad derecho, para la página derecha, el outer es el lado derecho y el inner la izquierda de la página; para un documento digital, que se desliza hacía abajo, el outer es el lado derecho y el inner el izquierdo), el valor que se le asigne a estos parámetros tiene que ser un unidades utilizadas por \LaTeX.
+\begin{lstlisting}
+    \usepackage{geometry} % Paquete para trabajar con los márgenes del documento.
+    
+    % Márgenes del documento.
+    \newgeometry{
+        top=2.5cm,     % Superior.
+        bottom=2.5cm,  % Inferior.
+        outer=2.5cm,   % Parte exterior.
+        inner=2.5cm,   % Parte interior.
+    }
+    
+    \begin{document}
+    
+    \end{document}
+\end{lstlisting}
+
+El resultado del ejemplo anterior se puede ver a lo largo de los márgenes de este documento.
+
+
+\subsection{Encabezado y pie de página}
+
+\LaTeX por defecto maneja el encabezado y pie de página solamente con el número de página, esto es porque el documento utiliza el comando \textbf{\textbackslash{pagestyle\{\}}} que define que es lo qué contendrá ambas partes del documento, suele estar ubicado antes del inicio del documento, su estilo por defecto es \textit{plain}, pero se le puede poner otro tipo estilo, como:
+\begin{itemize}
+    \item \textbf{plain}: estilo predeterminado de \LaTeX, simplemente agrega el número de página al documento.
+    \item \textbf{myheading}: utilizado para documentos con dos lados de página, escribe en la cabecera el título del capítulo en el que se esté posicionado.
+    \item \textbf{empty}: deja ambas partes del documento vacío.
+    \item \textbf{thispagestyle}: este comando se utiliza para para asignarle un estilo de página a una sola página, esto para diferenciarla de las otras.
+\end{itemize}
+\begin{center}
+    \textit{\textbackslash{pagestyle\{plain\}}}
+\end{center}
+
+
+\subsubsection{Personalización}
+
+Para salirnos de lo básico mostrado en la sección anterior, podemos personalizar aún más el encabezado y pie de página, para ello requerimos el paquete \textbf{fancyhdr}, después, dentro del comando \textbackslash{pagestyle}, le pasamos como parámetro el valor\textbf{fancy}, posterior a ello utilizaremos el comando.
+
+\textbf{\textbackslash{fancyhf\{\}}}, este último funciona para limpiar todo lo que esté contenido en la cabecera y pie (algo así como empty de pagestyle). La siguiente configuración va previa al comienzo del documento:
+\begin{lstlisting}
+    \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+    
+    % Personalización de la cabecera y pie de página.
+    \pagestyle{fancy}
+    \fancyhf{}
+
+    \begin{document}
+    
+    \end{document}
+\end{lstlisting}
+
+Algunos de los parámetros son utilizados en este documento, que se le pueden pasar a \textbf{fancyhdr} son:
+\begin{itemize}
+    \item \textbf{rhead}: texto del lado derecho del encabezado.
+    \item \textbf{chead}: texto en el centro del encabezado.
+    \item \textbf{lhead}: texto en el lado izquierdo del encabezado.
+    \item \textbf{rfoot}: texto en el lado derecho del pie de página.
+    \item \textbf{cfoot}: texto en el centro del pie de página.
+    \item \textbf{lfoot}: texto en el lado izquierdo del pie de página.
+    \begin{lstlisting}
+        \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+    
+        % Personalización de la cabecera y pie de página.
+        \pagestyle{fancy}
+        \fancyhf{}
+        % Texto en esquina superior derecha.
+        \rhead{Overleaf}
+        % Texto en esquina superior izquierda.
+        \lhead{Apuntes de LaTeX}
+        % Texto en la esquina inferior izquierda.
+        lfoot{Hola mundo}
+        % Texto en esquina inferior derecha (Página n).
+        \rfoot{Pagina \thepage}
+
+        \begin{document}
+    
+        \end{document}
+    \end{lstlisting}
+    \item \textbf{headrulewidth}: establece una línea vertical en la cabecera, este comando debe usarse como parámetro para el comando \textbf{\textbackslash{renewcommand}}. El grosor de esta línea es el parámetro de este comando y puede establecerse con unidades de medida.
+    \item \textbf{footrulewidth}: establece una línea vertical en el pie de página, este comando debe usarse como parámetro para el comando \textbf{\textbackslash{renewcommand}}. El grosor de esta línea es el parámetro de este comando y puede establecerse con unidades de medida.
+    \begin{lstlisting}
+        \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+    
+        % Personalización de la cabecera y pie de página.
+        \pagestyle{fancy}
+        \fancyhf{}
+        % Texto en esquina superior derecha.
+        \rhead{Overleaf}
+        % Texto en esquina superior izquierda.
+        \lhead{Apuntes de LaTeX}
+        % Texto en la esquina inferior izquierda.
+        lfoot{Hola mundo}
+        % Texto en esquina inferior derecha (Página n).
+        \rfoot{Pagina \thepage}
+        % Ancho de línea horizontal superior e inferior.
+        \renewcommand{\headrulewidth}{1pt}
+        \renewcommand{\footrulewidth}{1pt}
+
+        \begin{document}
+    
+        \end{document}
+    \end{lstlisting}
+    \item \textbf{Página x de y}: se puede personalizar el estilo en el que se presenta la numeración de páginas, para ello podemos escribir el texto "Página x de z" donde remplazamos x por el comando \textbf{thepage} y z por \textbf{pageref} donde su parámetro es \textbf{LastPage} (requiere el paquete \textbf{lastpage} para el funcionamiento correcto de esta personalización), con esto obtenemos como resultado que cada página tenga la numeración con el estilo "Página 1 de 120", el estilo de esta presentación puede ser personalizado, lo que importa son los comandos utilizados en este punto, depende de uno escoger si poner este comando en el encabezado o pie.
+    \begin{lstlisting}
+        \usepackage{fancyhdr}	% Paquete para personalizar encabezado y pie de página.
+        \usepackage{lastpage}	% Paquete para reverenciar páginas del documento.
+    
+        % Personalización de la cabecera y pie de página.
+        \pagestyle{fancy}
+        \fancyhf{}
+        % Texto en esquina superior derecha.
+        \rhead{Overleaf}
+        % Texto en esquina superior izquierda.
+        \lhead{Apuntes de LaTeX}
+        % Texto en la esquina inferior izquierda.
+        lfoot{Hola mundo}
+        % Texto en esquina inferior derecha (Página n de n).
+        \rfoot{Pagina \thepage \hspace{1pt} de \pageref{LastPage}}
+        % Ancho de línea horizontal superior e inferior.
+        \renewcommand{\headrulewidth}{1pt}
+        \renewcommand{\footrulewidth}{1pt}
+
+        \begin{document}
+    
+        \end{document}
+    \end{lstlisting}
+\end{itemize}
+
+\textit{Nota}: los comandos \textbf{\textbackslash{thepage}} referencia a la página actual en el contador del documento.
+
+El desarrollo de los ejemplos anteriores se ven a lo largo de todos las cabeceras y pies de página de este documento.
+
+
+
+\section{Manipulando el texto del documento}
+
+La necesidad de agrandar o encoger la fuente en un documento es algo básico, en \LaTeX se puede saciar esta necesidad. Los tamaños de letra por defecto de este lenguaje son los de 10pt, 11pt y 12pt para tipos de documentos \textit{article} o \textit{report}, siendo 10pt con el que se crea todo nuevo documento, si intentamos poner algún otro valor con otra unidad, se pondrá automáticamente 10pt, por lo que se tendrá que recurrir a paquetes externos.
+
+
+\subsection{Estilo del texto}
+
+Para resaltar textos se usan los siguientes comandos:
+\begin{itemize}
+    \item \textbf{Negrita}: se usa el comando \textbf{\textbackslash{textbf\{\}}} para hacer el texto negrita.
+    \item \underline{Subrayado}: se usa el comando \textbf{\textbackslash{underline\{\}}} para hacer una subrayar el texto.
+    \item \textit{Cursiva}: se usa el comando \textbf{\textbackslash{textit\{\}}} para hacer el texto cursiva.
+\end{itemize}
+\begin{lstlisting}
+    \begin{document}
+        \textbf{Este texto es negrita.}
+        \textit{Este texto es cursiva.}
+        \underline{Este texto está subrayado.}
+    \end{document}
+\end{lstlisting}
+
+
+\subsection{Tamaño del texto}
+
+
+\subsubsection{En todo el documento}
+
+Previo a mostrar la solución de aumentar o reducir la fuente de un documento con un paquete externo, queremos presentar que hay dos formas de cambiar el tamaño del texto del documento \LaTeX, la primera es hacer que todo el texto de todo el documento cambie de tamaño desde la instrucción \textit{documentclass\{\}}, como se ve a continuación:
+\begin{lstlisting}
+    % Tipo de documento con tamaño de fuente de 12pt.
+    % \documentclass[12pt]{article}
+\end{lstlisting}
+
+\textit{Nota}: el segundo comando del ejemplo anterior fue comentado porque, a pesar de estar en un bloque de código, el comando se sigue ejecutando a pesar de que no debería ejecutarse.
+
+Como podemos apreciar, utilizamos uno de los tamaños de letra predeterminado de \LaTeX entre corchetes previo al tipo de documento, sin embargo, seguimos limitado a los tamaños 10, 11 y 12 puntos.
+
+
+\subsubsection{En algunos bloques de texto}
+
+La segunda solución para cambiar el tamaño de la fuente del documento es utilizar las siguientes palabras reservadas o comandos de \LaTeX:
+\begin{itemize}
+    \item \textbf{\textbackslash{tiny}}: tamaño de letra más pequeño.
+    \item \textbf{\textbackslash{scriptsize}}: tamaño un poco mayor a \textit{tiny}.
+    \item \textbf{\textbackslash{footnotesize}}: tamaño de letra similar a los textos en pies de página.
+    \item \textbf{\textbackslash{small}}: tamaño de letra un poco menor al tamaño de letra predeterminado del documento (10pt, 11pt o 12pt).
+    \item \textbf{\textbackslash{normalsize}}: el mismo tamaño que el tamaño de letra predeterminado del documento (10pt, 11pt o 12pt).
+    \item \textbf{\textbackslash{large}}: tamaño de letra un poco mayor a \textit{normalsize}.
+    \item \textbf{\textbackslash{Large}}: tamaño de letra un poco mayor a \textit{large}.
+    \item \textbf{\textbackslash{LARGE}}: tamaño de letra un poco mayor a \textit{Large}.
+    \item \textbf{\textbackslash{huge}}: tamaño de letra un poco mayor a \textit{LARGE}.
+    \item \textbf{\textbackslash{Huge}}: tamaño de letra un poco mayor a \textit{huge} y el tamaño más grande.
+\end{itemize}
+
+Una demostración de estos tamaños en un párrafo es la siguiente:
+\begin{lstlisting}
+    \tiny lorem ipsum.
+    \scriptsize lorem ipsum.
+    \footnotesize lorem ipsum.
+    \small lorem ipsum.
+    \normalsize lorem ipsum.
+    \large lorem ipsum.
+    \Large lorem ipsum.
+    \LARGE lorem ipsum.
+    \huge lorem ipsum.
+    \Huge lorem ipsum.
+\end{lstlisting}
+\parbox{\textwidth}{\tiny lorem ipsum.}
+\parbox{\textwidth}{\scriptsize lorem ipsum.}
+\parbox{\textwidth}{\footnotesize lorem ipsum.}
+\parbox{\textwidth}{\small lorem ipsum.}
+\parbox{\textwidth}{\normalsize lorem ipsum.}
+\parbox{\textwidth}{\large lorem ipsum.}
+\parbox{\textwidth}{\Large lorem ipsum.}
+\parbox{\textwidth}{\LARGE lorem ipsum.}
+\parbox{\textwidth}{\huge lorem ipsum.}
+\parbox{\textwidth}{\Huge lorem ipsum.}
+
+Si busca aplicar alguno de estos tamaños a solo unas cuantas palabras de un párrafo, siga el siguiente ejemplo:
+\begin{lstlisting}
+    {\Large lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum} lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+\end{lstlisting}
+
+\textit{{\Large lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum} lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum}
+
+Sea consiente de que estas instrucciones no le permiten ingresar un tamaño y unidad de medida de su preferencia, si desea realizar dicha acción, debe acudir a paquetes externos, como lo muestra este \href{https://www.youtube.com/watch?v=VRp4B1JzHTM}{\textcolor{cyan}{video}}.
+
+
+\subsection{Color del texto}
+
+Por defecto, \LaTeX no permite utilizar colores para pintar un texto en específico, por lo que tendrá que recurrir a paquetes externos, como lo pueden ser \textbf{color} y \textbf{xcolor}:
+\begin{center}
+    \textit{
+        \textbackslash{usepackage\{color\}} \\
+        \textbackslash{usepackage\{xcolor\}}
+    }
+\end{center}
+
+La principal diferencia entre ambos es que el primer no tiene tantos colores predeterminados por defecto, del mismo modo que no se pueden crear o personalizar colores con tantos modelos (hexadecimal, RGB, RGBA, por ejemplo), mientras que el segundo si tiene estas posibilidad, por lo que recomendamos utilizar el segundo paquete.
+
+
+\subsubsection{Utilizando colores predeterminados}
+
+Basta con importar el paquete de su preferencia, para fines de este documento y sección se utilizará \textit{xcolor}, y utilizar el comando \textbf{textcolor} para pintar una o varias palabras de otro color:
+\begin{lstlisting}
+    Este \textcolor{red}{mensaje} tiene \textcolor{blue}{varias} palabras \textcolor{green}{en} distintos \textcolor{purple}{colores}.
+
+    \textcolor{red}{Este mensaje está pintado todo de un color}.
+\end{lstlisting}
+
+Este \textcolor{red}{mensaje} tiene \textcolor{blue}{varias} palabras \textcolor{green}{en} distintos \textcolor{purple}{colores}.
+
+\textcolor{red}{Este mensaje está pintado todo de un color}.
+
+
+\subsubsection{Utilizando colores personalizados}
+
+Si requiere de un color distinto a los disponibles en los paquetes externos, utilice el comando \textbf{definecolor} con los siguientes valores:
+\begin{center}
+    \textit{\textbackslash{definecolor\{nombre\}\{modelo\}\{configuración\}}}
+\end{center}
+
+Donde:
+\begin{itemize}
+    \item nombre: es el nombre del color que se está creando.
+    \item modelo: es la forma en la que se creará el color, pudiendo ser escala de grises (\textit{gray}), \textit{rgb}, \textit{RGB}, \textit{HTML} o cían, magenta, amarillo y negro (\textit{cmyc})
+    \item configuración: es la definición o configuración del color. Según el modelo será la configuración, por ejemplo, el modelo HTML utiliza valores hexadecimales como configuración o RGB utiliza un trío de valores para el rojo, verde y azul (0,0,0 por ejemplo).
+\end{itemize}
+
+Este documento tiene definido los siguientes colores:
+\begin{lstlisting}
+    % Define colores nuevos.
+    \definecolor{color}{HTML}{E4E4EE}
+    \definecolor{verde}{HTML}{3C8031}
+\end{lstlisting}
+
+\textcolor{color}{Texto con el color llamado 'color'}.
+
+\textcolor{verde}{Texto con el color llamado 'verde'}.
+
+Ambos colores son utilizados más que nada en las secciones de código de este documento. Puede consultar este \href{https://www.overleaf.com/learn/latex/Using_colours_in_LaTeX#Creating_your_own_colours}{\textcolor{cyan}{enlace}} o \href{https://en.wikibooks.org/wiki/LaTeX/Colors}{\textcolor{cyan}{este otro}} para consultar más información acerca de la creación de colores con xcolor y sus colores predeterminados disponibles.
+
+
+\subsubsection{Color del fondo del texto}
+
+Siguiendo con la línea de colorear objetos en documentos \LaTeX, también se puede pintar el fondo de un párrafo o texto utilizando el comando \textbf{colorbox}, en conjunto con el uso de colores que se ha explicado previamente.
+\begin{lstlisting}
+    Esta \colorbox{orange}{palabra} tiene un color de fondo naranja.
+\end{lstlisting}
+
+Esta \colorbox{orange}{palabra} tiene un color de fondo naranja.
+
+
+\subsection{Alineación del texto}
+
+Por defecto, \LaTeX utiliza la alineación de texto \textbf{justificada}, si es necesario alinear nuestro texto a la izquierda, centrado o derecha, se tienen las siguientes opciones.
+
+\textbf{A la izquierda}
+
+Utilice los comandos \textbf{begin\{flushleft\}} y \textbf{end\{flushleft\}} para alinear un texto a la izquierda:
+\begin{lstlisting}
+    \begin{flushleft}
+        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum} lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    \end{flushleft}
+\end{lstlisting}
+\begin{flushleft}
+    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+\end{flushleft}
+
+\textbf{Centrado}
+
+Visto anteriormente para alinear tablas, figuras o mensajes importantes, el comando \textbf{begin\{center\}} y \textbf{end\{center\}} alineará su texto al centro:
+\begin{lstlisting}
+    \begin{center}
+        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum} lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    \end{center}
+\end{lstlisting}
+\begin{center}
+    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+\end{center}
+
+La diferencia entre el comando anterior y \textbf{centering} es que el primero tiene un inicio y fin, mientras que el segundo terminará su efecto hasta que aparezca otro comando que lo interrumpta, es esta razón por la cual se recomienda utilizar \textit{centering} en figuras o tablas, mientras que \textit{center} es recomendado para textos.
+\\
+\textbf{A la derecha}
+
+Utilice los comandos \textbf{begin\{flushright\}} y \textbf{end\{flushright\}} para alinear un texto a la izquierda:
+\begin{lstlisting}
+    \begin{flushright}
+        lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum} lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum
+    \end{flushright}
+\end{lstlisting}
+\begin{flushright}
+    lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum 
+\end{flushright}
+
+Consulte \href{https://www.overleaf.com/learn/latex/Paragraphs_and_new_lines#Paragraph_alignment}{\textcolor{cyan}{este enlace}} para tener más información sobre la alineación de texto u las alternativas.
+
+
+\subsection{Interlineado del texto}
+
+El interlineado en \LaTeX no es algo que le interese a los usuarios, ya que este lenguaje se encarga de ajustar el interlineado al tipo de documento que se esté trabajando, sin embargo, siempre existirá la duda de cómo ajustarlo a nuestra preferencia. Para lograr este cometido, es necesario reescribir el comando que se encarga de ajustar el interlineado de todo el documento. El interlineado actual de este documento es sencillo, por lo que puede tomar estos ejemplos y aplicarlos a su documento.
+
+
+\subsubsection{En todo el documento}
+
+El comando \textbf{baselinestrech} es el que se encarga de establecer el interlineado de un documento, por defecto, el valor de este comando es 1, veamos como se utiliza.
+\begin{lstlisting}
+    % Sobre escribe el comando baselinestrech con el valor 2.
+    \renewcommand{\baselinestrech}{2}
+
+    % \begin{document}
+    % Inicio del documento...
+    % \end{document}
+\end{lstlisting}
+
+Se utiliza el comando \textit{renewcommand} para sobre escribir un comando anterior, en este caso, \textit{baselinestrech}, el valor que se le puede poner puede ser 1, 1.5, 2, o alguno otro conocido o utilizado en otros editores de texto. Puede consultar este \href{http://elclubdelautodidacta.es/wp/2012/06/latex-modificando-el-espacio-de-interlineado/}{\textcolor{cyan}{enlace}} para más información referente al interlineado.
+
+
+\subsubsection{En algunos bloques de texto}
+
+Agregamos el paquete \textbf{setspace}, el cual posee los comandos para establecer un interlineado simple (1), de 1.5 y doble (2), con la posibilidad de crear un interlineado propio, de 1.8 por ejemplo.
+\begin{center}
+    \textit{\textbackslash{usepackage\{setspace\}}}
+\end{center}
+\begin{lstlisting}
+    \doublespacing
+    Todo este texto tendrá interlineado doble
+    \onehalfspace
+    Todo este texto tendrá interlineado uno y medio
+    \singlespace
+    Todo este texto tendrá interlineado sencillo
+    \spacing{1.6}
+    Todo este texto tendrá interlineado de 1.6
+\end{lstlisting}
+
+Como podemos apreciar, este comando no tiene un final, por lo que después del mismo todo el texto se verá afectado por el interlineado establecido hasta que aparezca otro comando que lo interrumpa. Puede revisar este \href{http://minisconlatex.blogspot.com/2015/02/como-editar-el-interlineado-en-latex.html}{\textcolor{cyan}{enlace}} para consultar un poco más de información.

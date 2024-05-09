@@ -1,0 +1,84 @@
+\section{Introducción}
+
+
+\subsection{¿Qué es Angular?}
+
+Angular es utilizado para crear sitios web escalables con contenido dinámico que cambia con base en las interacciones del usuario.
+
+Angular es un Framework y una plataforma de desarrollo, esto quiere decir que provee de un alto rango de herramientas que te ayudan a escribir, visualizar y desplegar un proyecto, al mismo tiempo que es una estructura sobre la cual puedes construir un proyecto y personalizarlo.
+
+Angular se basa principalmente en HTML, CSS y Typescript.
+
+
+\subsection{Instalación y creación de proyectos}
+
+
+\subsubsection{Instalación}
+
+Para instalar Angular en una máquina local, es necesario insertar el siguiente comando:
+\begin{lstlisting}[style=bash]
+npm install -g @angular/cli
+\end{lstlisting}
+
+
+\subsubsection{Creación de un proyecto}
+
+Para crear un nuevo proyecto de Angular, se escribe el siguiente comando, donde nombreProyecto es el nombre que le daremos al proyecto:
+\begin{lstlisting}[style=bash]
+ng new nombreProyecto
+\end{lstlisting}
+
+
+\subsubsection{Ejecución del proyecto}
+
+Para ejecutar el proyecto, se debe de dirigir a la carpeta donde este se haya creado y ejecutar el siguiente comando:
+\begin{lstlisting}[style=bash]
+ng serve -o
+\end{lstlisting}
+
+
+\subsection{Estructura de archivos del proyecto}
+
+La estructura de archivos de los proyectos Angular es la siguiente (depende también del IDE o  editor de texto que se utilice, la estructura siguiente fue tomada de haber creado un proyecto con Visual Studio Code):
+\begin{itemize}
+    \item src
+    \begin{itemize}
+        \item app
+        \begin{itemize}
+            \item app.component.css
+            \item app.component.html
+            \item app.component.spec.ts
+            \item app.component.ts
+            \item app.config.server.ts
+            \item app.config.ts
+            \item app.routes.ts
+        \end{itemize}
+        \item assets
+        \begin{itemize}
+            \item .gitkeep
+        \end{itemize}
+        \item favicon.ico
+        \item index.html
+        \item main.server.ts
+        \item main.ts
+        \item styles.css
+    \end{itemize}
+    \item .editorconfig
+    \item .gitignore
+    \item angular.json
+    \item package.json
+    \item package-lock.json
+    \item README.md
+    \item server.ts
+    \item tsconfig.app.json
+    \item tsconfig.json
+    \item tsconfig.scep.json
+\end{itemize}
+
+Donde:
+\begin{itemize}
+    \item index.html es la estructura HTML principal del proyecto.
+    \item main.ts es el punto de entrada del proyecto cuando este es ejecutado.
+    \item styles.css es la hoja de estilos CSS principal del proyecto.
+    \item app.component.ts y app.component.html representan el componente raíz del proyecto.
+\end{itemize}

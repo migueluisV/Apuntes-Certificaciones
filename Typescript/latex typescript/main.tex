@@ -1,0 +1,75 @@
+% Tipo de documento y paquetes a utilizar.
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+% \usepackage{amsmath, amsthm, amsfonts, mathtools} % Paquete para usar más fórmulas y ecuaciones.
+\usepackage{graphicx}       % Paquete para usar imágenes y figuras.
+\usepackage{geometry}       % Paquete para trabajar con los márgenes del documento.
+\usepackage{fancyhdr}       % Paquete para personalizar encabezado y pie de página.
+\usepackage{lastpage}       % Paquete para referenciar páginas del documento.
+\usepackage{listings}       % Paquete para escribir código de programación.
+\usepackage{inconsolata}    % Paquete de tipo de letra consola.
+\usepackage{multirow}       % Paquete para combinar filas y columnas en tablas.
+\usepackage{array}          % Paquete para trabajar tablas especializadas.
+\usepackage{xcolor}         % Paquete básico para agregar color al texto.
+\usepackage{float}          % Paquete para utilizar fijación de figuras H.
+\usepackage{hyperref}       % Paquete para insertar links en el documento.
+\usepackage{comment}        % Paquete para comentarios multilínea.
+\usepackage{jsstyle}        % Paquete personalizado para estilo de lstlisting para JS.
+
+% Define colores nuevos
+\definecolor{fondo_codigo}{HTML}{E4E4EE}
+\definecolor{comentarios_codigo}{HTML}{3C8031}
+\definecolor{enlaces}{HTML}{419CFF}
+
+% Márgenes del documento.
+\newgeometry{
+    top=2.5cm,      % Superior.
+    bottom=2.5cm,   % Inferior.
+    outer=2.5cm,    % Parte exterior.
+    inner=2.5cm,    % Parte interior.
+}
+
+% Personalización de la cabecera y pie de página.
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Overleaf}                                            % Texto en esquina superior derecha.
+\lhead{Apuntes de Typescript}                                % Texto en esquina superior izquierda.
+\rfoot{Pagina \thepage \hspace{1pt} de \pageref{LastPage}}  % Texto en esquina inferior derecha (Página n de n).
+% Ancho de línea horizontal superior e inferior.
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% Datos para la portada del documento.
+\title{Apuntes de Typescript}
+\author{migueluisV}
+\date{Abril 2024}
+
+% Inicio del documento.
+\begin{document}
+
+% Cambia los títulos de los índices:
+% Content - Índice
+% List of Figures - Índice de Figuras
+% List of Tables - Índice de Tablas
+\renewcommand*\contentsname{Índice}
+\renewcommand{\listtablename}{Índice de Tablas}
+\renewcommand{\listfigurename}{Índice de Figuras}
+
+% Inserta la portada y los índices.
+\maketitle\newpage
+\tableofcontents\newpage
+\listoffigures\newpage
+\listoftables\newpage
+
+\hspace{0.55cm}Este documento se hizo con \textcolor{enlaces}{\href{https://es.overleaf.com/}{\textbf{Overleaf}}} y los ejemplos fueron desarrollados y probados principalmente en el \textcolor{enlaces}{\href{https://www.typescriptlang.org/play\#code/DYUwLgBARg9joEMB2MBc06KRAvBMATgK4gDcAUKJAMYIAmISC6AzoQJZIDmuEA5AAt4CPhSoQkRALYgCaCdKizeAVjHgFweZODBeO4OsicGAM07s68okjOcQdXjbtIHFctRhIW8EADotLgAKMABPAAcQGFMgnRgASnjSIA}{Playground de Typescript}}.
+
+La información de este documento se obtuvo de un mini curso de Youtube: \textcolor{enlaces}{\href{https://youtu.be/fUgxxhI_bvc?si=JC9jUVCaxNaDS3_4}{parte 1}} y \textcolor{enlaces}{\href{https://youtu.be/L1ZSk-vPVKI?si=Qt65wJCFzYQnFbDn}{parte 2}} y la plantilla de Lstlisting usada para Javascript fue tomada y modificada de este \textcolor{enlaces}{\href{https://github.com/xgirma/latex-javaScript/tree/master}{repositorio}} de Github.
+
+%\sloppy La estructura HTML de los ejemplos en este documento serán omitidos, dejando únicamente lo vital para que los ejemplos funcionen y para evitar que este trabajo sea muy largo, los ejemplos CSS y Bootstrap si vendrán completos.
+
+% Incluye los archivos que conforman al proyecto.
+\include{1.inferencia-tipos-arreglos}
+\include{2.colecciones-aserciones-interfaces-narrowing-etc}
+
+% Fin del documento.
+\end{document}

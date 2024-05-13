@@ -1,0 +1,94 @@
+% tipo de documento y paquetes a utilizar.
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+% \usepackage{amsmath, amsthm, amsfonts, mathtools} % Paquete para usar más fórmulas y ecuaciones.
+\usepackage{graphicx}       % Paquete para usar imágenes y figuras.
+\usepackage{geometry}       % Paquete para trabajar con los márgenes del documento.
+\usepackage{fancyhdr}       % Paquete para personalizar encabezado y pie de página.
+\usepackage{lastpage}       % Paquete para referenciar páginas del documento.
+\usepackage{listings}       % Paquete para escribir código de programación.
+\usepackage{inconsolata}    % Paquete de tipo de letra consola.
+\usepackage{multirow}       % Paquete para combinar filas y columnas en tablas.
+\usepackage{array}          % Paquete para trabajar tablas especializadas.
+\usepackage{xcolor}         % Paquete básico para agregar color al texto.
+\usepackage{float}          % Paquete para utilizar fijación de figuras H.
+\usepackage{hyperref}       % Paquete para insertar links en el documento.
+
+% Define colores nuevos.
+\definecolor{color}{HTML}{E4E4EE}
+\definecolor{verde}{HTML}{3C8031}
+
+% Personalización de la fuente para el código.
+\lstset{
+    % language = C++,                       % Lenguaje con palabras reservadas de este resaltadas.
+    basicstyle = \ttfamily\footnotesize,    % Utiliza la fuente tttfamily, en especial el paquete inconsolata.
+    frame = single,                         % Quita el marco al cuadro flotante que contiene el código o texto.
+    backgroundcolor = \color{color},        % Cambia el color del fondo del marco del código. Utiliza el paquete "xcolor" y define un nuevo color.
+    columns = fullflexible,                 % Ajusta el cuadro flotante al tamaño del texto del documento.
+    breaklines = true,                      % Ajusta el texto dentro del contenedor.
+    inputencoding = utf8,                   % Admite caracteres del código UTF8.
+    extendedchars = true,                   % Soporte para caracteres especiales.
+    %numbers = left,                        % Agrega número de línea al código (izquierda, sin número y derecha).
+    showstringspaces = false,               % Quita los guiones bajos predeterminados de los espacios en cadenas de texto.
+    escapebegin = \obeyspaces,              % Complemento de la entrada anterior.
+    % numberstyle = \color{red},            % Color de los números en el texto o código.
+    % stringstyle = \color{red},            % Color de las cadenas de texto en el texto o código.
+    % keywordstyle = \color{red},           % Color de las palabras reservadas en el texto o código.
+    % identifierstyle = \color{red},        % Color del texto o código.
+    commentstyle = \color{verde},           % Color de los comentarios en el texto o código.
+    literate =                              % Acepta los siguientes caracteres especiales fuera de UTF8.
+        {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+        {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+        {ñ}{{\~n}}1 {Ñ}{{\~N}}1,
+}
+
+% Márgenes del documento.
+\newgeometry{
+    top=2.5cm,     % Superior.
+    bottom=2.5cm,  % Inferior.
+    outer=2.5cm,   % Parte exterior.
+    inner=2.5cm,    % Parte interior.
+}
+
+% Personalización de la cabecera y pie de página.
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Overleaf}                                            % Texto en esquina superior derecha.
+\lhead{Apuntes de JavaScript}                               % Texto en esquina superior izquierda.
+\rfoot{Pagina \thepage \hspace{1pt} de \pageref{LastPage}}  % Texto en esquina inferior derecha (Página n de n).
+% Ancho de línea horizontal superior e inferior.
+\renewcommand{\headrulewidth}{1pt}
+\renewcommand{\footrulewidth}{1pt}
+
+% Datos para la portada del documento.
+\title{Apuntes de JavaScript}
+\author{migueluisV}
+\date{Realizadas: Noviembre 2022}
+
+% Inicio del documento.
+\begin{document}
+
+% Cambia los títulos de los índices:
+% Content - Índice
+% List of Figures - Índice de Figuras
+% List of Tables - Índice de Tablas
+\renewcommand*\contentsname{Índice}
+\renewcommand{\listtablename}{Índice de Tablas}
+\renewcommand{\listfigurename}{Índice de Figuras}
+
+% Inserta la portada y los índices.
+\maketitle\newpage
+\tableofcontents\newpage
+\listoffigures\newpage
+\listoftables\newpage
+
+% Incluye los archivos que conforman al proyecto.
+\include{1.conceptos_basicos.tex}
+\include{2.condicionales_ciclos.tex}
+\include{3.funciones.tex}
+\include{4.objetos_arreglos.tex}
+\include{5.DOM_eventos.tex}
+\include{6.ecmascript6.tex}
+
+% Fin del documento.
+\end{document}

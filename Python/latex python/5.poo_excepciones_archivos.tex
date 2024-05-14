@@ -1,0 +1,645 @@
+\section{Clases}
+
+Creamos una clase con la palabra reservada \textbf{class}, seguido de su nombre y dos puntos (:).
+
+Para crear \textbf{métodos} de una clase, sabiendo que siguen la sintaxis de una función,  agregamos indentación a la clase, y le damos un nombre y parámetros. Todos los métodos creados dentro de una clase deben tener un parámetro llamado \textbf{self}, refiriéndose a algún atributo de la clase.
+
+Para crear \textbf{atributos} de una clase no es necesario crear una sección con encapsulamiento, ni tipos de datos, ni nombres, como dijimos previamente, basta con utilizar la palabra reservada \textit{self} en cada método creado (ya sea el constructor u otro alguno) para que la clase sepa que dicho parámetro es un atributo de la clase, podemos acceder a él desde un objeto de clase por medio del operador ., simplemente recuerde qué atributos tendrá la clase y puede apuntarlos en comentarios, para recordarlos más fácilmente.
+
+
+\subsection{Constructores}
+
+Este es el método llamado \textbf{\_\_ init\_\_}, el cual es llamado cuando un objeto de una clase es llamado, si se desea inicializar algún atributo de la clase por medio del constructor, debe contener al inicio el parámetro \textit{self}, como vemos enseguida:
+\begin{lstlisting}
+    # Declara clase.
+    class Perro:
+        # Constructor.
+        def __init__(self, nombre, raza):
+            # Atributos: nombre y raza.
+            self.nombre = nombre
+            self.raza = raza
+
+        # Método que despliega sonido del perro.
+        def sonido(self):
+            print("Woof")
+
+    # Declara objeto de la clase Perro.
+    perrito = Perro("chuchis", "amarillo")
+    # Despliega el nombre del perro.
+    print(perrito.name)
+    # Llamada al método sonido de la clase Perro.
+    perrito.sonido()
+      
+    # Despliega:
+    # chuchis
+    # Woof
+\end{lstlisting}
+
+
+\subsection{Destructores}
+
+Este es el método llamado \textbf{\_\_ del\_\_}, el cual es llamado cuando un objeto de una clase deja de ser utilizado, es eliminado o la ejecución del programa ha finalizado.
+\begin{lstlisting}
+    def __del__(self):
+\end{lstlisting}
+
+
+\subsection{Herencia}
+
+Para heredar los atributos y métodos de una clase, primero debemos escribir el nombre de la clase heredera, seguido de paréntesis, en su contenido, escribimos el nombre de la clase a heredar y dos puntos:
+\begin{lstlisting}
+    nombreClase(claseHeredera):
+\end{lstlisting}
+
+Con esto, pasamos el contenido de una clase a otra, además, sabemos que la clase heredera es una \textbf{superclase} o \textbf{clase padre}, mientras que una heredada es una \textbf{sub clase} o \textbf{clase hija}, en la clase hija podremos crear métodos independientes a la clase padre. Veamos el siguiente ejemplo.
+\begin{lstlisting}
+    # Declara clase base.
+    class Animal:
+        # Constructor.
+        def __init__(self, nombre, raza):
+            self.nombre = nombre
+            self.raza = raza
+
+        # Método de clase base.
+        def despliegue(self):
+            print("Mi nombre es" ++ self.nombre ++ " y mi raza es " ++ self.raza)
+
+    # Declara clase hija de Animal.
+    class Perro(Animal):
+        # Método de clase hija.
+        def sonido(self):
+            print("Woof")
+
+    # Declara objeto de clase hija.
+    perrito = Perro("chuchis", "chihuahua")
+    # Llamada a métodos de clase hija,
+    perrito.despliegue()
+    perrito.sonido()
+\end{lstlisting}
+
+Para acceder a los métodos de una superclase utilizamos la palabra reservada \textbf{super()}, y para acceder a los atributos de la superclase, utilizamos la palabra reservada \textbf{self}.
+\begin{lstlisting}
+    # Clase base.
+    class A:
+        # Constructor con atributo de prueba.
+        def __init__(self, prueba):
+            self.prueba = prueba
+        # Método propio.
+        def spam(self):
+            print(1)
+
+    # Clase derivada de A.
+    class B(A):
+        # Método que utiliza el método y atributo de su clase base.
+        def spam(self):
+            print(2)
+            super().spam()
+            print(self.prueba)
+
+    # Declara objeto de la clase B y llama directamente a su método.
+    B("hola mundo").spam()
+\end{lstlisting}
+
+
+\subsection{Abstraccion}
+
+De manera rápida y directa, Python no posee palabras reservadas para indicar que una clase y sus métodos son abstractos, para acabar con esta problemática, debemos importar la \textbf{clase ABC} de la \textbf{librería abc} y su \textbf{decorador abstractmethod}:
+\begin{lstlisting}
+    from abc import ABC, abstractmethod
+\end{lstlisting}
+
+La \textit{clase abc} debe ser la clase padre de la clase que deseamos que sea abstracta, esto permite, más que heredemos atributos o métodos, que utilicemos el decorador que recién importamos en los métodos de la clase derivada, podemos pensar en la clase abc meramente como una etiqueta para la clase a convertir en abstracta.
+
+Si recordamos, una clase abstracta no puede tener objetos, y todos sus métodos deben ser utilizados en las clases hijas, veamos la creación de una clase abstracta en el siguiente ejemplo:
+\begin{lstlisting}
+    # Importa clase ABC y decorador abstractmethod de la librería abc.
+    from abc import ABC, abstractmethod
+
+    # Declara clase derivada abstracta de clase base ABC.
+    class Figuras(ABC):
+        # Declara métodos abstractos sin inicializar.
+        @abstractmethod
+        # Regresa el volumen de la figura.
+        def calcular_volumen(self):
+            pass
+
+        @abstractmethod
+        # Despliega el volumen y medidas para desplegar el volumen.
+        def desplegar_volumen(self):
+            pass
+\end{lstlisting}
+
+El cuerpo del método abstracto no debe quedar vacío, por lo que se utiliza la palabra reservada \textbf{pass}. Ahora crearemos una clase derivada de la clase abstracta:
+\begin{lstlisting}
+    class Cilindro(Figuras):
+        def __init__(self, radio, altura):
+            self.radio = radio
+            self.altura = altura
+
+        def calcular_volumen(self):
+            return math.pi * math.pow(self.radio, 2) * self.altura
+
+        def desplegar_volumen(self):
+            print("""
+            ---Datos del cilindro---
+            La medida del radio del cilindro es de {}u.
+            La medida de la altura del cilindro es de {}u.
+            El volumen del cilindro es de {}u^3.
+            """.format(self.radio, self.altura, 										round(self.calcular_volumen(), 3)))
+\end{lstlisting}
+
+Si quisiéramos crear más clases derivadas que tuvieran un comportamiento distinto lo podríamos hacer (un cono, un cilindro, un cubo, etc), siempre y cuando declaremos los métodos abstractos en cada clase derivada.
+
+Declaremos un objeto de la clase Cilindro:
+\begin{lstlisting}
+    # Declara objeto Cilindro y se le pasan valores para el radio
+    # y la altura.
+    cilindro = Cilindro(5.5, 10.66)
+    # Llamada al método que despliega el volumen del cilindro.
+    cilindro.desplegar_volumen()
+\end{lstlisting}
+
+En caso de querer declara un objeto de la clase Figuras, el lenguaje lanzará un error.
+
+
+\subsection{Polimorfismo}
+
+No es más que el pensamiento de que una función puede adoptar un comportamiento distinto en las distintas clases derivadas de una base, como lo que se acaba de ver en el punto anterior, pero sin ser abstracto, pondremos un breve ejemplo sobre lo que es polimorfismo:
+\begin{lstlisting}
+    # Clase base.
+    class Animal:
+        # Destructor.
+        def __del__(self):
+            print("Objeto Animal Eliminado.")
+
+        # Método que adoptará distinto comportamiento en sus clases derivadas (polimorfismo).
+        def desplazarse(self):
+            pass
+
+    # Clase derivada de clase base Animal.
+    class Ave(Animal):
+        # Constructor.
+        def __init__(self, nombre):
+            self.nombre = nombre
+
+        # Destructor.
+        def __del__(self):
+            print("Objeto Ave Eliminado.")
+
+        # Método que adopta su propio comportamiento al de la clase base.
+        def desplazarse(self):
+            print("Hola, mi nombre es {} y me desplazo volando.".format(self.nombre))
+
+    class Mamifero(Animal):
+        def __init__(self, nombre):
+            self.nombre = nombre
+
+        def __del__(self):
+            print("Objeto Mamifero Eliminado.")
+
+        def desplazarse(self):
+            print("Hola, mi nombre es {} y me desplazo caminando.".format(self.nombre))
+
+    # Declara objetos de clase Ave y Mamifero.
+    ave = Ave("Mauricio")
+    mamifero = Mamifero("Gonzalo")
+    # Llama a los métodos de desplazarse.
+    ave.desplazarse()
+    mamifero.desplazarse()
+    
+    # Imprime:
+    # Hola, mi nombre es Mauricio y me desplazo volando.
+    # Hola, mi nombre es Gonzalo y me desplazo caminando.
+\end{lstlisting}
+
+La clase base posee un método que tendrá un comportamiento distinto en sus clases derivadas, vemos que aquí también aparece la palabra reservada \textbf{pass} para no dejar completamente vacío el cuerpo de esta función. A diferencia de la abstracción, si declaramos un objeto de la clase base, el lenguaje no lanzará un error, si lo vemos como jerarquía, primero está el polimorfismo y luego la abstracción, pero ambos son dos conceptos muy ligados a la programación orientada a objetos.
+
+
+\subsection{Métodos mágicos}
+
+Son aquellos que tienen dos guiones bajos al inicio y final del nombre, funcionan para representar funcionalidades que no pueden ser creadas con un método regular, por ejemplo, poder realizar operaciones aritméticas con objetos de clases, de hecho, los constructores (\_\_ init\_\_) es un método mágico. La lista de métodos mágicos más comunes es:
+\begin{itemize}
+	\item \textbf{\_\_init\_\_} para constructores.
+	\item \textbf{\_\_add\_\_} para sumas.
+	\item \textbf{\_\_sub\_\_} para restas.
+	\item \textbf{\_\_mul\_\_} para multiplicaciones.
+	\item \textbf{\_\_truediv\_\_} para divisiones regulares.
+	\item \textbf{\_\_floordiv\_\_} para divisiones enteras.
+	\item \textbf{\_\_mod\_\_} para residuos.
+	\item \textbf{\_\_pow\_\_} para potencias.
+	\item \textbf{\_\_and\_\_} para comparaciones y.
+	\item \textbf{\_\_xor\_\_} para comparaciones xor.
+	\item \textbf{\_\_or\_\_} para comparaciones o.
+	\item \textbf{\_\_lt\_\_} para comparación menor.
+	\item \textbf{\_\_le\_\_} para comparación menor igual.
+	\item \textbf{\_\_eq\_\_} para comparación igual.
+	\item \textbf{\_\_ne\_\_} para comparación distinto.
+	\item \textbf{\_\_gt\_\_} para comparación mayor.
+	\item \textbf{\_\_ge\_\_} para comparación mayor igual.
+\end{itemize}
+
+
+\subsection{Ocultación de datos}
+
+La \textit{encapsulación} de atributos y métodos de una clase es algo normal en la POO y otros lenguajes de programación, sin embargo, este concepto no existe como tal en Python, podemos utilizar la \textbf{ocultación de datos} para evitar que secciones de código fuera de la clase accedan a los estos miembros privados, para complementar, solamente existen los "métodos  privados", no existen los métodos protegidos. Un método puede hacerse privado poniendo un guión bajo antes del nombre, veamos este ejemplo.
+\begin{lstlisting}
+    # Declara clase.
+    class Cola:
+        #Construtor con lista "escondido" privada.
+        def __init__(self, contenido):
+            self._escondido = list(contenido)
+
+    # Método que inserta valor en la cola.
+        def push(self, valor):
+            self._escondido.insert(0, valor)
+
+    # Declara objeto Cola.
+    cola = Cola([1, 2, 3])
+    print(cola)
+    cola.push(0)
+    print(cola)
+    print(cola.escondido)
+      
+    # Imprime:
+    # Queue[1, 2, 3].
+    # Queue[0, 1, 2, 3].
+    # [0, 1, 2, 3].
+\end{lstlisting}
+
+Al no existir la encapsulación en Python, el guión bajo en métodos es solo una convención, ya que si podemos acceder a estos métodos por fuera de la clase. Si seguimos buscando utilizar miembros privados, agregamos un guión más al inicio del nombre del miembro, con esto logramos un efecto mayor de privacidad, pero aún podemos acceder a este método por fuera, solamente tenemos que llamarlo de una forma particular.
+\begin{lstlisting}
+    class Ejemplo:
+        # Declara atributo privado.
+        __huevo = 7
+        # Método que imprime el valor del atributo privado.
+        def imprimir_Huevo(self)
+            print(self.__huevo)
+         
+    # Declara objeto Ejemplo.
+    e = Ejemplo()
+    # Llama al método de la clase.
+    s.imprimir_Huevo()
+    # Imprime el valor del atributo privado.
+    print(e._Ejemplo__huevo)
+\end{lstlisting}
+
+Es entonces que, para acceder al miembro privado fuera de la clase, debemos escribir el nombre del objeto, un punto y guión bajo, el nombre de la clase y enseguida el nombre del atributo:
+\begin{lstlisting}
+    e._Ejemplo__ Variable
+\end{lstlisting}
+
+
+\subsection{Métodos estáticos y de clase}
+
+Los \textbf{métodos de clase} son como una clase dentro de otra clase, o un tipo especial de método dentro de clase que no puede ser llamado por medio de un objeto de clase, sino que son llamados directamente desde el nombre de la clase, como las clases no pueden ser utilizadas directamente sin un objeto de por medio, para lograr utilizar los métodos de clases se debe utilizar una variable de por medio, que termina actuando como un objeto del método de clase.
+
+Para diferenciar estos métodos de los otros, utilizamos el decorador \textbf{classmethod}, como en el siguiente ejemplo.
+\begin{lstlisting}
+    # Declara clase.
+    class Rectangulo:
+        # Constructor
+        def __init__(self, ancho, alto):
+            self.ancho = ancho
+            self.alto = alto
+
+        # Método que calcula área del rectángulo.
+        def area(self):
+            return self.ancho * self.alto
+
+        # Método de clase que declara un cuadrado.
+        @classmethod
+        # Así como self, el método de clase debe tener su palabra reservada,
+        # en este caso, utilizamos la palabra "cls".
+        def cuadrado(cls, lado)
+            return cuadrado(lado, lado)
+
+    # Variable que recibe el método de la clase Rectangulo.
+    sqr = Rectangulo.cuadrado(5)
+    # Llama al método que calcula el área del rectángulo, pero
+    # aplicado a un cuadrado.
+    print(sqr.area())
+\end{lstlisting}
+
+Los métodos de clase deben tener su propia palabra reservada, así como las clases tienen la palabra \textbf{self}, estas dos palabras pueden tener el nombre que desees, sin embargo, \textbf{self} y \textbf{cls} son conocidas en muchos sitios y utilizadas en muchas partes, por lo que es recomendable utilizarlas para no confundir a quien lea tu código.
+
+Los \textbf{métodos estáticos} son iguales a los métodos regulares de clases o fuera de clases, pero no requieren de la palabra reservada \textit{self} dentro de sus parámetros, y puede llamarse a estos métodos por medio de la clase sin necesidad de un objeto, utilizamos el decorador \textbf{staticmethod}, veamos el ejemplo.
+\begin{lstlisting}
+    # Declara clase.
+    class Shape:
+        # Constructor.
+        def __init__(self, ancho, alto):
+            self.ancho = ancho
+            self.alto = alto
+
+    # Método estático.
+    @staticmethod
+        def area(ancho, alto):
+            return ancho * alto
+
+    # Variables reciben valores
+    w = int(input())
+    h = int(input())
+    # Imprime el área de la figura, usando el metodo estático sin necesidad
+    # de crear un objeto de la clase.
+    print(Shape.area(w, h))
+\end{lstlisting}
+
+
+\subsection{Propiedades}
+
+El decorador \textbf{property} ayuda a poder acceder a los métodos de una clase como si fueran atributos, o acceder a atributos de la clase por medio de un método, el uso más común de este decorador es volver atributos a solo-lectura. Otro tipo de decorador propiedad son los \textbf{Setters} y \textbf{Getters}, el primero asigna un valor a un atributo, y el segundo obtiene dicho valor, por ejemplo.
+\begin{lstlisting}
+    # Declara clase.
+    class Trabajador:
+        # Constructor
+        def __init__(self, primero, segundo):
+            self.primero = primero
+            self.segundo = segundo
+
+        # Método que define un correo electrónico, es tratado como atributo.
+        @property
+        def correo(self):
+            return "{}.{}@email.com".format(self.primero, self.segundo)
+
+        # Método que define el nombre completo, es tratado como atributo.
+        @property
+        def nombre_completo(self):
+            return "{} {}".format(self.primero, self.segundo)
+
+        # Método con decorador Setter que define el nombre completo
+        # del trabajador.
+        @nombre_completo.setter
+        def nombre_completo(self, nombre):
+            primero, ultimo = nombre.split(" ")
+            self.primero = primero
+            self.segundo = segundo
+
+    # Declara objeto Trabajador.
+    emp1 = Trabajador("Luis", "Miguel")
+   
+    # Asigna nombre completo al objeto, cambiando los atributos de dicho objeto.
+    emp1 = nombre_completo("Ernesto Casas")
+
+    # Imprime el primer nombre.
+    print(emp1.primero)
+    # Imprime el segundo nombre.
+    print(emp1.segundo)
+    # Llama al metodo nombre_completo, pero al ser una propiedad, no requiere de parentesis.
+    print(emp1.nombre_completo)
+\end{lstlisting}
+
+Vemos que se crea un objeto de la clase Trabajador con ciertos valores, después se cambia el nombre del trabajador por medio de un Setter, logrando cambiar los valores de los atributos del objeto, el método \textit{nombre\_ completo} regresa los atributos \textit{primero} y \textit{segundo} como una sola cadena, con el decorador property este método es tratado como un atributo más, por lo que descartamos el uso de paréntesis al final del nombre, lo mismo aplica con el método \textit{correo}.
+
+
+
+\section{Excepciones}
+
+El manejo de excepciones se logra utilizando el bloque \textbf{try:-except:}, donde dentro del bloque try se escribe el código que puede fallar, y el bloque exception contiene el código en caso de que el error se de. Algunas de las excepciones por defecto de Python son:
+\begin{itemize}
+	\item \textbf{ImportError}: cuando una importación de biblioteca falla.
+	\item \textbf{IndexError}: cuando se intenta acceder a un índice inexistente de una colección de datos.
+	\item \textbf{NameError}: cuando se trata de usar una variable desconocida.
+	\item \textbf{SyntaxError}: cuando el código no se puede analizar correctamente.
+	\item \textbf{TypeError}: cuando un tipo de dato no corresponde con la función o variable.
+	\item \textbf{ValueError}: cuando un valor no corresponde con el tipo de dato de la función o variable.
+	\item En caso de que no se asigne un tipo de excepción a bloque except, quiere decir que except va a atrapar todos los tipos de excepciones existentes.
+\end{itemize}
+
+Un bloque except puede contener más de una excepción, contenida en paréntesis, o tener múltiples bloques except para cada tipo de excepción.
+\begin{lstlisting}
+    # Bloque try-except.
+    try:
+        variable = 10
+        # Suma de un entero y una cadena.
+        print(variable + "hello")
+        print(variable / 2)
+    # Excepción por si se divide entre 0.
+    except ZeroDivisionError:
+        print("Divided by zero")
+    # Excepción por si un valor o tipo no coincide.
+    except (ValueError, TypeError):
+        print("Error occurred")
+\end{lstlisting}
+
+
+\subsection{finally y else}
+
+El bloque \textbf{finally} se ejecuta después del bloque try, sin importar si el bloque except se ejecutó o no, además, podemos utilizar el bloque \textit{else}, este se ejecuta únicamente si el bloque try se ejecutó con normalidad, es decir, sin error alguno.
+\begin{lstlisting}
+    # Bloque try-except.   
+    try:
+        # Variable que recibe un entero.
+        val = int(input())
+        print(val)
+    # Excepción por si el tipo ingresado no es válido.
+    except TypeError:
+        print("Ese no es un numero")
+    # Si no hubo error, se despliega mensaje.
+    else:
+        print("Todo salio bien")
+    # Bloque con mensaje final.
+    finally:
+        print("Hemos terminado")
+\end{lstlisting}
+
+
+\subsection{Lanzando excepciones}
+
+Podemos lanzar o llamar excepciones si alguna condición o se cumple, con la palabra reservada \textbf{raise}, seguido del nombre de la excepción a llamar.
+\begin{lstlisting}
+    # Asignación de valor a variable.   
+    tweet = input()
+
+    # Bloque try-except-else.
+    try:
+        #Si el largo de la variable es mayor a 42, lanza excepción.
+        if len(tweet) > 42:
+            raise ValueError
+    except:
+        print("Error")
+    else:
+        print("Posted")
+\end{lstlisting}
+
+
+
+\section{Trabajando con archivos}
+
+Para abrir un archivo en Python, utilizamos la función \textbf{open}, y dentro de sus paréntesis, va la ruta del archivo (si el archivo está en la carpeta actual donde se ubica la solución, solamente es necesario escribir el nombre, si está en otra carpeta, se indica la ruta completa del archivo).
+\begin{lstlisting}
+    miArchivo = open("prueba.txt")
+\end{lstlisting}
+
+Podemos especificarle el \textbf{como} se trabajará el archivo, es decir, si va a ser sobreescrito, solo leído, o escribir un archivo binario.
+\begin{lstlisting}
+    # Modo Escritura.
+    open("prueba.txt", "w")
+    # Modo Lectura.
+    open("prueba.txt", "r")
+    # Modo Escritura Binaria.
+    open("prueba.txt", "wb")
+    # Modo Lectura Binaria.
+    open("prueba.txt", "rb")
+\end{lstlisting}
+
+Una vez abrimos y trabajamos el archivo, debemos cerrarlo, esto lo conseguimos con la función \textbf{close()}.
+\begin{lstlisting}
+    miArchivo = open("prueba.txt")
+    miArchivo.close()
+\end{lstlisting}
+
+Es una buena practica siempre abrir, trabajar el archivo, y cerrarlo, para no desperdiciar recursos, podemos evitar esto utilizando un bloque try-finally o la instrucción \textbf{with}, donde se crea una variable temporal y se utiliza únicamente dentro del bloque identado, después de eso, la variable es borrada.
+\begin{lstlisting}
+    # Opción 1:
+    # Declara variable f con instrucción with abriendo un archivo.
+    with open("archivo.txt") as f:
+        # Imprime el contenido del archivo.
+        print(f.read())
+      
+    # Se sale del bloque identado, la variable f es borrada.
+    # Opción 2:
+    # Bloque try-finally para abrir y cerrar un archivo.
+    try:
+        # Variable que declara un archivo.
+        f = open("archivo.txt")
+        # Imprime el contenido del archivo.
+        print(f.read())
+    finally:
+        # Después del bloque try, se ejecuta finally que cierra el archivo.
+        f.close()
+\end{lstlisting}
+
+
+\subsection{Leyendo archivos}
+
+Con la función \textbf{read()} del archivo que hemos abierto podemos desplegar el contenido del mismo.
+\begin{lstlisting}
+    # Declara variable con un archivo.
+    archivo = open("libros.txt")
+    # Asigna a una variable el contenido del archivo.
+    aux = archivo.read()
+    # Imprime el contenido del archivo.
+    print(aux)
+    # Cierra el archivo.
+    archivo.close()
+\end{lstlisting}
+
+En caso de que queramos leer únicamente cierta cantidad de caracteres del archivo, podemos pasarle como parámetro a la función \textit{read()} la cantidad de caracteres deseados, la función regresará la cantidad deseada.
+\begin{lstlisting}
+    # Declara variable con un archivo.
+    archivo = open("libros.txt")
+    # Asigna a una variable cierta cantidad de caracteres del archivo.
+    aux = archivo.read(7)
+    aux2 = archivo.read(5)
+    # Imprime 7 y 5 caracteres del archivo.
+    print(aux)
+    print(aux2)
+    # Cierra el archivo.
+    archivo.close()
+\end{lstlisting}
+
+Otra forma de imprimir el contenido de un archivo es por medio de la función \textbf{readlines()}, el cual regresa una lista con las línea por línea el contenido de archivo, debemos utilizar un ciclo \textit{for} para poder imprimir línea a línea. A su vez, si no queremos utilizar las dos funciones anteriormente mencionadas, podemos simplemente juntar un ciclo for y el puro nombre del archivo, como vemos enseguida.
+\begin{lstlisting}
+    # Declara variable con un archivo.
+    file = open("filename.txt", "r")
+    # Ciclo for que lee línea a línea el contenido de un archivo.
+    for line in file.readlines():
+        #Imprime la linea.
+        print(line)
+    # Cierra el archivo.
+    file.close()
+
+    # Declara variable con un archivo.
+    file = open("filename.txt", "r")
+    # Ciclo for que imprime el contenido del archivo.
+    for line in file:
+        # Imprime la línea.
+        print(line)
+    # Cierra el archivo.
+    file.close()
+\end{lstlisting}
+
+La diferencia entre \textit{read()}, \textit{readlines()} y \textit{in file}, es que estos dos últimos agregan un salto de línea adicional al que da \textit{print()} cuando despliega algo.
+
+
+\subsection{Escribiendo en archivos}
+
+Con la función \textbf{write()} escribimos contenido en el archivo, si el \textbf{modo} del archivo es \textit{write} y el archivo ya existe, el archivo es sobreescrito, si no existe, Python lo crea en la ruta establecida.
+
+Recordemos que el \textit{modo a} permite agregar contenido a un archivo ya existente, así que podemos abrir un archivo con dicho modo y Python te posicionará en la última línea del archivo para que puedas agregar nuevo contenido.
+\begin{lstlisting}
+    # Declara variable con un archivo en modo write.
+    file1 = open("filename.txt", "w")
+    # Sobre escribe el contenido del archivo si ya existe, o lo crea y escribe el contenido en el.
+    file.write("Borron y cuenta nueva")
+    # Cierra el archivo.
+    file.close()
+
+    # Declara variable con un archivo en modo append.
+    file2 = open("filename.txt", "r")
+    # Sobre escribe el contenido del archivo en la última línea.
+    file.write("\nAgregado al final")
+    # Cierra el archivo.
+    file.close()
+\end{lstlisting}
+
+La función write regresa el número de caracteres escritos en el archivo, si es que se pudieron escribir correctamente.
+\begin{lstlisting}
+    # Declara variable con un archivo en modo write.
+    file1 = open("filename.txt", "w")
+    # Asigna a una variable el número de caracteres escritos en el archivo.
+    num_caracteres = file1.write("abcde")
+    # Despliega 5.
+    print(num_caracteres)
+    # Cierra el archivo.
+    file.close()
+\end{lstlisting}
+
+
+\subsection{Comprobar la existencia de un archivo}
+
+Para saber si existe un archivo o directorio dentro de una carpeta en Windows con Python requerimos importar el módulo \textbf{os} para llamadas al sistema:
+\begin{lstlisting}
+    import os
+\end{lstlisting}
+
+Sea cual sea la situación o problema que estemos programando o resolviendo, podemos utilizar la siguiente función que comprueba la existencia de un archivo o directorio en nuestro sistema de archivos:
+\begin{lstlisting}
+    import os
+
+    def verificar_archivo():
+        if os.path.exist(ruta):
+   	    # Instrucciones si la ruta o archivo existe.
+        else:
+            # Instrucciones si la ruta o archivo no existe.
+\end{lstlisting}
+
+
+\subsection{Obtener una lista con todos los archivos de una carpeta}
+
+La siguiente función resulta útil si queremos seleccionar un archivo de una carpeta, pero primero queremos ver todo el contenido de la carpeta donde se encuentra almacenado:
+\begin{lstlisting}
+    import os
+
+    def lista_archivos_en_directorios():
+        return [arch.name for arch in os.scandir(ruta) if arch.is_file()]
+\end{lstlisting}
+
+\textit{Nota}: esta función también requiere del módulo \textbf{os} para funcionar.
+
+
+\subsection{Eliminar un archivo del sistema}
+
+Requiere importar la clase \textbf{remove} del módulo \textbf{os} para funcionar:
+\begin{lstlisting}
+    from os import remove
+\end{lstlisting}
+
+Entonces, si en la carpeta "trabajos" tengo tres archivos: "final.docx", "ahora si final.docx" y "final final final en serio.docx" y quiero borrar el último, basta con utilizar la siguiente instrucción para eliminarlo:
+\begin{lstlisting}
+    from os import remove
+
+    remove("trabajos/final final final en serio.docx")
+\end{lstlisting}
+
+Tenga en cuenta cómo funcionan las rutas en el sistema operativo donde esté programando.

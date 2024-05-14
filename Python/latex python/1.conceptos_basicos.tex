@@ -1,0 +1,326 @@
+Python es uno de los lenguajes de programación más populares, funciona para desarollar proyectos web, videojuegos, ciencia de datos, machine learning, y mucho más.
+
+\section{Conceptos básicos}
+\begin{itemize}
+	\item \textbf{print(elemento)}: es la forma más simple y sencilla de dar salida a información en pantalla. Esta instrucción siempre despliega texto o información en una \textbf{línea nueva}.
+	\item Podemos eliminar el salto de línea de la sentencia \textbf{print()} si dentro de sus paréntesis agregamos el parámetro \textbf{end} y le asignamos una cadena vacía: \textit{print(end="")}.
+	\item \textbf{Tabulación}: Python no utiliza punto y coma (;) para la finalización de cada instrucción, en cambio, utiliza tabulación de instrucciones, si se comienza un ciclo, condicional, procedimiento, función o clase, todas las instrucciones dentro de cada una de estas instrucciones tendrán más tabulación, consiguiendo así mejor legibilidad de código y cumpliendo con la regla de que, cada instrucción escrita en este lenguaje, en vez de acabar con ;, acaba con tabulaciones.
+\end{itemize}
+
+
+\subsection{Tipos de datos}
+
+La \textit{Tabla \ref{tab: 1}} contiene la clasificación de los datos con los que trabaja Python:
+\begin{table}[H]
+    \begin{center}
+        \caption{Funciones especiales para listas}
+        \label{tab: 1}
+        \begin{tabular}{m{3cm}|m{10cm}}
+            \hline
+            \textbf{Tipo de dato} & \textbf{Significado} \\
+            \hline
+            String		& Cadena de texto, puede contenerse entre comillas dobles ("") y sencillas (''), p. e: n = "nombre", n = 'mario' \\
+            Integer		& Número entero, su espacio se limita a la memoria disponible, p. e: a = 4 \\
+            Float		& Número decimal, tiene un espacio límitado al tipo de dato, p. e: b = 3.14 \\
+            Boolean		& Un estado 1 o 0, True y False, p. e: listo = False \\
+            Complex		& Número real y uno imaginario, p. e: complejo = 1 + 2j \\
+            \hline
+        \end{tabular}
+    \end{center}    
+\end{table}
+
+
+\subsection{Operadores matemáticos}
+
+La \textit{Tabla \ref{tab: 2}} contiene los operadores válidos para realizar operaciones aritméticas, o tener un orden en la ejecución de las mismas:
+\begin{table}[H]
+    \begin{center}
+        \caption{Orden de operadores comunes en Python}
+        \label{tab: 2}
+        \begin{tabular}{m{3cm} m{10cm}}
+            \hline
+            \textbf{Operador} & \textbf{Significado} \\
+            \hline
+            \textbf{(), [], \{\}}		& Símbolos que contienen operaciones o instrucciones a ejecutar \\
+            \textbf{*, **, /, //, \%}	& Multiplicación, exponencial, división decimal, división entera y módulo \\
+            \textbf{+, -}				& Suma y resta \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+Donde:
+\begin{itemize}
+	\item Las operaciones con divisiones regresan resultados decimales.
+	\item Las operaciones con decimales regresan resultados decimales (aunque haya enteros involucrados).
+	\item La exponenciación es la operación donde dos asteriscos eleva el número x a la potencia y. La exponenciación puede concatenarse con otras exponenciaciones (2**3**2). Puede usarse floats en la exponenciación también.
+	\item La división entera es la operación donde dos diagonales divide el número x entre y y regresa un número entero, en vez de uno float.
+\end{itemize}
+
+
+\subsection{Operadores condicionales}
+
+La \textit{Tabla \ref{tab: 3}} contiene los operadores válidos para comparar expresiones en estructuras condicionales, como se verá en un futuro tema:
+\begin{table}[H]
+    \begin{center}
+        \caption{Operadores condicionales en Python}
+        \label{tab: 3}
+        \begin{tabular}{m{3cm} m{3cm}}
+            \hline
+            \textbf{Operador} & \textbf{Significado} \\
+            \hline
+            \textbf{$>$}	& Mayor que \\
+            \textbf{$>$=}	& Mayor igual que \\
+            \textbf{$<$}	& Menor que \\
+            \textbf{$<$=}	& Menor igual que \\
+            \textbf{==}		& Igual a \\
+            \textbf{!=}		& No igual a \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+\subsection{Operadores lógicos}
+
+La \textit{Tabla \ref{tab: 4}} contiene los operadores válidos si buscamos que más de una condición sea evaluada en una misma instrucción if:
+\begin{table}[H]
+    \begin{center}
+        \caption{Operadores lógicos en Python}
+        \label{tab: 4}
+        \begin{tabular}{m{3cm} m{10cm}}
+            \hline
+            \textbf{Operador} & \textbf{Significado} \\
+            \hline
+            \textbf{and	}	& Y, todas las condiciones deben ser True para que la expresión completa sea True \\
+            \textbf{or}		& O, una de todas las condiciones debe ser True para que toda la expresión sea True \\
+            \textbf{not}	& Negación, niega una condición o pasa de True a False y viceversa \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+\subsection{Cadenas}
+
+Existe el carácter especial \textbf{\textbackslash}, llamado \textbf{secuencia de escape}, este te permite imprimir o llevar a cabo ciertas acciones dentro de una cadena, como lo pueden ser:
+\begin{itemize}
+	\item inserción de tabulaciones (\textbackslash t).
+	\item inserción de nuevas líneas (\textbackslash n).
+	\item inserción de símbolo de retorno (\textbackslash r). Este posiciona el cursos al inicio de una línea.
+	\item inserción de caracteres de cadena (\textbackslash ', \textbackslash ").
+\end{itemize}
+
+Por lo general, los sistemas operativos Windows utilizan las secuencias de escape \textbackslash n\textbackslash r para dar saltos de línea y posicionar el cursos al inicio de la nueva línea, mientras que los sistemas operativos Linux solamente utilizan \textbackslash n.
+
+En caso de tener grandes textos, en vez de usar \textbackslash n, que pueden perderse a lo largo del texto, podemos usar las tres comillas (\textbf{"""}) o \textbf{'''} dentro de \textit{print()}, como vemos en el siguiente ejemplo:
+\begin{lstlisting}
+    # Por cada salto de linea en print, es la cantidad de saltos de línea que se imprimen en pantalla.
+    print("""esto
+    es
+    una
+    multilinea""")
+
+    print('''
+    Aprendiendo
+    Python	
+    ''')
+
+    # Despliega:
+    # esto
+    # es
+    # una
+    # multilinea
+    # Aprendiendo
+    # Python
+\end{lstlisting}
+
+
+\subsubsection{Operaciones con Strings}
+
+La \textbf{concatenación} es el proceso de unir dos o más cadenas, para tener una sola resultante, en Python, además, podemos realizar más operaciones, la siguiente lista cuenta con las distintas operaciones básicas con cadenas en este lenguaje:
+\begin{itemize}
+	\item \textbf{Concatenación}: por ejemplo: print("a" + "b"), print("c" + 'd'), print('e' + 'f') //\textit{Despliega: ab, cd, ef}.
+	\item \textbf{Multiplicación con concatenación}: cuando se utiliza el operador de multiplicación entre un número entero y una cadena, el resultado será la cadena repetida el número entero ingresado, por ejemplo: print(3 * "a"), print(2 * '2') \textit{//Despliega: aaa, 22}.
+	\item No se pueden multiplicar dos cadenas.
+	\item Podemos buscar una subcadena o carácter dentro de una cadena con la sentencia \textbf{in} (misma sentencia para buscar un elemento dentro de una colecciónd e datos): \textit{if subcadena in cadena}.
+\end{itemize}
+
+
+\subsubsection{Funciones de cadenas}
+
+La \textit{Tabla \ref{tab: 5}} contiene las funciones más útiles para cadenas:
+\begin{table}[H]
+    \begin{center}
+        \caption{Funciones especiales para listas}
+        \label{tab: 5}
+        \begin{tabular}{m{4cm} m{5cm} m{4cm}}
+            \hline
+            \textbf{Función}&\textbf{Significado}&\textbf{Ejemplo} \\
+            \hline
+            \textbf{format(elementos)}			& Aplica un formato o agrega otra cadena o elemento a una cadena que tiene marcada una posición en su contenido		& \parbox{4cm}{\raggedright print("\{0\} \{1\}".format("hola", "mundo"))} \\
+            \textbf{join(lista)}				& Pasa una lista a una cadena de texto, separado por un carácter (por ejemplo, un espacio)						& \parbox{4cm}{\raggedright x = ", ".join([1, 3, 5, 7])} \\
+            \textbf{split(delimitador)}	& \parbox{5cm}{\raggedright Separa las palabras de una cadena convirtiéndola en una lista, se puede especificar el delimitador} & \parbox{4cm}{\raggedright str = "esto es una cadena" print(str.slip(" "))} \\
+            \parbox{4cm}{\textbf{\raggedright replace(cadena,\\reemplazo)}}		& Cambia una subcadena de una cadena por otra cadena					& \parbox{4cm}{\raggedright str = "hola mundo" print(str.replace\\("hola", "lindo"))} \\
+            \textbf{upper()}					& \parbox{5cm}{\raggedright Formatea una cadena a mayúscula}																					& \parbox{4cm}{\raggedright print("hola mundo".upper())} \\
+            \textbf{upper()}					& \parbox{5cm}{\raggedright Formatea una cadena a minúscula}																					& \parbox{4cm}{\raggedright print("HOLA MUNDO".upper())} \\
+            \textbf{find()}					& Busca un carácter o subcadena dentro de una cadena, si lo encuentra, regresa el índice del primer carácter donde lo encontró, si no lo encuentra, regresa -1.															& \parbox{4cm}{\raggedright cadena.find("a")} \\
+            \hline
+        \end{tabular}
+    \end{center}    
+\end{table}
+
+
+
+\section{Variables}
+
+Para declarar variables, no es necesario declarar un tipo de dato, seguido de un nombre, operador de asignación y valor, se omite la parte de darles un tipo de dato a las variables, el valor que tenga ya le asigna un tipo de dato a la variable implícitamente. Ejemplos:
+\begin{lstlisting}
+    nombre = 'Luis'
+    apellido = 'Miguel'
+    edad = 21
+    pesoPersona = 64.5
+\end{lstlisting}
+
+Las variables en Python son sensitivas, así que, Nombre y nombre son variables distintas, aunque en esencia, tengan el mismo nombre. El nombre que reciba una variable puede contener mayúsculas, minúsculas, números y guiones, pero no caracteres especiales o palabras reservadas del lenguaje, ni puede comenzar el nombre con algún número.
+
+Al no requerir de un tipo de dato en la asignación de valores a variables, tu variable al comienzo puede tener un valor numérico, y le puedes sobre escribir un valor cadena, como se ve a continuación:
+\begin{lstlisting}
+    x = 555
+    print(x)
+
+    x = 'cinco'
+    print(x)
+\end{lstlisting}
+
+Lo anterior no es considerado una buena practica, por lo que es recomendable no realizarlo.
+
+La palabra reservada \textbf{del} puede ser utilizada para eliminar la memoria utilizada por una variable utilizada a lo largo de una función o procedimiento, como vemos enseguida:
+\begin{lstlisting}
+    x = 555
+    print(x)
+    del x
+\end{lstlisting}
+
+Esta palabra reservada puede ser utilizada acabando de usar una función, sin embargo, en el código sigue presente la declaración de la variable, por lo que, si se borra de la memoria en la línea 5 de la función, se puede volver a utilizar la variable en futuras líneas si es requerido, no olvide que, si usa una variable ya eliminada y sin volver a inicializar, ocurrirá un error en el código, como vemos en el siguiente ejemplo:
+\begin{lstlisting}
+    x = 5 # Declara variable entera que recibe el numero 5.
+
+    print(x) # Imprime 5.
+    del x # Es eliminada de la memoria la variable.
+
+    print(x + 5)
+    print(x) # Las dos anteriores lineas generan un error en la ejecucion del programa.
+
+    x = "hola mundo"
+
+    print(x) # Imprime hola mundo.
+\end{lstlisting}
+
+
+\subsection{Entrada de datos}
+
+Se utiliza la función \textbf{input()} para recibir valores del usuario, esta función recibe una entrada de datos y la regresa en forma de \textbf{string} (sin importar si lo que se recibe es un número), dentro de los paréntesis de \textit{input}, podemos ingresar una cadena que será lo que le estamos solicitando al usuario que ingrese, como vemos en el siguiente código:
+\begin{lstlisting}
+    nombre = input() # Variable que recibe un nombre por parte del usuario.
+
+    print(nombre) # Despliega el nombre ingresado por el usuario.
+
+    apellido = input("Digita tu apellido: ") # Variable que recibe un apellido por parte del usuario, el programa lanza mensaje donde solicita apellido.
+
+    print("El nombre del usuario es: " + nombre + apellido) #Despliega nombre completo del usuario.
+\end{lstlisting}
+
+
+\subsection{Conversión de valores o tipos de datos}
+
+Siguiendo con el tema anterior, en caso de que ocupemos la edad de un usuario en su forma numérica, podemos convertir la cadena que nos regresa \textit{input()} con la función \textbf{int()}, como vemos enseguida:
+\begin{lstlisting}
+    x = int(input("Ingresa tu edad: ")) # Variable recibe edad de usuario, el valor es convertido a entero.
+    print("Tu edad más 20 es: " + (x + 20)) # Despliega la edad del usuario más 20.
+\end{lstlisting}
+
+Las funciones \textbf{float()} y \textbf{str()} funcionan para convertir valores de un determinado tipo a decimal y cadena respectivamente, solamente tome en cuenta que, si tiene un decimal y lo quiere pasar a entero, la función \textit{int()} le devolverá el valor decimal redondeado a su elemento entero únicamente (de 9.99 se le es regresado 9).
+
+
+\subsection{Operadores de asignación o relacionales}
+
+Los \textbf{operadores de asignación} son permitidos en Python, estos permiten pasar de \textit{x = x + 1} a \textit{x += 1}, permitiendo un código más corto. Los operadores de asignación realizan una acción dependiendo del operador que se le quiera usar, los encontramos en la \textit{Tabla \ref{tab: 6}}:
+\begin{table}[H]
+    \begin{center}
+        \caption{Tipos de operadores de asignación o relacionales}
+        \label{tab: 6}
+        \begin{tabular}{m{3cm} m{10cm}}
+            \hline
+            \textbf{Operador} & \textbf{Significado} \\
+            \hline
+            +=		& x = x + n, x es igual a x más n \\
+            -=		& x = x - n, x es igual a x menos n \\
+            *=		& x = x * n, x es igual a x por n \\
+            /=		& x = x / n, x es igual a x entre n \\
+            \%=		& x = x \% n, x es igual a x entre n y regresa el residuo de la división \\
+            **=		& x = x ** n, x es igual a x a la n \\
+            //=		& x = x // n, x es igual a x entre n y regresa un valor entero \\
+            \hline
+        \end{tabular}
+    \end{center}
+\end{table}
+
+
+\subsection{Asignación de un valor a múltiples variables}
+
+Si buscamos asignarle un valor (p. e: 1) a varias variables (p. e: tres variables), podemos seguir el siguiente formato:
+\begin{lstlisting}
+    a = b = c = 1
+\end{lstlisting}
+
+Si tenemos varias variables y les queremos asignar distintos valores, podemos optar por el siguiente formato como una alternativa a asignar valores a variables en distintas líneas de texto:
+\begin{lstlisting}
+    a, b, c = 1, 2, 3
+\end{lstlisting}
+
+
+
+\section{Comentarios}
+
+No es más que una línea de código que no se ejecuta, son usados para explicar una función o instrucción, se utiliza el símbolo de gato (\#) para hacer que una línea se convierta en un comentario:
+\begin{lstlisting}
+    # Esto es un comentario.
+    # print("hola mundo").
+    print("hola mundo").
+\end{lstlisting}
+
+Si se desea comentar múltiples líneas de código sin tener que poner demasiados símbolos \#, puede poner tres dobles comillas (""") al inicio del bloque de código que desea comentar y otras tres comillas final del bloque:
+\begin{lstlisting}
+    """
+    print("a")
+    print("a")
+    print("a")
+    print("Estos son varios comentarios")
+    print("a")
+    print("a")
+    """
+    print("a")
+
+    # Imprime: a.
+\end{lstlisting}
+
+
+\subsection{Docstrings}
+
+Este tipo de comentario especial es utilizado para dar una explicación más completa al código, se mantiene durante el tiempo de ejecución, para que otros programadores puedan examinar dichos comentarios, la estructura es la siguiente:
+\begin{lstlisting}
+    def nombre():
+    """
+    Esta es una funcion que despliega que es un robot!
+    """
+    print("hola, soy un robot")
+		
+    nombre()
+\end{lstlisting}
+
+
+
+\section{Terminar la ejecución de un programa}
+
+Para finalizar la ejecución de un programa, se utiliza la instrucción \textbf{exit()}, no requiere de ningún parámetro.
